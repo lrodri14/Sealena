@@ -11,6 +11,7 @@ to access it from anywhere and at any time, as well to collaborate and connect w
 contacting them, Sealena got's your covered. Patients have their own medical record that allowed users are able to create or update whenever is needed and be sure that their information is safe.</p>
 <p>Appointments and Consult management is other of the main features of Sealena. Users can create appointments for any date and time.
 Confirmation, updating of dates or appointment cancellation can be accomplished afterwards. Appointment reminders are sent any time an appointment is confirmed, this way there is no chance the client misses their consult appointments and attend them.</p>
+<p>Stay up to date in how your data is behaving. Sealena gives data life through statistics, users are able to have a visual representation of their data in real time and have a variety of categories to choose from and visualize instantly.</p>
 <p>Laboratories, medical providers or single visitors, any kind of provider can be managed with Sealena and contacted by the user as well.</p>
 <p>In order to bring all the healthcare community closer, the exchanging of ideas and knowledge, we need a way to connect together. With Sealena
 we are able to accomplish this task, users are able to connect with other users from all over the globe with a single click and start talking to
