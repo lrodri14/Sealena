@@ -1,0 +1,57 @@
+<!-- The patient_list template is used to display user specific patients, it serves as a wrapper of the patient partial list -->
+
+{% load static %}
+{% if patients %}
+
+    <div class="data-container">
+        {% if message %}
+            <p class="data-container__basic-account-message">{{ message }}</p>
+        {% endif %}
+        <table class="data-table">
+            <thead>
+                <tr id="heading">
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Age</th>
+                    <th>Origin</th>
+                    <th>Residence</th>
+                    <th>Insurance?</th>
+                    <!-- This code will check if the user is a doctor -->
+                    {% if doctor %}
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    {% endif %}
+                    <th>
+                        {% if creation_enabled %}
+                            <i class="fas fa-plus data-table__create" onclick="window.location='{% url 'patients:add_patient' %}'"></i>
+                        {% else %}
+                            <i class="fas fa-plus data-table__create"></i>
+                        {% endif %}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--Included Template, this included template is used to display content dynamically in our main page. -->
+                {% include 'patients/patients_partial_list.html' %}
+           </tbody>
+        </table>
+    </div>
+
+    <div class="filter-container">
+        <!-- Patient filtering form -->
+        <i class="fas fa-filter filter-container__filter-display-button"></i>
+        <form method="GET" action="{% url 'patients:filter_patients' %}" autocomplete="off" class="filter-container__filter-form">
+            <h3 class="filter-container__filter-form-title">Filter Results</h3>
+            <p>{{ form.patient.label }} Name</p>
+            <p>Or</p>
+            <p>ID Number</p>
+            <p>{{ form.patient }}</p>
+        </form>
+    </div>
+
+{% else %}
+    <!-- This code will be executed if there are no instances available -->
+    <p id="no-data">There are no patients listed</p>
+    <a class="add-data" href="{% url 'patients:add_patient' %}"><i class="fas fa-plus"></i></a>
+{% endif %}

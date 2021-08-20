@@ -1,0 +1,15 @@
+<!-- This drugs_partial_list template is used to display all the drugs created by a specific user, this template is populated
+     dynamically based on different operations. -->
+
+{%load static%}
+{% if drugs %}
+     {% for d in drugs %}
+        <tr class="data-table__item" data-url="{% url 'settings:drug_details' d.pk %}">
+            <td class="data-table__data">{{ d.name }}</td>
+            <td class="data-table__data">{{ d.get_category_display }}</td>
+            <td class="data-table__data"><i class="fas fa-edit data-table__update" data-url="{% url 'settings:update_drug' d.pk %}"></i></td>
+            <td class="data-table__data"><i class="fas fa-trash data-table__delete" data-url="{% url 'settings:delete_drug' d.pk %}"></i></td>
+            <td class="data-table__data"></td>
+        </tr>
+    {% endfor %}
+{% endif %}

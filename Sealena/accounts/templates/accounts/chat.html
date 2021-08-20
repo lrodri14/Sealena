@@ -1,0 +1,37 @@
+<!-- This chat template displays a chat conversation between two users, as well as the form used to create messages and
+     add them to the conversation. -->
+
+{% load static %}
+{% load accounts_custom_tags %}
+{% get_destination chat user as destination %}
+<!-- Destination Profile Picture -->
+{% if not destination.profile.profile_pic %}
+    {% if destination.profile.gender == 'MASCULINE' %}
+        <img class="social-section__chat-destination-profile-picture" src="{% static 'accounts/avatars/male-avatar.png' %}" alt="">
+    {% else %}
+        <img class="social-section__chat-destination-profile-picture" src="{% static 'accounts/avatars/female-avatar.png' %}" alt="">
+    {% endif %}
+{% else %}
+    <img class="social-section__chat-destination-profile-picture" src="{{ MEDIA_URL }}{{ destination.profile.profile_pic }}" alt="">
+{% endif %}
+<h4 class="social-section__destination-user">{{ destination.first_name }} {{ destination.last_name }}</h4>
+<!-- Chat content area -->
+<div class="social-section__chat-content">
+    {% for message in chat.message.all %}
+        {% if message.created_by == user %}
+            <div class="social-section__message">
+                {{ message.text }}
+            </div>
+        {% else %}
+            <div class="social-section__reply">
+                {{ message.text }}
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<form action="{% url 'accounts:save_message' chat.pk%}" method="POST" class="social-section__chat-form" data-chat-pk="{{ chat.pk }}">
+    {% csrf_token %}
+    <!-- Chat message input field and send button -->
+    <p>{{ message_form.text }}</p><i class="fas fa-paper-plane social_section__send-message-button"></i>
+</form>

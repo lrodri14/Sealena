@@ -1,0 +1,39 @@
+<!-- This template displays the agenda, serves as a wrapper for the agenda dynamic content -->
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Agenda{% endblock %}
+{% block return %}<a href="{% url 'appointments:appointments' %}"><i class="fas fa-long-arrow-alt-left"></i></a>{% endblock %}
+{% block body_block %}
+<link rel="stylesheet" href="{% static 'appointments/css/agenda.css' %}">
+<h2>Agenda</h2>
+{% if appointments %}
+    <div class="data">
+        <div class="data-container">
+            {% include 'appointments/partial_agenda_list.html' %}
+        </div>
+
+        <div class="filter-container">
+            <i class="fas fa-filter filter-container__filter-display-button"></i>
+            <form method="GET" action="{% url 'appointments:filter_agenda' %}" class="filter-container__filter-form">
+                <h3>Filter Results</h3>
+                <p>{{ form.date_from.label }}</p>
+                <p>{{ form.date_from }}</p>
+                <p>{{ form.date_to.label }}</p>
+                <p>{{ form.date_to }}</p>
+                <button type="submit">Search</button><br>
+            </form>
+        </div>
+
+        <div class="modal">
+            <div class="modal__content">
+
+            </div>
+        </div>
+    </div>
+{% else %}
+    <p id="no-data">There are no appointments ahead</p>
+{% endif %}
+</div>
+<script src="{% static 'appointments/js/agenda.js' %}"></script>
+{% endblock %}

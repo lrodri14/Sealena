@@ -1,0 +1,37 @@
+<!-- This template displays all the consults for a specific patient -->
+
+{% load static %}
+{% if records %}
+<div class="data">
+
+<!-- Records Table Content -->
+    <div class="data-container">
+        <table class="data-table">
+            <thead>
+                <tr id="heading">
+                    <th>ID</th>
+                    <th>Patient</th>
+                    <th>Date and Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in records %}
+                    <tr class="data-table__item record" data-url="{% url 'appointments:consult_summary' r.pk %}">
+                        <td class="data-table__data">{{ r.patient.id_number }}</td>
+                        <td class="data-table__data">{{ r.patient.first_names }} {{ r.patient.last_names }}</td>
+                        <td class="data-table__data">{{ r.datetime }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+<!-- Summary -->
+    <div class="records-summary">
+
+    </div>
+
+</div>
+{% else %}
+    <p id="no-data">No records found, this is patient's first visit</p>
+{% endif %}

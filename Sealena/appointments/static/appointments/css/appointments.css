@@ -1,0 +1,122 @@
+/* This consults.css stylesheet contains all the styles needed to display the consults main page properly. */
+
+/*##################################################### Body #########################################################*/
+
+button{
+    width: 10%;
+}
+
+/*#################################################### Table #########################################################*/
+
+.data-container__basic-account-message{
+    position: absolute;
+    top: 10%;
+    right: 1%;
+}
+
+.account-subscription-warning{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255,255,255,0.1);
+    width: 50%;
+    height: 20%;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.data-container{
+    margin-top: 1%;
+    max-height: 727px;
+}
+
+.data-table__item{
+    line-height: 20px;
+}
+
+.data-table__data{
+    text-align: center;
+}
+
+.fa-exclamation-circle{
+    color: #CBA415;
+}
+
+/*#################################################### PopUp #########################################################*/
+
+.popup{
+    position: absolute;
+    left: 83.8%;
+    margin-top: -35px;
+    background-color: rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-clip: padding-box;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s;
+    z-index: 1;
+}
+
+.popup--display{
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s;
+}
+
+.popup__text{
+    font-size: 10px;
+    color: #FFFFFF;
+    padding: 5px;
+}
+
+/*Needed to display the arrow in the popup*/
+.popup__text:after{
+    content: " ";
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(0,0,0,0.1) transparent transparent transparent;
+    position: absolute;
+    top: 112%;
+    left: 92%;
+}
+
+/*################################################# Modal Form #######################################################*/
+
+.create-update-appointment-loader{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(0,0,0,0);
+    border-bottom: 2px solid #FFFFFF;
+    position: absolute;
+    top: 2%;
+    right: 4%;
+    visibility: hidden;
+    animation: spin 1s linear infinite;
+}
+
+.create-update-appointment-loader--display{
+    visibility: visible;
+}
+
+.error{
+    color: #FFFFFF;
+}
+/*#################################################### Modal #########################################################*/
+
+.modal__add-patient{
+    position: absolute;
+    right: 11%;
+    top: 19%;
+}
+
+.modal__form{
+    width: 25%;
+}
+
+.modal__form button{
+    width: 30%;
+}

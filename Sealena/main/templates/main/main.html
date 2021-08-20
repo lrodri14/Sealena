@@ -1,0 +1,75 @@
+<!-- The main.html template is responsible of displaying the main page from the project -->
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" style="background-color: black">
+<head>
+    <meta charset="UTF-8">
+    <title>Sealena</title>
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
+    <link rel="mask-icon" href="{% static 'favicon/safari-pinned-tab.svg' %}" color="#5f618b">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#abc4ed">
+</head>
+    <body>
+
+    <video id="video" src="{% static 'main/backgrounds/background-video.mp4' %}" autoplay loop muted></video>
+
+        <!-- Container -->
+        <div class="container">
+            <!-- Logo -->
+            <img class="container__logo" src="{% static 'main/logo/seal.svg' %}" alt="">
+            <!-- Authentication -->
+            <div class="container__auth">
+                <div class="container__auth-controls">
+                    <button type="button" id="login-btn" class="container__auth-button" data-url="{% url 'accounts:login' %}">Log In</button>
+                    <button type="button" id="signup-btn" class="container__auth-button">Sign Up</button>
+                </div>
+            </div>
+            <!-- Slogan Container -->
+            <div class="container__quote">
+                <q>{{ quote }}</q><br>
+                {% if author is not None %}
+                    <i>- {{ author }}</i>
+                {% endif %}
+            </div>
+            <!-- Footer -->
+            <div class="container__footer">
+                <div class="container__social-media-contact">
+                    <a href="" target="_blank"><img class="container__social-media-logo" src="{% static 'main/social_media_icons/facebook.svg' %}" alt=""></a>
+                    <a href="" target="_blank"><img class="container__social-media-logo" src="{% static 'main/social_media_icons/instagram.svg' %}" alt=""></a>
+                    <a href="" target="_blank"><img class="container__social-media-logo" src="{% static 'main/social_media_icons/twitter.svg' %}" alt=""></a>
+                    <a href="" target="_blank"><img class="container__social-media-logo" src="{% static 'main/social_media_icons/seal.svg' %}" alt=""></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Account Type Selector -->
+        <div class="account-type-selector">
+            <div class="account-type-selector__tile" data-url="{% url 'accounts:signup' %}" data-type="doctor">
+                <i class="fas fa-user-md account-type-selector__icon"></i>
+                Doctor
+            </div>
+            <div class="account-type-selector__tile" data-url="{% url 'accounts:signup' %}" data-type="assistant">
+                <i class="fas fa-user-nurse account-type-selector__icon"></i>
+                Assistant
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal">
+            <div class="modal__content">
+
+            </div>
+        </div>
+
+        <script src="{% static 'main/js/main.js' %}"></script>
+    </body>
+</html>
+

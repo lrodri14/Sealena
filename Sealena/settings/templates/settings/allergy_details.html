@@ -1,0 +1,10 @@
+<!-- This allergy_details template is used to display the details about an allergy created by a specific user -->
+
+{% load static %}
+{% block body_block %}
+<div id="details">
+    <h2>Allergy Details</h2>
+    <h3>Allergy Type</h3>
+    <p>{{ allergy.allergy_type }}</p>
+</div>
+{% endblock %}

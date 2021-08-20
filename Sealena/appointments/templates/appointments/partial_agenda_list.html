@@ -1,0 +1,46 @@
+<!-- This template is used to display all the pending appointments, this template is dynamically populated based different
+     processes. Items are grouped or arranged by year and month. -->
+{% load static %}
+{% if appointments %}
+    {% for m in months %}
+        <h3>{{ m }}</h3>
+        <table class="data-table">
+            <thead>
+                <tr id="heading">
+                    <th>ID</th>
+                    <th>Patient</th>
+                    <th>Date and Time</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                    <th>Confirm</th>
+                    <th>Cancel</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for a in appointments %}
+                {% if a.datetime|date:"F" == m %}
+                    <tr class="data-table__item">
+                        <td class="data-table__data">{{ a.patient.id_number }}</td>
+                        <td class="data-table__data">{{ a.patient.first_names }} {{ a.patient.last_names }}</td>
+                        <td class="data-table__data">{{ a.datetime }}</td>
+                        {% if a.status == 'OPEN' %}
+                            <td id="Open" class="data-table__data">Open</td>
+                        {% elif a.status == 'CONFIRMED' %}
+                             <td id="Confirmed" class="data-table__data">Confirmed</td>
+                        {% elif a.status == 'CANCELLED' %}
+                            <td id="Cancelled" class="data-table__data">Cancelled</td>
+                        {% elif a.status == 'CLOSED' %}
+                            <td id="Closed" class="data-table__data">Closed</td>
+                        {% endif %}
+                        <td class="data-table__data" data-url="{% url 'appointments:appointment_date_update' a.pk %}">{% if a.status == 'OPEN' %}<i class="fas fa-edit data-table__update"></i>{% endif %}</td>
+                        <td class="data-table__data" data-url="{% url 'appointments:confirm_appointment' a.pk %}">{% if a.status == 'OPEN' %}<i class="fas fa-check data-table__confirm"></i>{% endif %}</td>
+                        <td class="data-table__data" data-url="{% url 'appointments:cancel_appointment' a.pk %}">{% if a.status == 'OPEN' %}<i class="fas fa-times-circle data-table__cancel"></i>{% endif %}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+{% else %}
+    <p id="no-data">Clear section, no data stored</p>
+{% endif %}

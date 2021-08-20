@@ -1,0 +1,21 @@
+<!-- This template display the update appointment form -->
+{% load static %}
+{% block body_block %}
+<form method="POST" id="appointment-update-form" class="modal__form creation-update-form" action="{% url 'appointments:appointment_date_update' consult.pk %}">
+    {% csrf_token %}
+    <h2>Update Appointment</h2><div class="create-update-appointment-loader"></div>
+    <p>{{ consult_form.patient.label }}</p>
+    <p>{{ consult_form.patient }}</p>
+    <p>{{ consult_form.datetime.label }}</p>
+    <p class="error"><small>{{ error }}</small></p>
+    {% if consult_form.errors %}
+        <p class="error"><small>{{ consult_form.non_field_errors.as_text }}</small></p>
+    {% endif %}
+    <p>{{ consult_form.datetime }}</p>
+    <p>{{ consult_form.motive.label }}</p>
+    <p>{{ consult_form.motive }}</p>
+    <p>{{ consult_form.suffering.label }}</p>
+    <p>{{ consult_form.suffering }}</p>
+    <button type="submit">Update</button>
+</form>
+{% endblock %}

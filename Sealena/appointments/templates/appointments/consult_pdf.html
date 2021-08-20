@@ -1,0 +1,74 @@
+<!-- This template is used not to render a template but to build up a pdf containing all the specified information from a consult -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <style type="text/css">
+            body {font-family: Trebuchet MS}
+            #title-bar{ background-color: #5ba2cf; color: #FFFFFF; padding-top: 10px; text-align: center; font-size: 20px;}
+            h2{color: #5ba2cf; padding-top: 10px;}
+            table {width: 100%; border: 1px solid #000000; border-collapse: collapse;}
+            tr, th, td {border: 1px solid #000000; padding: 5px;}
+            th {width: 50%; line-height: 30px;}
+            .drug {text-align: center;}
+            hr{width: 25%; margin-top: 50px;}
+            #signature-indicator{margin-left: 45%;}
+        </style>
+    </head>
+    <body>
+        <div id="title-bar">
+            Medical Receipt
+        </div>
+        <div>
+            <div id="patient-information">
+                <p>Patient: {{ consult.patient.first_names }} {{ consult.patient.last_names }}</p>
+                <p>Patient ID: {{ consult.patient.id_number }}</p>
+                <p>Date: {{ consult.datetime }}</p>
+            </div>
+            <div id="doctor-information">
+                <p>Dr: {{ user.first_name }} {{ user.last_name }}</p>
+                <p>Contact: {{ user.profile.phone_number }}</p>
+                <p>Email: {{ user.email }}</p>
+            </div>
+        </div>
+
+        {% if consult.drugs.all %}
+            <h2>Drugs</h2>
+            <ol>
+                {% for drug in consult.drugs.all %}
+                    <li>{{ drug }}</li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+
+        <!-- Consult Drug Prescriptions -->
+        {% if consult.indications %}
+            <h2>Indications</h2>
+            <p>{{ consult.indications|linebreaks }}</p>
+        {% endif %}
+
+        <!-- Consult Testing Prescriptions -->
+        {% if consult.testing.all %}
+            <h2>Medical Testing</h2>
+            <ol>
+                {% for test in consult.testing.all %}
+                    <li>{{ test }}</li>
+                {% endfor %}
+            </ol>
+            {% if consult.instructions %}
+            <h2>Instructions</h2>
+                <p>{{ consult.instructions }}</p>
+            {% endif %}
+        {% endif %}
+
+        <!-- Consult Extra Notes -->
+        {% if consult.actions != "" %}
+            <h2>Actions</h2>
+            <p>{{ consult.actions }}</p>
+        {% endif %}
+        <hr id="signature">
+        <small id="signature-indicator">Signature</small>
+    </body>
+</html>

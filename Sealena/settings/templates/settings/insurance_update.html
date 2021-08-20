@@ -1,0 +1,14 @@
+<!-- This insurance_update template displays the update insurance form -->
+
+{% block body_block %}
+<form method="POST" autocomplete="off" action="{% url 'settings:update_insurance' carrier.pk %}" id="update-insurance-form" class="modal__form creation-update-form">
+    {% csrf_token %}
+    <h2>Update Insurance Carrier</h2>
+    <p>{{ insurance.company.label }}</p>
+    <p>{{ insurance.company }}</p>
+    <p>{{ insurance.country.label }}</p>
+    <p>{{ insurance.country }}</p>
+    <p class="error">{{ error }}</p>
+    <button type="submit">Update Carrier</button>
+</form>
+{% endblock %}

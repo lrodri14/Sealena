@@ -1,0 +1,7 @@
+<!-- This insurance_partial_select template display dynamic insurances created by a specific user whenever some operations have been executed
+     or a filter has been done. -->
+
+<option value="">---------</option>
+{% for insurance in insurances %}
+    <option value="{{ insurance.pk }}">{{ insurance.company }}</option>
+{% endfor %}

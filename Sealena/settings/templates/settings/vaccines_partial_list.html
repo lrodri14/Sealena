@@ -1,0 +1,21 @@
+<!-- This vaccines_partial_list template is used to display all the vaccines created by a specific user, this template is populated
+     dynamically based on different operations. -->
+
+{% load static %}
+{% if vaccines %}
+     {% for vaccine in vaccines %}
+        <tr class="data-table__item" data-url="{% url 'settings:vaccine_details' vaccine.pk %}">
+            <td class="data-table__data">{{ vaccine.name }}</td>
+            <td class="data-table__data">
+                {% if vaccine.scientific_name is not None %}
+                    {{ vaccine.scientific_name }}
+                {% else %}
+                    ------------
+                {% endif %}
+            </td>
+            <td class="data-table__data"><i class="fas fa-edit data-table__update" data-url="{% url 'settings:update_vaccine' vaccine.pk %}"></i></td>
+            <td class="data-table__data"><i class="fas fa-trash data-table__delete" data-url="{% url 'settings:delete_vaccine' vaccine.pk %}"></i></td>
+            <td class="data-table__data"></td>
+        </tr>
+    {% endfor %}
+{% endif %}

@@ -1,0 +1,80 @@
+<!--Checked-->
+<!DOCTYPE html>
+{% load static %}
+{% load global_tags %}
+<html lang="en" style="background-color:black">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'base/css/base.css' %}">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+        <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
+        <link rel="mask-icon" href="{% static 'favicon/safari-pinned-tab.svg' %}" color="#5f618b">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="theme-color" content="#abc4ed">
+    </head>
+
+    <body>
+
+    <img id=background src="{% display_wallpaper request.user.general_settings.wallpaper %}" alt="">
+
+        {% block notifications_popup %}<div class="notifications-popup" data-status="{{ user.general_settings.notifications }}"></div>{% endblock %}
+
+        {% block return %} {% endblock %}
+
+        <!-- Doctor Section -->
+
+        {% if user.roll == 'DOCTOR' %}
+
+            {% block navigation %}
+                <div class="navigator-display-button">
+                    <i class="fas fa-chevron-right navigator-display-button__arrow"></i>
+                </div>
+                <!-- Navigator -->
+                <div class="global-navigator">
+                    <!-- Tabs -->
+                    <div class="global-navigator__tab" onclick="window.location='{% url 'home:home' %}'"><i class="fas fa-home global-navigator__icon"></i></div>
+                    <div class="global-navigator__tab" onclick="window.location='{% url 'patients:patients' %}'"><i class="fas fa-user-injured global-navigator__icon"></i></div>
+                    <div class="global-navigator__tab" onclick="window.location='{% url 'appointments:appointments'%}'"><i class="fas fa-calendar-check global-navigator__icon"></i></div>
+                    <div class="global-navigator__tab" onclick="window.location='{% url 'records:records' %}'"><i class="fas fa-clipboard global-navigator__icon"></i></div>
+                    <div class="global-navigator__tab" onclick="window.location='{% url 'stats:stats' %}'"><i class="fas fa-chart-bar global-navigator__icon"></i></div>
+                    <div class="global-navigator__tab" onclick="window.location='{% url 'providers:providers' %}'"><i class="fas fa-handshake global-navigator__icon"></i></div>
+                    <div class="global-navigator__tab" onclick="window.location='{% url 'settings:settings' %}'"><i class="fas fa-cog global-navigator__icon"></i></div>
+                    <div class="global-navigator__tab" onclick="window.location='{% url 'accounts:profile' %}'"><i class="fas fa-user global-navigator__icon"></i></div>
+                    <p class="global-navigator__watermark">Telematica</p>
+                </div>
+            {% endblock %}
+
+            {% block social_section %}
+                <div class="social-section-display-button">
+                    <i class="fas fa-chevron-left social-section-display-button__arrow"></i>
+                </div>
+                <!-- Social Content -->
+                <div class="social-section" data-user="{{ user.username }}">
+                    <div class="social-section__navigator"><div class="social-section__tab social-section__tab--active" data-url="{% url 'accounts:contacts' %}">Contacts</div><div class="social-section__tab" data-url="{% url 'accounts:chats' %}">Chats</div><div class="social-section__tab" data-url="{% url 'accounts:contact_requests' %}">Requests</div></div>
+                    <div class="social-section__data"></div>
+                </div>
+            {% endblock %}
+
+        {% endif %}
+
+        {% block body_block %}
+        {% endblock %}
+
+        <div class="global-loader-modal">
+            <i class="fas fa-heart global-loader-modal__heart-icon"></i>
+            <div class="global-loader-modal__spinner"></div>
+            <p class="global-loader-modal__message">Check your network connection....</p>
+        </div>
+
+        <script src="{% static 'base/js/base.js' %}"></script>
+        <script src="https://media.twiliocdn.com/sdk/js/chat/v4.0/twilio-chat.min.js"></script>
+    </body>
+
+</html>

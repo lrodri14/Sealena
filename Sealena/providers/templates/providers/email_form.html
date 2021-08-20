@@ -1,0 +1,33 @@
+<!-- Template used to render the providers and visitors email form -->
+
+{% load static %}
+{% if form %}
+    {% if provider_type == 'provider' %}
+        <form method="POST" action="{% url 'providers:send_provider_email' receiver.pk %}" autocomplete="off" class="email-form modal__form">
+    {% else %}
+        <form method="POST" action="{% url 'providers:send_visitor_email' receiver.pk %}" autocomplete="off" class="email-form modal__form">
+    {% endif %}
+        {% csrf_token %}
+        <div class="loader"></div>
+        <h2>Send Email</h2>
+        <p>Date: {{ today }}</p>
+        <p>To: {{ receiver.email }}</p>
+        <p>From: {{ user.email }}</p>
+        <hr>
+        <p>{{ form.subject.label }}</p>
+        <p>{{ form.subject }}</p>
+        <p>{{ form.body.label }}</p>
+        <p>{{ form.body }}</p>
+        <button type="submit">Send Email</button>
+    </form>
+{% else %}
+    <div class="server-response">
+        {% if success %}
+            <p>{{ success }}</p>
+            <button type="button">Continue</button>
+        {% else %}
+            <p>{{ error }}</p>
+            <button type="button">Continue</button><a href="{% url 'settings:settings' %}"><button type="">Settings</button></a>
+        {% endif %}
+    </div>
+{% endif %}

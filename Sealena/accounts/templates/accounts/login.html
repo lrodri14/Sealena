@@ -1,0 +1,17 @@
+<!-- This login template is used to display the form used to authenticate the user and access the application. -->
+
+{% load static %}
+<!-- Login Forms -->
+<form action="{% url 'accounts:login' %}" method="POST" autocomplete="off" class="login-form">
+    <h1>Log In</h1>
+    {% csrf_token %}
+    <p>{{ form.username.label }}</p>
+    <p>{{ form.username  }}</p>
+    <p>{{ form.password.label}}</p>
+    <p>{{ form.password }}</p>
+    {% if form.errors %}
+        <p><small>Your credentials are incorrect, please try again.</small></p>
+        <p><small><a href="{% url 'accounts:password_reset' %}" class="login-form__password-reset">Did you forgot your password?</a></small></p>
+    {% endif %}
+    <button type="submit" class="login-form__submit-button">Log In</button>
+</form>

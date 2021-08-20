@@ -1,0 +1,15 @@
+<!-- This account template display the account related settings -->
+
+{%load static%}
+<div class="account-settings">
+    {% if user.roll == 'DOCTOR' %}
+        <p id="linking-id">Linking ID: {{ user.doctor.linking_id }}</p>
+        <p>Subscription: {{ subscription }} <button class="{{ action }}-button" data-url="{% url 'accounts:manage_subscription' action %}">{{ action_message }}</button></p>
+    {% endif %}
+    <p>Update Password <button type="button" data-url="{% url 'accounts:change_password' %}">Update</button></p>
+    <form action="{% url 'settings:update_session_expiry_time' %}" method="POST" id="account-settings-form">
+        {% csrf_token %}
+        <p>Timezone: {{ user_settings_form.tzone }}</p>
+        <p>Session Expiry Time: {{ user_settings_form.session_expire_time }}</p>
+    </form>
+</div>

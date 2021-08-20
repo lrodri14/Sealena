@@ -1,0 +1,10 @@
+<!-- This medical_test_details template is used to display the details about an medical test created by a specific user -->
+
+{% load static %}
+<div id="details">
+    <h2>Medical Test Details</h2>
+    <h3>Test Type</h3>
+    <p>{{ medical_test.get_test_type_display }}</p>
+    <h3>Name</h3>
+    <p>{{ medical_test.name }}</p>
+</div>

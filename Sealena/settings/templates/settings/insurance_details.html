@@ -1,0 +1,11 @@
+<!-- This insurance_details template is used to display the details about an insurance created by a specific user -->
+
+{% block body_block %}
+<div id="details">
+    <h2>Insurance Details</h2>
+    <h3>Company</h3>
+    <p>{{ insurance.company }}</p>
+    <h3>Country</h3>
+    <p>{{ insurance.get_country_display }}</p>
+</div>
+{% endblock %}
