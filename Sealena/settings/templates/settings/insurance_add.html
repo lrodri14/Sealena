@@ -1,0 +1,15 @@
+<!-- This insurance_add template displays the add insurance form -->
+
+{% load static %}
+{% block body_block %}
+<form method="POST" autocomplete="off" action="{% url 'settings:add_insurance' %}" id="add-insurance-form" class="modal__form creation-update-form">
+    {% csrf_token %}
+    <h2>Add Insurance Carrier</h2>
+    <p>{{ insurance_carrier_form.company.label }}</p>
+    <p>{{ insurance_carrier_form.company }}</p>
+    <p>{{ insurance_carrier_form.country.label }}</p>
+    <p>{{ insurance_carrier_form.country }}</p>
+    <p class="error"><small>{{ error }}</small></p>
+    <button type="submit">Add Carrier</button>
+</form>
+{%endblock%}

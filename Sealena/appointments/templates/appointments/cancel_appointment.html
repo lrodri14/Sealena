@@ -1,0 +1,16 @@
+<!-- This cancel_appointment template is used to display the cancel appointment form -->
+
+{% load static %}
+{% block body_block %}
+<form method="POST" id="cancel-appointment-form" class="modal__form deletion-form" action="{% url 'appointments:cancel_appointment' consult.pk %}">
+    {% csrf_token %}
+    <h2>Cancel Appointment</h2>
+    <h3>Are you sure you want to cancel this consult?</h3>
+    <h4>Patient: {{ consult.patient }}</h4>
+    <h4>Date and Time: {{ consult.datetime }}</h4>
+    <h4>Motive: {{ consult.motive }}</h4>
+    <h4>Suffering: {{ consult.suffering }}</h4>
+    <button type="submit" value="yes" name="choice">Yes</button>
+    <button type="submit" value="no" name="choice">No</button>
+</form>
+{% endblock %}

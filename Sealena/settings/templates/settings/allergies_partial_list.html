@@ -1,0 +1,14 @@
+<!-- This allergies_partial_list template is used to display all the allergies created by a specific user, this template is populated
+     dynamically based on different operations. -->
+
+{% load static %}
+{% if allergies %}
+     {% for a in allergies %}
+        <tr class="data-table__item" data-url="{% url 'settings:allergy_details' a.pk %}">
+            <td class="data-table__data">{{ a.allergy_type }}</td>
+            <td class="data-table__data"><i class="fas fa-edit data-table__update" data-url="{% url 'settings:update_allergy' a.pk %}"></i></td>
+            <td class="data-table__data"><i class="fas fa-trash data-table__delete" data-url="{% url 'settings:delete_allergy' a.pk %}"></i></td>
+            <td class="data-table__data"></td>
+        </tr>
+    {% endfor %}
+{% endif %}

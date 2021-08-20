@@ -1,0 +1,29 @@
+<!-- This patient_consults_partial_list template is used to display patient consults, this template will be populated dynamically
+     based on the patient consults -->
+
+{% load static %}
+
+<!--If consults are present this code will be rendered-->
+{% if consults %}
+    {% for c in consults %}
+        <tr class="data-table__item" {% if c.medical_status %} onclick="window.location='{% url 'appointments:consult_details' c.pk %}'" {% endif %}>
+            <td class="data-table__data">{{ c.datetime|date }}</td>
+            <td class="data-table__data">{{ c.datetime|time }}</td>
+            {% if c.medical_status %}
+            <td class="attended data-table__data">Attended</td>
+            {% else %}
+            <td class="not-attended data-table__data">Not Attended</td>
+            {% endif %}
+            {% if c.status == 'OPEN' %}
+                <td class="Open data-table__data">Open</td>
+            {% elif c.status == 'CONFIRMED' %}
+                <td class="Confirmed data-table__data">Confirmed</td>
+            {% elif c.status == 'CANCELLED' %}
+                <td class="Canceled data-table__data">Cancelled</td>
+            {% elif c.status == 'CLOSED' %}
+                <td class="Closed data-table__data">Closed</td>
+            {% endif %}
+            <td class="data-table__data">{{ c.created_by }}</td>
+        </tr>
+    {% endfor %}
+{% endif %}

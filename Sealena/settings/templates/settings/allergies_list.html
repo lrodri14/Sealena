@@ -1,0 +1,34 @@
+<!-- This allergies_list template displays all the allergies created by a specific user, this template serves as the wrapper for the
+     allergies_partial_list template that is dynamically populated based on different operations -->
+
+{% load static %}
+{% block body_block %}
+{% if allergies %}
+        <div class="data-container">
+            <table class="data-table">
+                <thead>
+                    <tr id="heading">
+                        <th>Allergy</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                        <th><i class="fas fa-plus data-table__create" data-url="{% url 'settings:add_allergy' %}"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% include 'settings/allergies_partial_list.html' %}
+                </tbody>
+            </table>
+        </div>
+        <div class="filter-container">
+            <i class="fas fa-filter filter-container__filter-display-button"></i>
+            <form method="GET" action="{% url 'settings:filter_allergies' %}" autocomplete="off" class="filter-container__filter-form">
+                <h3>Filter Allergies</h3>
+                <p>{{ form.allergy_type.label }}</p>
+                <p>{{ form.allergy_type }}</p>
+            </form>
+        </div>
+{%else%}
+    <p id="no-data">No allergies listed</p>
+    <i class="fas fa-plus add-data" data-url="{% url 'settings:add_allergy' %}"></i>
+{%endif%}
+{%endblock%}

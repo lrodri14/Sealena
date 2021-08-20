@@ -1,0 +1,7 @@
+<!-- This allergies_partial_select template display dynamic allergies created by a specific user whenever some operations have been executed
+     or a filter has been done. -->
+
+<option value="">---------</option>
+{%for allergy in allergies%}
+    <option value="{{allergy.pk}}">{{allergy.allergy_type}}</option>
+{%endfor%}

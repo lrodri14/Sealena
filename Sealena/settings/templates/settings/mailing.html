@@ -1,0 +1,18 @@
+<!-- This mailing template displays mail settings form -->
+
+{% load static %}
+<form method="POST" action="{% url 'settings:update_mailing_information' %}" autocomplete="off" id="mailing-info-form">
+    {% if success == True %}<p><small>* Mailing settings updated successfully</small></p>{% endif %}
+    {% csrf_token %}
+    <p>{{ mailing_form.smtp_server.label }}</p>
+    <p>{{ mailing_form.smtp_server }}</p>
+    <p>{{ mailing_form.port.label }}</p>
+    <p>{{ mailing_form.port }}</p>
+    <p>{{ mailing_form.email.label }}</p>
+    <p>{{ mailing_form.email }}</p>
+    <p>{{ mailing_form.password.label }}</p>
+    <p>{{ mailing_form.password }}</p>
+    <p>{{ mailing_form.use_tls.label }}</p>
+    <p>{{ mailing_form.use_tls }}</p>
+    <button type="submit">Update</button>
+</form>

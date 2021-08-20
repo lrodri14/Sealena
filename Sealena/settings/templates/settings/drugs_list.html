@@ -1,0 +1,35 @@
+<!-- This drugs_list template displays all the drugs created by a specific user, this template serves as the wrapper for the
+     drugs_partial_list template that is dynamically populated based on different operations -->
+
+{% load static %}
+{% block body_block %}
+{% if drugs %}
+        <div class="data-container">
+            <table class="data-table">
+                <thead>
+                    <tr id="heading">
+                        <th>Drug</th>
+                        <th>Category</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                        <th><i class="fas fa-plus data-table__create" data-url="{% url 'settings:add_drug' %}"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% include 'settings/drugs_partial_list.html' %}
+                </tbody>
+            </table>
+        </div>
+        <div class="filter-container">
+            <i class="fas fa-filter filter-container__filter-display-button"></i>
+            <form method="GET" action="{% url 'settings:filter_drugs' %}" class="filter-container__filter-form" autocomplete="off">
+                <h3>Drug Filter</h3>
+                <p>{{ form.name.label }}</p>
+                <p>{{ form.name }}</p>
+            </form>
+        </div>
+{% else %}
+    <p id="no-data">No drugs listed</p>
+    <i class="fas fa-plus add-data" data-url="{% url 'settings:add_drug' %}"></i>
+{% endif %}
+{% endblock %}

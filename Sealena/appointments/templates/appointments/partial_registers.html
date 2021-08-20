@@ -1,0 +1,27 @@
+<!-- This template is used to display dynamically populated registers -->
+
+{% load static %}
+
+{% for r in registers %}
+    <tr class="data-table__item">
+        <td class="data-table__data">{{ r.patient.id_number }}</td>
+        <td class="data-table__data">{{ r.patient.first_names }} {{ c.patient.last_names }}</td>
+        <td class="data-table__data">{{ r.datetime }}</td>
+        {% if r.status == 'OPEN' %}
+            <td id="Open" class="data-table__data">Open</td>
+        {% elif r.status == 'CONFIRMED' %}
+            <td id="Confirmed" class="data-table__data">Confirmed</td>
+        {% elif r.status == 'CANCELLED' %}
+            <td id="Cancelled" class="data-table__data">Cancelled</td>
+        {% elif r.status == 'CLOSED' %}
+            <td id="Closed" class="data-table__data">Closed</td>
+        {% endif %}
+        {% if r.medical_status == False and r.status == 'CLOSED' or r.medical_status == False and r.status == 'CANCELLED' %}
+            <td id="never_attended" class="data-table__data">Never Attended</td>
+        {% elif r.medical_status == False and r.status == 'OPEN' or r.medical_status == False and r.status == 'CONFIRMED' %}
+            <td id="pending" class="data-table__data">Pending</td>
+        {% else %}
+            <td id="attended" class="data-table__data">Attended</td>
+        {% endif %}
+    </tr>
+{% endfor %}

@@ -1,0 +1,32 @@
+<!-- This chats template is used to display the chats to which a user belongs, this template is populated dynamically
+     based on the number of chats to which the user belongs. -->
+
+{% load static %}
+<!-- Display destination custom tag -->
+{% load accounts_custom_tags %}
+<!-- If any chats in existence, they will be displayed. -->
+{% if chats %}
+    {% for chat in chats %}
+        {% get_destination chat user as destination %}
+        <div class="social-section__cell social-section__chat" data-url="{% url 'accounts:display_chat' chat.pk %}" data-pk="{{ chat.pk }}">
+            <div class="social-section__grid">
+                <!-- Destination Profile Pic -->
+                {% if not destination.profile.profile_pic %}
+                    {% if destination.profile.gender == 'MASCULINE' %}
+                        <img class="social-section__profile-picture" src="{% static 'accounts/avatars/male-avatar.png' %}" alt="">
+                    {% else %}
+                        <img class="social-section__profile-picture" src="{% static 'accounts/avatars/female-avatar.png' %}" alt="">
+                    {% endif %}
+                {% else %}
+                    <img class="social-section__profile-picture" src="{{ MEDIA_URL }}{{ destination.profile.profile_pic }}" alt="">
+                {% endif %}
+            </div>
+            <div class="social-section__grid">
+                <p class="social-section__contact-identification">{{ destination.first_name }} {{ destination.last_name }}</p>
+            </div>
+        </div>
+    {% endfor %}
+<!-- If no chats in existence, this message will be displayed -->
+{% else %}
+    <p id="no-content">No Chats</p>
+{% endif %}

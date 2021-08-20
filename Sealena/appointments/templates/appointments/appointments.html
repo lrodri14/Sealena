@@ -1,0 +1,67 @@
+<!-- This appointments template is used to display all the pending appointments a user has for the current date. -->
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Consults for Today {% endblock %}
+{% block return %}<a href="{% url 'home:home' %}"><i class="fas fa-long-arrow-alt-left"></i></a>{% endblock %}
+{% block body_block %}
+<link rel="stylesheet" href="{% static 'appointments/css/appointments.css' %}">
+
+<h2 class="title">Appointments</h2>
+<button type="button" onclick="window.location.href='{% url 'appointments:agenda' %}'">Agenda</button>
+<button type="button" onclick="window.location.href='{% url 'appointments:registers' %}'">Registers</button>
+
+{% if appointments %}
+
+<div class="data-container">
+    {% if message %}
+        <p class="data-container__basic-account-message">{{ message }}</p>
+    {% endif %}
+    <table class="data-table">
+        <thead>
+            <tr id="heading">
+                <th>ID</th>
+                <th>Patient</th>
+                <th>Date and Time</th>
+                <th>Status</th>
+                {% if doctor %}<th>Complete</th>{% endif %}
+                <th><i class="fas fa-plus data-table__create" data-url="{% url 'appointments:create_appointment' %}"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for a in appointments %}
+            <tr class="data-table__item">
+                <td class="data-table__data">{{ a.patient.id_number }}</td>
+                <td class="data-table__data">{{ a.patient.first_names }} {{ a.patient.last_names }}</td>
+                <td class="data-table__data">{{ a.datetime }}</td>
+                <td class="data-table__data" id="status-0">Pending...</td>
+                {% if doctor %}<td class="data-table__data"><i class="fas fa-edit data-table__update" onclick="window.location='{% url 'appointments:update_consult' a.pk %}'"></i></td>{% endif %}
+                <td class="data-table__data">
+                    {% if a.lock == False %}
+                        <div class="popup">
+                            <span class="popup__text">This consult is unlocked for further changes</span>
+                        </div>
+                        <i class="fas fa-exclamation-circle"></i>
+                    {%endif%}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% else %}
+
+    <p id="no-data">There are no consults for today's date</p>
+    <i class="fas fa-plus add-data" data-url="{% url 'appointments:create_appointment' %}"></i>
+
+{% endif %}
+
+<div class="modal">
+    <div class="modal__content">
+
+    </div>
+</div>
+
+<script src="{% static 'appointments/js/appointments.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,34 @@
+<!-- This medical_testing template displays all the medical_tests created by a specific user, this template serves as the wrapper for the
+     medical_tests_partial_list template that is dynamically populated based on different operations -->
+
+{% load static %}
+{% if medical_tests %}
+        <div class="data-container">
+            <table class="data-table">
+                <thead>
+                    <tr id="heading">
+                        <th>Test Type</th>
+                        <th>Test Name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                        <th><i class="fas fa-plus data-table__create" data-url="{% url 'settings:add_medical_test' %}"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% include 'settings/medical_tests_partial_list.html' %}
+                </tbody>
+            </table>
+        </div>
+        <div class="filter-container">
+            <i class="fas fa-filter filter-container__filter-display-button"></i>
+            <form method="GET" action="{% url 'settings:filter_medical_testing' %}" autocomplete="off" class="filter-container__filter-form">
+                <h3>Filter Medical Tests</h3>
+                <p>{{ form.name.label }}</p>
+                <p>{{ form.name }}</p>
+            </form>
+        </div>
+
+{%else%}
+    <p id="no-data">No tests listed</p>
+    <i class="fas fa-plus add-data" data-url="{% url 'settings:add_medical_test' %}"></i>
+{%endif%}

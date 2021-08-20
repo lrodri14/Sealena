@@ -1,0 +1,13 @@
+<!-- The update_allergy template is used to display the update allergy form -->
+
+{% load static %}
+{% block body_block %}
+<form method="POST" autocomplete="off" action="{% url 'settings:update_allergy' allergy.pk %}" id="update-allergy-form" class="modal__form creation-update-form">
+    {% csrf_token %}
+    <h2>Update Allergy</h2>
+    <p>{{ allergy_form.allergy_type.label }}</p>
+    <p>{{ allergy_form.allergy_type }}</p>
+    <p class="error">{{ error }}</p>
+    <button type="submit">Update Allergy</button>
+</form>
+{% endblock %}

@@ -1,0 +1,257 @@
+<!-- This patient_details template display patient specific details -->
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ patient.first_names }} {{ patient.last_names }}{% endblock %}
+{% block return %}<a href="{% url 'patients:patients' %}"><i class="fas fa-long-arrow-alt-left"></i></a>{% endblock %}
+{% block body_block %}
+<link rel="stylesheet" href="{% static 'patients/css/patient_details.css' %}">
+
+<h2 id="patient-name">{{ patient.first_names }} {{ patient.last_names }}</h2>
+
+{% if user.roll == 'DOCTOR' %}
+    <!--Info Navigation, this is used to select what information the user wants to see.-->
+    <div class="navigation">
+        <div class="navigation__tab navigation__tab--active"><p>General</p></div><div class="navigation__tab"><p>Appointments</p></div><div class="navigation__tab"><p>Exams</p></div><div class="navigation__tab"><p>Charges</p></div>{% if user.doctor.speciality == 'PED'%}<div class="navigation__tab"><p>Vaccines</p></div>{% elif user.doctor.speciality == 'SRG' %}<!--<div class="info-tab"><p>Surgeries</p></div>-->{% endif %}
+    </div>
+{% endif %}
+
+<div class="details-container">
+
+    <!-- General Information of the patient-->
+    <div class="details-container__personal-information">
+
+        <div class="details-container__general-information">
+            <h2>General</h2>
+            <h4 class="details-container__title">General Information</h4>
+            <i class="far fa-calendar-check quick-consult" data-url="{% url 'appointments:create_appointment' patient.pk %}"></i>
+            {% if patient.email %}<i class="fas fa-envelope" data-url="{% url 'patients:send_email' patient.pk %}"></i>{% endif %}
+            <p>Id Card Number: {% if patient.id_number %} {{ patient.id_number }} {% else %} ---------- {% endif %}</p>
+            <p>First Name: {{ patient.first_names }}</p>
+            <p>Last Name: {{ patient.last_names }}</p>
+            <p>Gender: {{ patient.get_gender_display }}</p>
+            <p>Birthday: {{ patient.birthday|date:"d M, Y" }}</p>
+            <p>Age: {{ patient.age }}</p>
+            <p>Phone Number: {% if patient.phone_number %} {{ patient.phone_number }} {% else %} ---------- {% endif %}</p>
+            <p>Email: {% if patient.email %} {{ patient.email }} {% else %} ---------- {% endif %}</p>
+            <p>Civil Status: {{ patient.get_civil_status_display }}</p>
+            <p>Origin: {{ patient.get_origin_display }}</p>
+            <p>Residence: {{ patient.get_residence_display }}</p>
+        </div>
+
+        <div class="details-container__background">
+            <h2>Background</h2>
+            <h4 class="details-container__title">Allergies</h4>
+            {% if patient.allergy_information.all %}
+                {% for allergy in patient.allergy_information.all %}
+                    <p>{{ forloop.counter }}. {{ allergy.allergy_type }} - {{ allergy.about }}</p>
+                {% endfor %}
+            {% else %}
+                <p class="no-data">No Data</p>
+            {% endif %}
+            <h4 class="details-container__title">Antecedents</h4>
+            {% if patient.antecedent_information.all %}
+                {% for antecedent in patient.antecedent_information.all %}
+                    <p>{{ forloop.counter }}. {{ antecedent.antecedent }} - {{ antecedent.info }}</p>
+                {% endfor %}
+            {% else %}
+                <p class="no-data">No Data</p>
+            {% endif %}
+            <h4 class="details-container__title">Insurance</h4>
+            {% if patient.insurance.insurance_carrier or patient.type_of_insurance %}
+                <p>Insurance Carrier: {{ patient.insurance.insurance_carrier }}</p>
+                <p>Insurance Type: {{ patient.insurance.insurance_type }}</p>
+                <p>Expiration Date: {{ patient.insurance.expiration_date }}</p>
+            {% else %}
+                <p class="no-data">No Data</p>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <div class="data appointments">
+        <!--If no consults are present this code will be rendered-->
+        {% if consults %}
+            <div class="data-container">
+                <table class="data-table">
+                    <thead>
+                        <tr id="heading">
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Medical Status</th>
+                            <th>Status</th>
+                            <th>Created By</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Included template for dynamic displaying of results-->
+                        {% include 'patients/patient_consults_partial_list.html' %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="filter-container">
+                <!--Filtering form-->
+                <i class="fas fa-filter filter-container__display-filter-button appointments-filter"></i>
+                <form method="GET" action="{% url 'patients:filter_patient_details' %}" class="filter-container__filter-form appointments-form">
+                    <h3 class="filter-container__form-title">Filter Results</h3>
+                    <p>{{ consults_filter_form.date_from.label }}</p>
+                    <p>{{ consults_filter_form.date_from }}</p>
+                    <p>{{ consults_filter_form.date_to.label }}</p>
+                    <p>{{ consults_filter_form.date_to }}</p>
+                    <p class="error"><small>{{ error }}</small></p>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        {% else %}
+            <p id="no-consults-data">No Data</p>
+        {% endif %}
+    </div>
+
+    <div class="data exams">
+        {% if exams %}
+            <div class="data-container">
+                <table class="data-table">
+                    <thead>
+                        <tr id="heading">
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Created By</th>
+                            <th>Type</th>
+                            <th>Exams</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Included template for dynamic displaying of results-->
+                    {% include 'patients/patient_exams_partial_list.html' %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="filter-container">
+                <!-- Filtering form -->
+                <i class="fas fa-filter filter-container__display-filter-button"></i>
+                <form method="GET" action="{% url 'patients:filter_patient_details' %}" class="filter-container__filter-form exams-form">
+                    <h3 class="filter-container__filter-form">Filter Results</h3>
+                    <p>{{ consults_filter_form.date_from.label }}</p>
+                    <p>{{ consults_filter_form.date_from }}</p>
+                    <p>{{ consults_filter_form.date_to.label }}</p>
+                    <p>{{ consults_filter_form.date_to }}</p>
+                    <p class="error"><small>{{ error }}</small></p>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        <!--If no exams are present this code will be rendered-->
+        {% else %}
+            <p id="no-exams-data">No Data</p>
+        {% endif %}
+    </div>
+
+    <div class="data charges">
+        <!--If charges are present this code will be rendered-->
+        {% if charges %}
+            <div class="data-container">
+                <table class="data-table">
+                    <thead>
+                        <tr id="heading">
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Created By</th>
+                            <th>$</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Included template for dynamic displaying of results-->
+                        {% include 'patients/patient_charges_partial_list.html' %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="filter-container">
+            <!-- Filtering Form -->
+            <i class="fas fa-filter filter-container__display-filter-button charges-filter"></i>
+            <form method="GET" action="{% url 'patients:filter_patient_details' %}" class="filter-container__filter-form charges-form">
+                <h3 class="filter-container__form-title">Filter Results</h3>
+                <p>{{ consults_filter_form.date_from.label }}</p>
+                <p>{{ consults_filter_form.date_from }}</p>
+                <p>{{ consults_filter_form.date_to.label }}</p>
+                <p>{{ consults_filter_form.date_to }}</p>
+                <p class="error"><small>{{ error }}</small></p>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <!--If no charges are present this code will be rendered-->
+        {% else %}
+            <p id="no-charges-data">No Data</p>
+        {% endif %}
+    </div>
+
+    {% if user.doctor.speciality == 'PED' %}
+        <div class="data vaccines">
+            {% if vaccines %}
+                <!-- Included template for dynamic displaying of results-->
+                {% include 'patients/patient_vaccines_list.html' %}
+            {% else %}
+                <p id="no-vaccines-data">No Data</p>
+                <i class="fas fa-plus add-data" data-url="{% url 'appointments:add_vaccination_record' patient.pk %}"></i>
+            {% endif %}
+        </div>
+    {% elif user.doctor.speciality == 'SRG'%}
+
+<!--  Assisted Surgery coming up in updates!  -->
+
+<!--        <div class="filterable surgeries">-->
+<!--            {% if surgeries %}-->
+<!--                <div class="data-table">-->
+<!--                    <table>-->
+<!--                        <thead>-->
+<!--                            <tr id="heading">-->
+<!--                                <th>Surgery Type</th>-->
+<!--                                <th>Date & Time</th>-->
+<!--                                <th>Status</th>-->
+<!--                                <th>Medical Status</th>-->
+<!--                                <th>Update</th>-->
+<!--                                <th>Cancel</th>-->
+<!--                                <th><i class="fas fa-plus" data-url="{% url 'appointments:appoint_surgery' patient.pk %}"></i></th>-->
+<!--                            </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody id="surgical-records">-->
+<!--                            &lt;!&ndash; Included template for dynamic displaying of results&ndash;&gt;-->
+<!--                            {% include 'patients/patient_surgeries_partial_list.html' %}-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <i class="fas fa-filter surgeries-filter"></i>-->
+<!--                    <form method="GET" action="{% url 'patients:filter_patient_details' patient.pk %}" class="surgeries-form">-->
+<!--                        <h3>Filter Results</h3>-->
+<!--                        <p>{{ consults_form.date_from.label }}</p>-->
+<!--                        <p>{{ consults_form.date_from }}</p>-->
+<!--                        <p>{{ consults_form.date_to.label }}</p>-->
+<!--                        <p>{{ consults_form.date_to }}</p>-->
+<!--                        <p class="error"><small>{{ error }}</small></p>-->
+<!--                        <button type="submit">Submit</button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            {% else %}-->
+<!--                <p id="no-surgeries-data">No Data</p>-->
+<!--            {% endif %}-->
+<!--        </div>-->
+
+    {% endif %}
+</div>
+
+<!-- Email Sending Modal -->
+<div class="modal">
+    <div class="modal__content">
+
+    </div>
+</div>
+
+<!--Modal used for image previewing.-->
+<div class="exam-preview">
+    <img class="exam-preview__image" src="" alt="">
+</div>
+
+<script src="{% static 'patients/js/patient_details.js' %}"></script>
+{% endblock %}

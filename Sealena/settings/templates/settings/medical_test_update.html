@@ -1,0 +1,13 @@
+<!-- This medical_test_update template displays the update medical test form -->
+
+{% load static %}
+<form method="POST" autocomplete="off" action="{% url 'settings:update_medical_test' medical_test.pk %}" id="update-medical-test-form" class="modal__form creation-update-form">
+    {% csrf_token %}
+    <h2>Update Medical Test</h2>
+    <p>{{ medical_test_form.test_type.label }}</p>
+    <p>{{ medical_test_form.test_type }}</p>
+    <p>{{ medical_test_form.name.label }}</p>
+    <p>{{ medical_test_form.name }}</p>
+    <p class="error">{{ error }}</p>
+    <button type="submit">Update Test</button>
+</form>

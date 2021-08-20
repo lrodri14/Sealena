@@ -1,0 +1,21 @@
+<!-- This profile_picture_change template is used to display the profile picture change form, it contains a form with
+     hidden inputs that are set using JS. -->
+
+{% load static %}
+<!-- Change Profile Picture Form -->
+<form method="POST" action="{% url 'accounts:profile_picture_change' %}" enctype="multipart/form-data"  class="edit-profile-picture-form">
+    {% csrf_token %}
+    <!--Hidden Inputs-->
+        <p class="edit-profile-picture-form__input">{{ form.profile_pic }}</p>
+        <p>{{ form.x }}</p>
+        <p>{{ form.y }}</p>
+        <p>{{ form.width }}</p>
+        <p>{{ form.height }}</p>
+    <!-- Image Selected -->
+    <h2>Selected Picture</h2>
+    <div class="edit-profile-picture-form__picture-container">
+        <img src="" alt="" class="edit-profile-picture-form__selected-picture">
+    </div>
+    <p><label for="id_profile_pic">Select File</label></p>
+    <button type="submit">Save</button>
+</form>
