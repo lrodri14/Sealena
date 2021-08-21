@@ -56,7 +56,7 @@ class TimezoneMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        if request.user.is_authenticated and not request.user.username.is_staff:
+        if request.user.is_authenticated and request.user.username != 'admin':
             tzname = request.user.account_settings.tzone
             if tzname:
                 timezone.activate(pytz.timezone(tzname))
