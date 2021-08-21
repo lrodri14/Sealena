@@ -10,7 +10,6 @@ from .models import *
 from django.db.models import Q
 from django.http import JsonResponse
 from django.core.mail import send_mail
-from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 from accounts.models import MailingCredential
 from django.template.loader import render_to_string
@@ -36,11 +35,8 @@ def patients(request):
          can only be linked to a single doctor, this before we build up the multiple linking functionality in future updates.*
     """
     if request.user.roll == 'DOCTOR':
-        doctor_group = Group.objects.get(name='Doctor')
-        doctor = doctor_group in request.user.groups.all()
         aimed_user = request.user
     else:
-        doctor = False
         aimed_user = request.user.assistant.doctors.all()[0]
 
     message = None
@@ -56,7 +52,7 @@ def patients(request):
     patients_list = Patient.objects.filter(created_by=aimed_user).order_by('id_number')
     patient_filter = PatientFilterForm
     template = 'patients/patients.html'
-    context = {'patients': patients_list, 'form': patient_filter, 'doctor': doctor, 'today': today, 'message': message, 'creation_enabled': creation_enabled}
+    context = {'patients': patients_list, 'form': patient_filter, 'today': today, 'message': message, 'creation_enabled': creation_enabled}
     return render(request, template, context)
 
 
@@ -73,16 +69,13 @@ def filter_patients(request):
     """
     query = request.GET.get('query')
     if request.user.roll == 'DOCTOR':
-        doctor_group = Group.objects.get(name='Doctor')
-        doctor = doctor_group in request.user.groups.all()
         aimed_user = request.user
     else:
-        doctor = False
         aimed_user = request.user.assistant.doctors.all()[0]
     today = timezone.localtime().date()
     patients_list = Patient.objects.filter(Q(first_names__icontains=query) | Q(last_names__icontains=query) | Q(id_number__icontains=query), created_by=aimed_user).order_by('id_number')
     template = 'patients/patients_partial_list.html'
-    context = {'patients': patients_list, 'doctor': doctor, 'today': today}
+    context = {'patients': patients_list, 'today': today}
     data = {'html': render_to_string(template, context, request)}
     return JsonResponse(data)
 
@@ -257,8 +250,6 @@ def delete_patient(request, pk):
     """
     today = timezone.localtime().date()
     patient = Patient.objects.get(pk=pk)
-    doctor_group = Group.objects.get(name='Doctor')
-    doctor = doctor_group in request.user.groups.all()
     consults = BaseConsult.objects.filter(created_by=request.user, patient=patient, medical_status=True)
 
     template = 'patients/delete_patient.html'
@@ -283,7 +274,7 @@ def delete_patient(request, pk):
             context = {'patient_deleted': 'Patient deleted successfully, your records have been updated'}
             patients_list = Patient.objects.filter(created_by=request.user).order_by('id_number')
             data = {'html': render_to_string(template, context, request),
-                    'patients': render_to_string('patients/patients_list.html', {'patients': patients_list, 'doctor': doctor, 'message': message, 'creation_enabled': creation_enabled}, request)}
+                    'patients': render_to_string('patients/patients_list.html', {'patients': patients_list, 'message': message, 'creation_enabled': creation_enabled}, request)}
     return JsonResponse(data)
 
 
