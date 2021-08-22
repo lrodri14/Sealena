@@ -273,8 +273,9 @@ def delete_patient(request, pk):
 
             context = {'patient_deleted': 'Patient deleted successfully, your records have been updated'}
             patients_list = Patient.objects.filter(created_by=request.user).order_by('id_number')
+            patient_filter = PatientFilterForm
             data = {'html': render_to_string(template, context, request),
-                    'patients': render_to_string('patients/patients_list.html', {'patients': patients_list, 'message': message, 'creation_enabled': creation_enabled}, request)}
+                    'patients': render_to_string('patients/patients_list.html', {'patients': patients_list, 'form': patient_filter, 'message': message, 'creation_enabled': creation_enabled}, request)}
     return JsonResponse(data)
 
 

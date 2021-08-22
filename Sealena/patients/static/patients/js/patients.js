@@ -68,29 +68,13 @@ async function submitFormAW(form, csrfmiddlewaretoken){
 
 // Sync Functions
 
-function addIconLevitate(addPatientIcon){
-    /*This function is used to perform the levitation effect in the
-      .fa-plus icon every time there is no data available, it takes
-      one parameter, 'addPatientIcon' is the icon itself. it will
-      execute a setInterval function every 0.5 seconds, which just
-      changes the style of the 'top' attribute in our element.*/
-    setInterval(function(){
-        if (addPatientIcon.style.top == '90%'){
-            addPatientIcon.style.top = '88%'
-        } else {
-            addPatientIcon.style.top = '90%'
-        }
-    },500)
-}
-
-function deleteItem(event){
-    /*
-        This function is used to execute the deletion over an element by clicking in the delete icon, this function
-        is called over inline calling.
-    */
-    event.preventDefault()
-    event.stopPropagation()
-    let url = event.target.parentNode.getAttribute('data-url')
+function deleteItem(e){
+    /* This function is used to execute the deletion over an element by clicking in the delete icon, this function
+        is called over inline calling. */
+    e.preventDefault()
+    e.stopPropagation()
+    let target = e.target
+    let url = target.parentNode.getAttribute('data-url')
     deleteAW(url).
     then(data => {
         modalContent.innerHTML = data['html']
@@ -98,14 +82,15 @@ function deleteItem(event){
     })
 }
 
-function updateItem(event){
+function updateItem(e){
     /*
         This function is used to execute the updating over an element by clicking in the update icon, this function
         is called over inline calling.
     */
-    event.preventDefault()
-    event.stopPropagation()
-    let url = event.target.parentNode.getAttribute('data-url')
+    e.preventDefault()
+    e.stopPropagation()
+    let target = e.target
+    let url = target.parentNode.getAttribute('data-url')
     window.location.href = url
 }
 
@@ -222,9 +207,8 @@ if (dataContainer){
     })
 
     dataContainer.addEventListener('click', (e) => {
-
         /* This event will be fired if the target is a e.target.classList.contains('filter-container__filter-display-button') icon, and depending if the filter form contains the
-           filter-container__filter-form--display class or not, will add or remove this class.*/
+           filter-container__filter-form--display class or not, will add or remove this class. */
         if (e.target.classList.contains('filter-container__filter-display-button')){
             warningPopup.classList.remove('popup--display')
             warningPopup.style.top = ''
@@ -233,6 +217,7 @@ if (dataContainer){
     })
 
     dataContainer.addEventListener('input', (e) => {
+       /* This event will be fired every time a query is been typed in the filter, a request will be done to the server requesting any data matching the query */
        const url = filterForm.action + '?query=' + e.target.value
         filterResults(url)
         .then(data => {
@@ -300,12 +285,11 @@ if (modal){
         if (e.target === form){
             submitFormAW(form, csrfmiddlewaretoken)
             .then(data => {
-                console.log(data)
                 if (data.hasOwnProperty('patients')){
                     modalContent.innerHTML = data['html']
                     dataContainer.innerHTML = data['patients']
-                    // This function is called in case there are no more instances available, the add button will be displayed and levitated
-                    addIconLevitate(document.querySelector('.add-data'))
+                    tbody = document.querySelector('tbody')
+                    filterForm = document.querySelector('.filter-container__filter-form')
                 }else{
                     modalContent.innerHTML = data['html']
                 }
