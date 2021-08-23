@@ -32,11 +32,11 @@
     <div class="patient-information-popup__popup-text">
         <h3>Background</h3>
         <h4>Allergies</h4>
-        {% for allergy in consult.patient.allergies.all %}
+        {% for allergy in consult.patient.allergy_information.all %}
             <p>{{ allergy.allergy_type }} - {{ allergy.about }}</p>
         {% endfor %}
         <h4>Antecedents</h4>
-        {% for antecedent in consult.patient.antecedents.all %}
+        {% for antecedent in consult.patient.antecedent_information.all %}
             <p>{{ antecedent.antecedent }} - {{ antecedent.info }}</p>
         {% endfor %}
         <h4>Insurance</h4>
