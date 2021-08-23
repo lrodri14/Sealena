@@ -11,13 +11,11 @@ called 'backedUpData', the purpose of this variable is to serve the data that pr
 
 let dataContainer = document.querySelector('.data')
 let tbody = document.querySelector('tbody')
-let addPatient = document.querySelector('.add-data')
 let filterForm = document.querySelector('.filter-container__filter-form')
 let warningPopup = document.querySelector('.popup')
 let warningPopupText = document.querySelector('.popup__text')
 let modal = document.querySelector('.modal')
 let modalContent = document.querySelector('.modal__content')
-let addData = document.querySelector('.add-data')
 
 // Warning Messages
 let warningMessages = {
@@ -98,26 +96,17 @@ function updateItem(e){
 
 // addData Event Listeners, this events will be fired when there is not data available to show.
 
-if (addData){
-
-    /* Every time a hover occurs over this element, this event will be fired, it will add the add-data--active
-       class to the element*/
-    addData.addEventListener('mouseover', () => {
-        addData.classList.add('add-data--active')
-    })
-
-    /* Every time a hover occurs over this element, this event will be fired, it will remove the add-data--active
-       class from the element*/
-    addData.addEventListener('mouseout', () => {
-        addData.classList.remove('add-data--active')
-    })
-}
-
 // Data Container
 
 if (dataContainer){
 
     dataContainer.addEventListener('mouseover', (e) => {
+
+        /* This event will be fired every time a mouseover occurs in an element with the add-data class in it's classList, the
+           add-data--active class will be added */
+        if (e.target.classList.contains('add-data')){
+            e.target.classList.add('add-data--active')
+        }
 
         /* This event will be fired every time a hover occurs in the icons or a data-table__item item, this will change many style
            properties from the row*/
@@ -165,6 +154,12 @@ if (dataContainer){
     })
 
     dataContainer.addEventListener('mouseout', (e) => {
+
+        /* This event will be fired every time a mouseout occurs in an element with the add-data class in it's classList, the
+           add-data--active class will be removed */
+        if (e.target.classList.contains('add-data')){
+            e.target.classList.remove('add-data--active')
+        }
 
         /* This event will be fired every time a hover occurs in the icons or a data-table__item item, this will remove many style
            properties from the row*/
