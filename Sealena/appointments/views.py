@@ -532,7 +532,7 @@ def appointment_date_update(request, pk):
     creation_form = speciality_mapping[aimed_user.doctor.speciality]['creation_form']
     consult_form = creation_form(request.POST or None, instance=consult, user=aimed_user)
     template = 'appointments/appointment_date_update.html'
-    context = {'consult_form': consult_form, 'consult':consult}
+    context = {'consult_form': consult_form, 'consult': consult}
     data = {'html': render_to_string(template, context, request)}
     if request.method == 'POST':
         consult_form = creation_form(request.POST or None, instance=consult, user=aimed_user)
