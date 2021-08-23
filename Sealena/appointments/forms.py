@@ -166,7 +166,7 @@ class UpdateBaseConsultForm(forms.ModelForm):
         icd_group = cleaned_data.get('icd_10_group')
         icd_detail = cleaned_data.get('icd_10_detail')
         if (icd_group and not icd_detail) or (icd_detail and not icd_group):
-            raise ValidationError("CIE-10 diagnose details incomplete", code='invalid_cie_10_details')
+            raise ValidationError("ICD-10 diagnose details incomplete", code='invalid_icd_10_details')
         return cleaned_data
 
     class Meta:
@@ -307,6 +307,8 @@ class MedicalTestResultForm(forms.ModelForm):
         cleaned_data = super().clean()
         exam_type = cleaned_data.get('type')
         image = cleaned_data.get('image')
+        print(exam_type)
+        print(image)
         if (exam_type and not image) or (image and not exam_type):
             raise ValidationError("Both 'Type' and 'Image' fields must be provided", code='invalid_exams')
         return cleaned_data
