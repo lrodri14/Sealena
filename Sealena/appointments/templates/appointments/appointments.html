@@ -24,7 +24,7 @@
                 <th>Patient</th>
                 <th>Date and Time</th>
                 <th>Status</th>
-                {% if doctor %}<th>Complete</th>{% endif %}
+                {% if user.roll == 'DOCTOR' %}<th>Complete</th>{% endif %}
                 <th><i class="fas fa-plus data-table__create" data-url="{% url 'appointments:create_appointment' %}"></i></th>
             </tr>
         </thead>
@@ -35,7 +35,7 @@
                 <td class="data-table__data">{{ a.patient.first_names }} {{ a.patient.last_names }}</td>
                 <td class="data-table__data">{{ a.datetime }}</td>
                 <td class="data-table__data" id="status-0">Pending...</td>
-                {% if doctor %}<td class="data-table__data"><i class="fas fa-edit data-table__update" onclick="window.location='{% url 'appointments:update_consult' a.pk %}'"></i></td>{% endif %}
+                {% if user.roll == 'DOCTOR' %}<td class="data-table__data"><i class="fas fa-edit data-table__update" onclick="window.location='{% url 'appointments:update_consult' a.pk %}'"></i></td>{% endif %}
                 <td class="data-table__data">
                     {% if a.lock == False %}
                         <div class="popup">

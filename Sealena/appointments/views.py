@@ -14,7 +14,6 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.db import IntegrityError
 from django.shortcuts import redirect
-from django.contrib.auth.models import Group
 from patients.models import Patient
 from .models import BaseConsult, MedicalTestResult, VaccineApplication, Surgery
 from utilities.accounts_utilities import speciality_mapping
@@ -59,11 +58,8 @@ def appointments(request):
     """
     today = timezone.localtime()
     if request.user.roll == 'DOCTOR':
-        doctor_group = Group.objects.get(name='Doctor')
-        doctor = doctor_group in request.user.groups.all()
         aimed_user = request.user
     else:
-        doctor = False
         aimed_user = request.user.assistant.doctors.all()[0]
 
     message = None
@@ -77,7 +73,7 @@ def appointments(request):
 
     appointments_list = BaseConsult.objects.filter(Q(created_by=aimed_user, datetime__date=today.date(), medical_status=False, status='CONFIRMED') | Q(created_by=aimed_user, lock=False)).order_by('datetime')
     template = 'appointments/appointments.html'
-    context = {'appointments': appointments_list, 'doctor': doctor, 'message': message}
+    context = {'appointments': appointments_list, 'message': message}
     return render(request, template, context)
 
 
