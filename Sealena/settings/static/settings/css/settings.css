@@ -402,6 +402,7 @@
 .error-response{
     width: 30%;
     height: 12%;
+    border-radius: 20px;
     text-align: center;
     padding: 20px;
     position: absolute;
