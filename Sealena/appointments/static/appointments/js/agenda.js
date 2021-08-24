@@ -249,31 +249,6 @@ if (container){
             modal.classList.remove('modal--display')
         }
 
-        /*This event will be fired every time a submit occurs and the target contains the 'update-appointment-form' class in it's
-        classlist, this event will stop the itself, and collect the data needed to update the consult, this consists of
-        the url, method, csrfmiddlewaretoken and the form data, once this data is collected from the form, we proceed to
-        call our asynchronous function, the response is dynamically displayed in our table.*/
-        if (e.target.id === 'update-appointment-form'){
-            e.preventDefault()
-            const form = e.target
-            const method = form.method
-            const url = form.action
-            const data = new FormData(form)
-            const csrfmiddlewaretoken = document.querySelector('[name=csrfmiddlewaretoken]').value
-            document.querySelector('.create-update-appointment-loader').classList.add('create-update-appointment-loader-show')
-            submitUpdateAW(url, method, csrfmiddlewaretoken, data)
-            .then(data => {
-                if (data['updated_html']){
-                    dataTable.innerHTML = data['updated_html']
-                    modal.classList.remove('modal-show')
-                    notificationWebsocket.send(JSON.stringify({'to': data['to'], 'message': `${data['patient']} updated an appointment date to ${data['datetime']}`, 'nf_type':'appointment_update'}))
-                }else{
-                    document.querySelector('.create-update-appointment-loader').classList.remove('create-update-appointment-loader-show')
-                    modalContent.innerHTML = data['html']
-                }
-            })
-        }
-
         if (e.target.classList.contains('filter-container__filter-form')){
             /*This event will be fired every time a submit occurs and the target is the filter results form
             this event will stop the itself, and collect the data needed to filter the consults, this consists of
@@ -306,6 +281,34 @@ if (modal){
         // This event will be fired every time the target is the modal, it will remove the modal--display class from the element.
         if (e.target.classList.contains('modal')){
             e.target.classList.remove('modal--display')
+        }
+    })
+
+    modal.addEventListener('submit', (e) => {
+        /* This event will be fired every time a submit occurs and the target contains the 'appointment-update-form' class in it's
+        classlist, this event will stop the itself, and collect the data needed to update the consult, this consists of
+        the url, method, csrfmiddlewaretoken and the form data, once this data is collected from the form, we proceed to
+        call our asynchronous function, the response is dynamically displayed in our table. */
+        if (e.target.id === 'appointment-update-form'){
+            e.preventDefault()
+            e.stopPropagation()
+            const form = e.target
+            const method = form.method
+            const url = form.action
+            const data = new FormData(form)
+            const csrfmiddlewaretoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+            document.querySelector('.create-update-appointment-loader').classList.add('create-update-appointment-loader--display')
+            submitUpdateAW(url, method, csrfmiddlewaretoken, data)
+            .then(data => {
+                if (data['updated_html']){
+                    dataTable.innerHTML = data['updated_html']
+                    modal.classList.remove('modal--display')
+                    notificationWebsocket.send(JSON.stringify({'to': data['to'], 'message': `${data['patient']} updated an appointment date to ${data['datetime']}`, 'nf_type':'appointment_update'}))
+                }else{
+                    document.querySelector('.create-update-appointment-loader').classList.remove('create-update-appointment-loader--display')
+                    modalContent.innerHTML = data['html']
+                }
+            })
         }
     })
 }

@@ -32,8 +32,8 @@ h3:first-child{
     border: 2px solid rgba(0,0,0,0);
     border-bottom: 2px solid #FFFFFF;
     position: absolute;
-    top: 8%;
-    left: 61.5%;
+    top: 2%;
+    right: 4%;
     visibility: hidden;
     animation: spin 1s linear infinite;
 }
