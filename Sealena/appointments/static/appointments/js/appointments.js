@@ -128,7 +128,7 @@ if (body){
          remains unlocked for further changes.*/
         if (e.target.classList.contains('fa-exclamation-circle')){
             popUp = e.target.parentNode.childNodes[1]
-            popUp.classList.add('popup--display')
+            popUp.classList.remove('popup--display')
         }
 
     })
