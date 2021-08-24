@@ -11,13 +11,11 @@ called 'backedUpData', the purpose of this variable is to serve the data that pr
 
 let dataContainer = document.querySelector('.data')
 let tbody = document.querySelector('tbody')
-let addPatient = document.querySelector('.add-data')
 let filterForm = document.querySelector('.filter-container__filter-form')
 let warningPopup = document.querySelector('.popup')
 let warningPopupText = document.querySelector('.popup__text')
 let modal = document.querySelector('.modal')
 let modalContent = document.querySelector('.modal__content')
-let addData = document.querySelector('.add-data')
 
 // Warning Messages
 let warningMessages = {
@@ -68,29 +66,13 @@ async function submitFormAW(form, csrfmiddlewaretoken){
 
 // Sync Functions
 
-function addIconLevitate(addPatientIcon){
-    /*This function is used to perform the levitation effect in the
-      .fa-plus icon every time there is no data available, it takes
-      one parameter, 'addPatientIcon' is the icon itself. it will
-      execute a setInterval function every 0.5 seconds, which just
-      changes the style of the 'top' attribute in our element.*/
-    setInterval(function(){
-        if (addPatientIcon.style.top == '90%'){
-            addPatientIcon.style.top = '88%'
-        } else {
-            addPatientIcon.style.top = '90%'
-        }
-    },500)
-}
-
-function deleteItem(event){
-    /*
-        This function is used to execute the deletion over an element by clicking in the delete icon, this function
-        is called over inline calling.
-    */
-    event.preventDefault()
-    event.stopPropagation()
-    let url = event.target.parentNode.getAttribute('data-url')
+function deleteItem(e){
+    /* This function is used to execute the deletion over an element by clicking in the delete icon, this function
+        is called over inline calling. */
+    e.preventDefault()
+    e.stopPropagation()
+    let target = e.target
+    let url = target.parentNode.getAttribute('data-url')
     deleteAW(url).
     then(data => {
         modalContent.innerHTML = data['html']
@@ -98,14 +80,15 @@ function deleteItem(event){
     })
 }
 
-function updateItem(event){
+function updateItem(e){
     /*
         This function is used to execute the updating over an element by clicking in the update icon, this function
         is called over inline calling.
     */
-    event.preventDefault()
-    event.stopPropagation()
-    let url = event.target.parentNode.getAttribute('data-url')
+    e.preventDefault()
+    e.stopPropagation()
+    let target = e.target
+    let url = target.parentNode.getAttribute('data-url')
     window.location.href = url
 }
 
@@ -113,26 +96,17 @@ function updateItem(event){
 
 // addData Event Listeners, this events will be fired when there is not data available to show.
 
-if (addData){
-
-    /* Every time a hover occurs over this element, this event will be fired, it will add the add-data--active
-       class to the element*/
-    addData.addEventListener('mouseover', () => {
-        addData.classList.add('add-data--active')
-    })
-
-    /* Every time a hover occurs over this element, this event will be fired, it will remove the add-data--active
-       class from the element*/
-    addData.addEventListener('mouseout', () => {
-        addData.classList.remove('add-data--active')
-    })
-}
-
 // Data Container
 
 if (dataContainer){
 
     dataContainer.addEventListener('mouseover', (e) => {
+
+        /* This event will be fired every time a mouseover occurs in an element with the add-data class in it's classList, the
+           add-data--active class will be added */
+        if (e.target.classList.contains('add-data')){
+            e.target.classList.add('add-data--active')
+        }
 
         /* This event will be fired every time a hover occurs in the icons or a data-table__item item, this will change many style
            properties from the row*/
@@ -181,6 +155,12 @@ if (dataContainer){
 
     dataContainer.addEventListener('mouseout', (e) => {
 
+        /* This event will be fired every time a mouseout occurs in an element with the add-data class in it's classList, the
+           add-data--active class will be removed */
+        if (e.target.classList.contains('add-data')){
+            e.target.classList.remove('add-data--active')
+        }
+
         /* This event will be fired every time a hover occurs in the icons or a data-table__item item, this will remove many style
            properties from the row*/
         if (e.target.closest('.data-table__item')){
@@ -222,9 +202,8 @@ if (dataContainer){
     })
 
     dataContainer.addEventListener('click', (e) => {
-
         /* This event will be fired if the target is a e.target.classList.contains('filter-container__filter-display-button') icon, and depending if the filter form contains the
-           filter-container__filter-form--display class or not, will add or remove this class.*/
+           filter-container__filter-form--display class or not, will add or remove this class. */
         if (e.target.classList.contains('filter-container__filter-display-button')){
             warningPopup.classList.remove('popup--display')
             warningPopup.style.top = ''
@@ -233,6 +212,7 @@ if (dataContainer){
     })
 
     dataContainer.addEventListener('input', (e) => {
+       /* This event will be fired every time a query is been typed in the filter, a request will be done to the server requesting any data matching the query */
        const url = filterForm.action + '?query=' + e.target.value
         filterResults(url)
         .then(data => {
@@ -300,12 +280,11 @@ if (modal){
         if (e.target === form){
             submitFormAW(form, csrfmiddlewaretoken)
             .then(data => {
-                console.log(data)
                 if (data.hasOwnProperty('patients')){
                     modalContent.innerHTML = data['html']
                     dataContainer.innerHTML = data['patients']
-                    // This function is called in case there are no more instances available, the add button will be displayed and levitated
-                    addIconLevitate(document.querySelector('.add-data'))
+                    tbody = document.querySelector('tbody')
+                    filterForm = document.querySelector('.filter-container__filter-form')
                 }else{
                     modalContent.innerHTML = data['html']
                 }

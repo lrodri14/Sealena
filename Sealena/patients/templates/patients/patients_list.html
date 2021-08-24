@@ -18,7 +18,7 @@
                     <th>Residence</th>
                     <th>Insurance?</th>
                     <!-- This code will check if the user is a doctor -->
-                    {% if doctor %}
+                    {% if user.roll == 'DOCTOR' %}
                         <th>Edit</th>
                         <th>Delete</th>
                     {% endif %}
@@ -49,9 +49,8 @@
             <p>{{ form.patient }}</p>
         </form>
     </div>
-
 {% else %}
     <!-- This code will be executed if there are no instances available -->
     <p id="no-data">There are no patients listed</p>
-    <a class="add-data" href="{% url 'patients:add_patient' %}"><i class="fas fa-plus"></i></a>
+    <a href="{% url 'patients:add_patient' %}"><i class="fas fa-plus add-data"></i></a>
 {% endif %}
