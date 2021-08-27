@@ -11,7 +11,7 @@ from django.utils import timezone
 from django.core.files import File
 from django.template.loader import render_to_string
 from twilio.base.exceptions import TwilioRestException
-from Sealena.settings import NUMVERIFY_API_KEY, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN
+from Sealena.settings import NUMVERIFY_ENDPOINT, NUMVERIFY_API_KEY, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN
 
 # Twilio Client instance
 client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
@@ -108,7 +108,7 @@ async def validate_number(phone_number):
     """
     success = False
     payload = {'access_key': NUMVERIFY_API_KEY, 'number': phone_number}
-    response = requests.get('http://apilayer.net/api/validate', params=payload).json()
+    response = requests.get(NUMVERIFY_ENDPOINT, params=payload).json()
     if 'valid' in response.keys():
         success = response['valid']
     return success

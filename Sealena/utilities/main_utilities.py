@@ -4,12 +4,12 @@
 """
 import requests
 import random
-from Sealena.settings import X_RAPID_API_KEY_QUOTES, X_RAPID_API_KEY_HOST_QUOTES
+from Sealena.settings import X_RAPID_API_QUOTES_ENDPOINT, X_RAPID_API_KEY_QUOTES, X_RAPID_API_KEY_HOST_QUOTES
 
 api_key = X_RAPID_API_KEY_QUOTES
 host = X_RAPID_API_KEY_HOST_QUOTES
 quote_categories = ['love', 'god', 'wisdom', 'beauty', 'dreams']
-endpoint = "https://famous-quotes4.p.rapidapi.com/random"
+endpoint = X_RAPID_API_QUOTES_ENDPOINT
 headers = {'x-rapidapi-key': api_key, 'x-rapidapi-host': host}
 querystring = {'category': random.choice(quote_categories), 'count': '1'}
 
