@@ -7,11 +7,10 @@ from django.utils import timezone
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.db import IntegrityError
-from django.http import JsonResponse, HttpResponse
-from django.contrib.auth.models import Group
+from django.http import JsonResponse
 from django.contrib.auth import get_user_model
 from django.template.loader import render_to_string
-from .models import CustomUser, Doctor, Assistant, UsersProfile, ContactRequest, Chat, Message, Plan, Subscription
+from .models import CustomUser, UsersProfile, ContactRequest, Chat, Message, Plan, Subscription
 from utilities.paypal_utilities import cancel_subscription
 from utilities.accounts_utilities import check_requests, send_welcome_email, send_verification_email, check_token_validity
 from .forms import DoctorSignUpForm, AssistantSignUpForm, ProfileForm, ProfilePictureForm, MessageForm, \
