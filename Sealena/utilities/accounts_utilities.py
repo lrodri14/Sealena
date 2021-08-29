@@ -12,7 +12,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMultiAlternatives
 from django.core.mail.backends.smtp import EmailBackend
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_str, force_text, DjangoUnicodeDecodeError
+from django.utils.encoding import force_bytes, force_text
 
 from appointments.models import GeneralConsult, AllergyAndImmunologicalConsult, DentalConsult, NeurologicalConsult, \
                                 GynecologicalConsult, OphthalmologyConsult, PsychiatryConsult, SurgicalConsult, UrologicalConsult
@@ -23,14 +23,6 @@ from appointments.forms import GeneralConsultCreationForm, AllergyAndImmunologic
                                 UpdateGeneralConsultForm, UpdateAllergyAndImmunologicalConsultForm, UpdateDentalConsultForm, \
                                 UpdateNeurologicalConsultForm, UpdateGynecologicalConsultForm, UpdateOphthalmologyConsultForm, \
                                 UpdatePsychiatryConsultForm, UpdateSurgicalConsultForm, UpdateUrologicalConsultForm
-
-
-domains = {
-    'gmail.com': {'smtp_server': 'smtp.gmail.com', 'port': 587, 'use_tls': True},
-    'yahoo.com': {'smtp_server': 'smtp.mail.yahoo.com', 'port': 465, 'use_tls': True},
-    'hotmail.com': {'smtp_server': 'smtp.live.com', 'port': 465, 'use_tls': True},
-    'outlook.com': {'smtp_server': 'smtp.live.com', 'port': 587, 'use_tls': True},
-}
 
 speciality_mapping = {
     'A&I': {'model': AllergyAndImmunologicalConsult, 'creation_form': AllergyAndImmunologicalConsultCreationForm, 'updating_form': UpdateAllergyAndImmunologicalConsultForm},
@@ -115,40 +107,6 @@ def check_token_validity(uidb64, token):
         user = None
 
     return user, generate_token.check_token(user, token)
-
-
-def set_mailing_credentials(email):
-    """
-        DOCSTRING:
-        This set_mailing_credentials function is used to create a MailingCredential instance whenever a new user is created
-        independently if the email meets the requirements to fill the instance with initial data, this function only
-        takes two parameters the user itself and the email which we use to fill the instance with data if needed.
-    """
-    domain = email.split("@")[1]
-    if domains.get(domain):
-        smtp_server = domains[domain]['smtp_server']
-        port = domains[domain]['port']
-        use_tls = domains[domain]['use_tls']
-        credentials = {'smtp_server': smtp_server, 'port': port, 'use_tls': use_tls}
-        return credentials
-    else:
-        return False
-
-
-def open_connection(user_mailing_credentials):
-    """
-        DOCSTRING:
-        This open_connection function is used to open an SMTP connection when the user tries to send a message to someone,
-        this function only expects one argument, the mailing_credentials of the sender, we will open the connection creating
-        an instance of the EmailBackend class, and returning this instance.
-    """
-    smtp_server = user_mailing_credentials.smtp_server
-    port = user_mailing_credentials.port
-    email = user_mailing_credentials.email
-    password = user_mailing_credentials.password
-    use_tls = user_mailing_credentials.use_tls
-    connection = EmailBackend(host=smtp_server, port=port, username=email, password=password, use_tls=use_tls)
-    return connection
 
 
 def check_requests(user):

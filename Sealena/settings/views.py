@@ -14,12 +14,11 @@ from django.db import IntegrityError
 from django.template.loader import render_to_string
 from patients.forms import AllergyFilterForm, AllergyForm, InsuranceCarrierFilterForm, InsuranceCarrierForm
 from appointments.forms import DrugForm, DrugFilterForm, MedicalTestForm, MedicalTestFilterForm, VaccineCreationAndUpdateForm, VaccineApplicationCreationAndUpdateForm, VaccineFilterForm
-from accounts.forms import MailingCredentialForm, ChangeAvailabilityForm, AddLinkingForm, UserAccountSettingsForm, UserGeneralSettingsForm
+from accounts.forms import ChangeAvailabilityForm, AddLinkingForm, UserAccountSettingsForm, UserGeneralSettingsForm
 User = apps.get_model('accounts', 'CustomUser')
 Doctor = apps.get_model('accounts', 'Doctor')
 Assistant = apps.get_model('accounts', 'Assistant')
 Patient = apps.get_model('patients', 'Patient')
-MailingCredential = apps.get_model('accounts', 'MailingCredential')
 InsuranceCarrier = apps.get_model('patients', 'InsuranceCarrier')
 Drugs = apps.get_model('appointments', 'Drug')
 Allergies = apps.get_model('patients', 'Allergy')
@@ -273,42 +272,6 @@ def remove_linking(request, pk):
     template = 'settings/remove_linking.html'
     data = {'html': render_to_string(template, request=request, context={'user': user})}
     return JsonResponse(data)
-
-# Mailing
-###############################
-
-
-def mailing(request):
-    """
-        DOCSTRING:
-        This mailing view is used to present the mailing settings, this content will be displayed in the settings dynamically,
-        so the content will sent to the front-end in JSON format, we will use the render_to_string function to convert a content
-        into a string and send it using the JsonResponse class. It expects one single argument: 'request', it expects a
-        request object.
-    """
-    mailing_form = MailingCredentialForm(instance=MailingCredential.objects.get(user=request.user))
-    template = 'settings/mailing.html'
-    context = {'mailing_form': mailing_form}
-    data = {'html': render_to_string(template, context, request)}
-    return JsonResponse(data)
-
-
-def update_mailing_information(request):
-    """
-        DOCSTRING:
-        This update_mailing_information view is used to update the mailing information of the current user, once this
-        view receives a request with a POST content, the information will be updated and sent to the client side in a
-        JSON Format.
-    """
-    template = 'settings/mailing.html'
-    if request.method == "POST":
-        mailing_info = MailingCredentialForm(request.POST, instance=MailingCredential.objects.get(user=request.user))
-        if mailing_info.is_valid():
-            mailing_info.save()
-            mailing_form = MailingCredentialForm(instance=MailingCredential.objects.get(user=request.user))
-            context = {'mailing_form': mailing_form, 'success': True}
-            data = {'html': render_to_string(template, context, request)}
-            return JsonResponse(data)
 
 # Medical Testing Logic
 #####################################

@@ -167,8 +167,6 @@ def signup(request):
         profile_creation_form = None
 
     if request.method == 'POST':
-        # doctor = Group.objects.get(name='Doctor')
-        # assistant = Group.objects.get(name='Assistant')
 
         if 'speciality' in request.POST:
             user_creation_form = DoctorSignUpForm(request.POST)
@@ -183,13 +181,11 @@ def signup(request):
                 user.assign_roll(speciality=True)
                 user.generate_linking_id()
                 user.save()
-                # user.groups.add(doctor)
                 user_profile.user = user
                 user_profile.save()
             else:
                 user.assign_roll(speciality=False)
                 user.save()
-                # user.groups.add(assistant)
             send_welcome_email(user)
             send_verification_email(user, request)
         else:

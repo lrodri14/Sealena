@@ -9,7 +9,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm as CreationForm
 from django.contrib.auth.forms import UserChangeForm as ChangeForm
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-from .models import CustomUser, Doctor, Assistant, UsersProfile, UserAccountSettings, UserGeneralSettings, MailingCredential, Message
+from .models import CustomUser, Doctor, Assistant, UsersProfile, UserAccountSettings, UserGeneralSettings, Message
 
 
 class UserCreationForm(CreationForm):
@@ -198,21 +198,6 @@ class UserGeneralSettingsForm(forms.ModelForm):
     class Meta:
         model = UserGeneralSettings
         exclude = ('user',)
-
-
-class MailingCredentialForm(forms.ModelForm):
-    """
-        DOCSTRING:
-        This MailingCredentialForm is used to edit the user's mailing credentials, we defined the class's Meta class
-        and set the model attribute aiming to the MailingCredential class, we excluded specific fields through the
-        exclude field and finally we defined our widgets in the widget field.
-    """
-    class Meta:
-        model = MailingCredential
-        exclude = ('user',)
-        widgets = {
-            'password': forms.PasswordInput(render_value=True),
-        }
 
 
 class MessageForm(forms.ModelForm):

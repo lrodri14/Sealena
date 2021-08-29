@@ -9,15 +9,12 @@ from .forms import *
 from .models import *
 from django.db.models import Q
 from django.http import JsonResponse
-from django.core.mail import send_mail
 from django.shortcuts import render, redirect
-from accounts.models import MailingCredential
 from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
 from appointments.models import BaseConsult, MedicalTestResult, VaccineApplication, Surgery
 from appointments.forms import ConsultDetailsFilterForm
-from utilities.accounts_utilities import open_connection
 from utilities.global_utilities import country_number_codes, collect_country_code
-from smtplib import SMTPSenderRefused, SMTPAuthenticationError, SMTPNotSupportedError
 
 # Create your views here.
 
@@ -357,24 +354,14 @@ def send_email(request, pk):
     context = {'form': EmailForm, 'receiver': patient, 'today': timezone.localdate()}
     data = {'html': render_to_string(template, context, request)}
     if request.POST:
-        mailing_credentials = MailingCredential.objects.get(user=request.user)
-        connection = open_connection(mailing_credentials)
-        sender = mailing_credentials.email
-        receiver = patient.email
+        receiver = [patient.email]
         subject = request.POST.get('subject')
-        message = request.POST.get('body')
-        try:
-            send_mail(subject, message, sender, (receiver,), connection=connection, fail_silently=False)
-            context = {'success': 'Email has been sent successfully'}
-        except ConnectionRefusedError:
-            context = {'error': 'SMTP Server not configured, set up your credentials in settings'}
-        except SMTPSenderRefused:
-            context = {'error': 'Incomplete credentials in SMTP Server settings'}
-        except SMTPAuthenticationError:
-            context = {'error': 'Incorrect credentials in SMTP Server Settings'}
-        except SMTPNotSupportedError:
-            context = {'error': 'TLS Protocol must be active to open connection'}
+        message = request.POST.get('body') + '\nIn order to get in direct contact, please reach Dr. {} {} {}\n' \
+                                             'Message sent from the Sealena App'.format(request.user.first_name, request.user.last_name, request.user.email)
+        email = EmailMessage(subject=subject, body=message, to=receiver)
+        success = email.send(fail_silently=True)
+        response = 'Email has been sent successfully' if success == 1 else 'We encountered a problem trying to send this email, please try again later...'
+        context = {'success': success, 'response': response}
         data = {'html': render_to_string(template, context, request)}
-        return JsonResponse(data)
     return JsonResponse(data)
 
