@@ -23,11 +23,11 @@
 {% else %}
     <div class="server-response">
         {% if success %}
-            <p>{{ success }}</p>
+            <p>{{ response }}</p>
             <button type="button">Continue</button>
         {% else %}
-            <p>{{ error }}</p>
-            <button type="button">Continue</button><a href="{% url 'settings:settings' %}"><button type="">Settings</button></a>
+            <p>{{ response }}</p>
+            <button type="button">Continue</button>
         {% endif %}
     </div>
 {% endif %}

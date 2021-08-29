@@ -594,7 +594,7 @@ if (modal){
                     }
                 })
             }else{
-                document.querySelector('.loader').classList.add('loader-show')
+                document.querySelector('.loader').classList.add('loader--display')
                 sendEmailAW(url, method, csrfmiddlewaretoken, formData)
                 .then(data => {
                     modalContent.innerHTML = data['html']
