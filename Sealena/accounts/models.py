@@ -96,7 +96,6 @@ class Doctor(CustomUser):
         if created:
             UserAccountSettings.objects.create(user=self)
             UserGeneralSettings.objects.create(wallpaper=1, user=self)
-            MailingCredential.objects.create(email=self.email, user=self)
 
     class Meta:
         verbose_name = 'Doctor'
