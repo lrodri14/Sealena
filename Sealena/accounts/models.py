@@ -219,40 +219,6 @@ class UserGeneralSettings(models.Model):
         verbose_name_plural = "User General Settings"
 
 
-class MailingCredential(models.Model):
-
-    """
-        DOCSTRING:
-        This MailingCredential class will store all the data needed to open a mailing connection through the SMTP
-        Protocol, an instance of this class will be created once a new user has been created, it is linked through
-        a OneToOne relationship with the CustomUser class, the instance will be prefilled if the user account data
-        fulfills certain conditions. It contains it's Meta class and it's own __str__ dunder method.
-    """
-
-    smtp_server = models.CharField("SMTP Server", max_length=100, blank=True, null=True, help_text="Provide the SMTP Server", default="")
-    port = models.IntegerField("Port", blank=True, null=True, help_text="Provide the port used by your server")
-    email = models.EmailField("Email", blank=True, null=True, help_text="Provide your email")
-    password = models.CharField("Password", max_length=254, blank=True, null=True, help_text="Provide your password")
-    use_tls = models.BooleanField("Use TLS? (Recommended)", default=False)
-    user = models.OneToOneField(CustomUser, blank=True, null=True, related_name="mailing_credentials", on_delete=models.CASCADE)
-
-    def __str__(self):
-        return str(self.user) + ' - ' + 'Mailing Credentials'
-
-    def save(self, *args, **kwargs):
-        from utilities.accounts_utilities import set_mailing_credentials
-        available_credentials = set_mailing_credentials(self.email)
-        if available_credentials:
-            self.smtp_server = available_credentials['smtp_server']
-            self.port = available_credentials['port']
-            self.use_tls = available_credentials['use_tls']
-        super().save(*args, **kwargs)
-
-    class Meta:
-        verbose_name = 'Mailing Credential'
-        verbose_name_plural = 'Mailing Credentials'
-
-
 class ContactRequest(models.Model):
     """
         DOCSTRING:

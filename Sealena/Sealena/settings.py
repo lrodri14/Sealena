@@ -103,12 +103,12 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # EMAIL SETTINGS
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtppro.zoho.com'
+EMAIL_HOST = 'smtp.zoho.com'
 EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'sealena@sealena.com'
+EMAIL_HOST_USER = os.environ.get('SEALENA_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('SEALENA_EMAIL_PASSWORD')
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'sealena@sealena.com'
+DEFAULT_FROM_EMAIL = os.environ.get('SEALENA_DEFAULT_FROM_EMAIL')
 
 WSGI_APPLICATION = 'Sealena.wsgi.application'
 ASGI_APPLICATION = 'Sealena.asgi.application'
