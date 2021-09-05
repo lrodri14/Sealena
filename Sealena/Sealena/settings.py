@@ -22,20 +22,14 @@ DOT_ENV = os.path.join(BASE_DIR, '.env')
 
 load_dotenv(DOT_ENV)
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '+fevk9ycv55-0n09=n+l&&_x5floh+879m8cocyy*trhxcm_+7'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+# PRODUCTION SETTINGS
+SECRET_KEY = os.environ.get('SEALENA_SECRET_KEY')
+DEBUG = False
+ALLOWED_HOSTS = os.environ.get('SEALENA_ALLOWED_HOSTS').split(',')
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -58,7 +52,7 @@ INSTALLED_APPS = [
 # CUSTOM USER MODEL REFERENCE
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
-
+# PASSWORD HASHERS
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.Argon2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
@@ -66,6 +60,7 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
 ]
 
+# MIDDLEWARE
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -78,14 +73,14 @@ MIDDLEWARE = [
     'accounts.middleware.TimezoneMiddleware',
 ]
 
+# URL CONF
 ROOT_URLCONF = 'Sealena.urls'
 
+# TEMPLATES
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            TEMPLATES_DIR,
-        ],
+        'DIRS': [TEMPLATES_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -99,17 +94,19 @@ TEMPLATES = [
     },
 ]
 
+# X-FRAME
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # EMAIL SETTINGS
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtppro.zoho.com'
 EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'sealena@sealena.com'
+EMAIL_HOST_USER = os.environ.get('SEALENA_EMAIL')
 EMAIL_HOST_PASSWORD = os.environ.get('SEALENA_EMAIL_PASSWORD')
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'sealena@sealena.com'
+DEFAULT_FROM_EMAIL = os.environ.get('SEALENA_EMAIL')
 
+# WSGI - ASGI
 WSGI_APPLICATION = 'Sealena.wsgi.application'
 ASGI_APPLICATION = 'Sealena.asgi.application'
 CHANNEL_LAYERS = {
@@ -123,11 +120,17 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('SEALENA_DB_NAME'),
+        'USER': os.environ.get('SEALENA_DB_USER'),
+        'PASSWORD': os.environ.get('SEALENA_DB_PASSWORD'),
+        'HOST': os.environ.get('SEALENA_DB_HOST'),
+        'PORT': os.environ.get('SEALENA_DB_PORT'),
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -147,7 +150,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -163,13 +165,11 @@ USE_TZ = True
 
 DATETIME_FORMAT = '%Y-%m-%dT%H:%M'
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    STATIC_DIR,
-]
+STATICFILES_DIRS = [STATIC_DIR]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Media Files
 MEDIA_URL = '/media/'
@@ -197,6 +197,7 @@ PAYPAL_CLIENT_ID = os.environ.get('PAYPAL_CLIENT_ID')
 PAYPAL_SECRET_KEY = os.environ.get('PAYPAL_SECRET_KEY')
 PAYPAL_ACCESS_TOKEN = os.environ.get('PAYPAL_ACCESS_TOKEN')
 
+# LOGIN/LOGOUT REDIRECTION
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/home/'
 LOGOUT_REDIRECT_URL = '/'
