@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import CustomUser, Assistant, Doctor, UsersProfile, UserAccountSettings, \
-                    UserGeneralSettings, MailingCredential, ContactRequest, Chat, \
+                    UserGeneralSettings, ContactRequest, Chat, \
                     Message, Product, Plan, Subscription
 from .forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
@@ -26,7 +26,6 @@ admin.site.register(Doctor)
 admin.site.register(UsersProfile)
 admin.site.register(UserAccountSettings)
 admin.site.register(UserGeneralSettings)
-admin.site.register(MailingCredential)
 admin.site.register(ContactRequest)
 admin.site.register(Chat)
 admin.site.register(Message)

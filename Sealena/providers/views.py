@@ -5,20 +5,17 @@
 
 
 # Imports
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.db.models import Q
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.db import IntegrityError
 from django.template.loader import render_to_string
 from django.utils import timezone
-from smtplib import SMTPAuthenticationError, SMTPSenderRefused, SMTPNotSupportedError
 
 from utilities.global_utilities import country_number_codes, collect_country_code
 from .models import Provider, Visitor
 from .forms import ProviderForm, ProviderFilterForm, VisitorForm, VisitorFilterForm, EmailForm
-from accounts.models import MailingCredential
-from utilities.accounts_utilities import open_connection
 
 # Create your views here.
 # Providers Related Logic
@@ -348,33 +345,23 @@ def send_providers_email(request, pk):
     """
         DOCSTRING:
         The send_providers_email function view is responsible of the providers mail sending, in the POST request, it expects
-        and receives different information used for this process, it makes use of the send_mail() function for this.
+        and receives different information used for this process, it makes use of the EmailMessage class for this.
     """
     template = 'providers/email_form.html'
     provider = Provider.objects.get(pk=pk)
     provider_type = 'provider'
     context = {'form': EmailForm, 'receiver': provider, 'provider_type': provider_type, 'today': timezone.localdate()}
     data = {'html': render_to_string(template, context, request)}
-    if request.POST:
-        mailing_credentials = MailingCredential.objects.get(user=request.user)
-        connection = open_connection(mailing_credentials)
-        sender = mailing_credentials.email
-        receiver = provider.email
+    if request.method == 'POST':
         subject = request.POST.get('subject')
-        message = request.POST.get('body')
-        try:
-            send_mail(subject, message, sender, (receiver,), connection=connection, fail_silently=False)
-            context = {'success': 'Email has been sent successfully'}
-        except ConnectionRefusedError:
-            context = {'error': 'SMTP Server not configured, set up your credentials in settings'}
-        except SMTPSenderRefused:
-            context = {'error': 'Incomplete credentials in SMTP Server settings'}
-        except SMTPAuthenticationError:
-            context = {'error': 'Incorrect credentials in SMTP Server Settings'}
-        except SMTPNotSupportedError:
-            context = {'error': 'TLS Protocol must be active to open connection'}
+        message = request.POST.get('body') + '\n\nIn order to get in direct contact, please reach Dr. {} {} through {}\n' \
+                                             'Message sent from the Sealena App'.format(request.user.first_name, request.user.last_name, request.user.email)
+        receiver = [provider.email]
+        email = EmailMessage(subject=subject, body=message, to=receiver)
+        success = email.send(fail_silently=True)
+        response = 'Email has been sent successfully' if success == 1 else 'We encountered a problem trying to send this email, please try again later...'
+        context = {'success': success, 'response': response}
         data = {'html': render_to_string(template, context, request)}
-        return JsonResponse(data)
     return JsonResponse(data)
 
 
@@ -382,7 +369,7 @@ def send_visitors_email(request, pk):
     """
         DOCSTRING:
         The send_providers_email function view is responsible of the visitors mail sending, in the POST request, it expects
-        and receives different information used for this process, it makes use of the send_mail() function for this.
+        and receives different information used for this process, it makes use of the EmailMessage class for this.
     """
     template = 'providers/email_form.html'
     provider = Visitor.objects.get(pk=pk)
@@ -390,23 +377,13 @@ def send_visitors_email(request, pk):
     context = {'form': EmailForm, 'receiver': provider, 'provider_type': provider_type, 'today': timezone.localdate()}
     data = {'html': render_to_string(template, context, request)}
     if request.POST:
-        mailing_credentials = MailingCredential.objects.get(user=request.user)
-        connection = open_connection(mailing_credentials)
-        sender = mailing_credentials.email
-        receiver = provider.email
         subject = request.POST.get('subject')
-        message = request.POST.get('body')
-        try:
-            send_mail(subject, message, sender, (receiver,), connection=connection, fail_silently=False)
-            context = {'success': 'Email has been sent successfully'}
-        except ConnectionRefusedError:
-            context = {'error': 'SMTP Server not configured, set up your credentials in settings'}
-        except SMTPSenderRefused:
-            context = {'error': 'Incomplete credentials in SMTP Server settings'}
-        except SMTPAuthenticationError:
-            context = {'error': 'Incorrect credentials in SMTP Server Settings'}
-        except SMTPNotSupportedError:
-            context = {'error': 'TLS Protocol must be active to open connection'}
+        message = request.POST.get('body') + '\n\nIn order to get in direct contact, please reach Dr. {} {} through {}\n' \
+                                             'Message sent from the Sealena App'.format(request.user.first_name, request.user.last_name, request.user.email)
+        receiver = [provider.email]
+        email = EmailMessage(subject=subject, body=message, to=receiver)
+        success = email.send(fail_silently=True)
+        response = 'Email has been sent successfully' if success == 1 else 'We encountered a problem trying to send this email, please try again later...'
+        context = {'success': success, 'response': response}
         data = {'html': render_to_string(template, context, request)}
-        return JsonResponse(data)
     return JsonResponse(data)

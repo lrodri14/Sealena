@@ -565,6 +565,7 @@ if (modal){
 
         /* This event will be fired every time the target's id is 'email-form' it is used to send emails */
         if (e.target.id === 'email-form'){
+            document.querySelector('.loader').classList.add('loader--display')
             sendEmailAW(url, method, csrfmiddlewaretoken, formData)
             .then(data => {
                 modalContent.innerHTML = data['html']
