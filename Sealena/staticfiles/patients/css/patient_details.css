@@ -1,0 +1,348 @@
+/* This patient_details stylesheet contains all the style to display the patient_details template */
+
+#patient-name{
+    margin-left: 1%;
+    position: fixed;
+}
+
+.quick-consult{
+    position: absolute;
+    top: 22.8%;
+    left: 44%;
+    font-size: 21px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.quick-consult--active{
+    color: #25BB41;
+    transition: 0.5s;
+}
+
+.account-subscription-warning{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255,255,255,0.1);
+    width: 50%;
+    height: 20%;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.account-subscription-warning a{
+    text-decoration: underline;
+}
+
+.fa-envelope{
+    position: absolute;
+    top: 23%;
+    left: 47%;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.fa-envelope--active{
+    color: #00CCFF;
+    transition: 0.5s;
+}
+
+/*##################################################### Wrapper ######################################################*/
+
+.details-container{
+    display: grid;
+    grid-template-columns: 100% 100% 100% 100% 100%;
+    margin-top: 7%;
+}
+
+.details-container__personal-information{
+    display: grid;
+    grid-template-columns: 49.5% 49.5%;
+    grid-gap: 1%;
+    margin-top: 3%;
+}
+
+.details-container__background{
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.details-container__personal-information h2{
+    margin-left: 45%;
+}
+
+.details-container__personal-information p{
+    margin-left: 10px;
+}
+
+.details-container__title{
+    left: 0;
+    width: 95%;
+    padding: 10px;
+    color: #FFFFFF;
+    margin-top: 5%;
+    background-color: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-clip: padding-box;
+}
+
+.filter-container__filter-form{
+    margin-top: 0%;
+}
+
+.filter-container__filter-form--display{
+    transform: translateY(1%);
+}
+
+.filter-container__filter-form button{
+    width: 30%;
+}
+
+/*##################################################### Data Table ###################################################*/
+
+.data{
+    margin-top: 2.5%;
+}
+
+.data-container{
+    max-height: 693px;
+}
+
+/*##################################################### Navigation ###################################################*/
+
+.navigation{
+    position: fixed;
+    left: 0;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-clip: padding-box;
+    transition: 0.5s;
+    animation: show-up 0.5s linear forwards;
+}
+
+.navigation__tab{
+    width: 150px;
+    text-align: center;
+    display: inline-block;
+    transition: 0.5s;
+}
+
+.navigation__tab--hover{
+    cursor: pointer;
+    color: #000000;
+    background-color: #FFFFFF;
+    transition: 0.5s;
+}
+
+.navigation__tab--active{
+    color: #000000;
+    background-color: #FFFFFF;
+    transition: 0.5s;
+}
+
+/*##################################################### Email Modal - Form ###########################################*/
+
+.loader{
+    position: absolute;
+    visibility: hidden;
+    top: 3%;
+    left: 94%;
+    border: 3px solid rgba(0,0,0,0);
+    border-top: 3px solid #FFFFFF;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    animation: spin 1s linear infinite;
+}
+
+.loader--display{
+    visibility: visible;
+}
+
+#email-form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    margin-top: 0%;
+    width: 50%;
+    height: 60%;
+    padding: 25px;
+    text-align: center;
+    border-radius: 20px;
+    background-color: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-clip: padding-box;
+    visibility: visible;
+}
+
+#email-form p{
+    text-align: left;
+}
+
+#email-form hr{
+    border: none;
+    border-bottom: 1px solid #FFFFFF;
+}
+
+#email-form input{
+    width: 40%;
+    text-align: left;
+}
+
+#email-form button{
+    width: 20%;
+}
+
+.server-response{
+    width: 50%;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    border-radius: 25px;
+    background-color: rgba(255,255,255,0.1);
+}
+
+.server-response button{
+    width: 20%;
+}
+
+/*####################################### Vaccination - Surgical Forms & Details #####################################*/
+
+.create-update-form{
+    width: 26%;
+}
+
+#add-new-vaccine{
+    position: absolute;
+    right: 10%;
+    top: 25%;
+    cursor: pointer;
+}
+
+#vaccination-details{
+    width: 40%;
+    height: 30%;
+    padding: 25px;
+    border-radius: 25px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-clip: padding-box;
+}
+
+#vaccination-details h2{
+    text-align: center;
+}
+
+#comments{
+    text-align: justify;
+    max-height: 85px;
+    overflow-y: auto;
+}
+
+/*##################################################### Image Preview ################################################*/
+
+.exam-preview{
+    position: fixed;
+    margin-left: 79.5%;
+    margin-top: -48%;
+    max-width: 20%;
+    max-height: 70%;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s;
+}
+
+.exam-preview--display{
+    opacity: 1;
+    visibility: visible;
+    transition: 0.5s;
+}
+
+.exam-preview__image{
+    width: 100%;
+    height: auto;
+}
+
+/*##################################################### No Data ######################################################*/
+
+#no-consults-data{
+    width: 80px;
+    position: absolute;
+    top: 50%;
+    left: 150%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+#no-exams-data{
+    width: 80px;
+    position: absolute;
+    top: 50%;
+    left: 250%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+#no-charges-data{
+    width: 80px;
+    position: absolute;
+    top: 50%;
+    left: 350%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+#no-vaccines-data{
+    width: 80px;
+    position: absolute;
+    top: 50%;
+    left: 450%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+#no-surgeries-data{
+    width: 80px;
+    position: absolute;
+    top: 50%;
+    left: 450%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.add-data{
+    left: 450%;
+}
+
+/*##################################################### Modal ######################################################*/
+
+.modal{
+    position: fixed;
+}
+
+/*##################################################### Key Frames ###################################################*/
+
+@keyframes spin{
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}

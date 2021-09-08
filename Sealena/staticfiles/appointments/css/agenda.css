@@ -1,0 +1,43 @@
+/* This consult_register.css contains all the stylesheets for the consult register template to be displayed properly */
+
+
+/*######################################################## Titles ###################################################*/
+
+h2,h3{
+    margin-left: 1%;
+}
+
+/*########################################################## Table ###################################################*/
+
+h3:first-child{
+    display: none;
+}
+
+/*########################################################## Forms ###################################################*/
+
+.filter-container__filter-form--display{
+    transform: translateY(6%);
+}
+
+/*######################################### Cancel and Update Form Modal #############################################*/
+
+#cancel-appointment-form h4{
+    text-align: left;
+}
+
+.create-update-appointment-loader{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(0,0,0,0);
+    border-bottom: 2px solid #FFFFFF;
+    position: absolute;
+    top: 2%;
+    right: 4%;
+    visibility: hidden;
+    animation: spin 1s linear infinite;
+}
+
+.create-update-appointment-loader--display{
+    visibility: visible;
+}
