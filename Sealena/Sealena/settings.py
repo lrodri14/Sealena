@@ -25,9 +25,13 @@ load_dotenv(DOT_ENV)
 # PRODUCTION SETTINGS
 SECRET_KEY = os.environ.get('SEALENA_SECRET_KEY')
 DEBUG = False
-ALLOWED_HOSTS = os.environ.get('SEALENA_ALLOWED_HOSTS').split(',')
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+
+if not DEBUG:
+    ALLOWED_HOSTS = os.environ.get('SEALENA_ALLOWED_HOSTS').split(',')
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+else:
+    ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
@@ -101,7 +105,6 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.zoho.com'
 EMAIL_PORT = '587'
-
 EMAIL_HOST_USER = os.environ.get('SEALENA_EMAIL')
 EMAIL_HOST_PASSWORD = os.environ.get('SEALENA_EMAIL_PASSWORD')
 EMAIL_USE_TLS = True
@@ -119,19 +122,27 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('SEALENA_DB_NAME'),
-        'USER': os.environ.get('SEALENA_DB_USER'),
-        'PASSWORD': os.environ.get('SEALENA_DB_PASSWORD'),
-        'HOST': os.environ.get('SEALENA_DB_HOST'),
-        'PORT': os.environ.get('SEALENA_DB_PORT'),
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+if not DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ.get('SEALENA_DB_NAME'),
+            'USER': os.environ.get('SEALENA_DB_USER'),
+            'PASSWORD': os.environ.get('SEALENA_DB_PASSWORD'),
+            'HOST': os.environ.get('SEALENA_DB_HOST'),
+            'PORT': os.environ.get('SEALENA_DB_PORT'),
+            'OPTIONS': {
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+            }
         }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -168,7 +179,7 @@ DATETIME_FORMAT = '%Y-%m-%dT%H:%M'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
 STATICFILES_DIRS = [STATIC_DIR]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 

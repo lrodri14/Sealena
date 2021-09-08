@@ -1,0 +1,449 @@
+/* This settings.css stylesheet contains all the styles needed to display the settings web page properly. */
+
+/*###################################################### Nav Bar #####################################################*/
+
+.settings-navigator{
+    position: absolute;
+    top: 0%
+    left: 0%;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-clip: padding-box;
+    transition: 0.5s;
+    animation: show-up 0.5s linear forwards;
+}
+
+.settings-navigator__tab{
+    cursor: pointer;
+    padding: 15px;
+    text-align: center;
+    display: inline-block;
+    transition: 0.5s;
+}
+
+.settings-navigator__tab--hover{
+    background-color: #FFFFFF;
+    color: #000000;
+    transition: 0.5s;
+}
+
+.settings-navigator__tab--active{
+    background-color: #FFFFFF;
+    color: #000000;
+    transition: 0.5s;
+}
+
+/*############################################### Specific Settings Tabs #############################################*/
+
+.tab--hover{
+    background-color: #FFFFFF;
+    color: #000000;
+    transition: background-color 0.5s;
+}
+
+.tab--active{
+    background-color: #FFFFFF;
+    color: #000000;
+    transition: background-color 0.5s;
+}
+
+/*####################################################### Data ######################################################*/
+
+.data{
+    margin-top: 6%;
+}
+
+.data-container{
+    max-height: 693px;
+}
+
+.filter-container__filter-form--display{
+    transform: translateY(15%);
+    transition: transform 0.5s ease-out;
+}
+
+/*####################################################### General Settings ###########################################*/
+
+#user-settings-form{
+    display: none;
+}
+
+#id_wallpaper{
+    display: none;
+}
+
+.general-settings{
+    list-style: none;
+    display: inline-block;
+    width: 10%;
+    margin-left: 2%;
+    text-align: center;
+    padding-left: 0%;
+    background-color: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-clip: padding-box;
+    animation: show-up 0.5s linear forwards;
+}
+
+.general-settings__tab{
+    cursor: pointer;
+    height: 25px;
+    padding: 10px;
+    transition: background-color 0.5s;
+}
+
+.general-settings__content{
+    width: 85%;
+    height: 73%;
+    position: absolute;
+    top: 21%;
+    left: 13%;
+}
+
+.wallpaper-row{
+    position: absolute;
+}
+
+.wallpaper-row:nth-child(2){
+    top: 40%;
+}
+
+.wallpaper-row__wallpaper{
+    cursor: pointer;
+    width: 220px;
+    height: 220px;
+    border-radius: 25px;
+    border: 2px solid rgba(0,0,0,0);
+    animation: show-up 0.5s linear forwards;
+}
+
+.wallpaper-row__wallpaper--active{
+    border-color: #FFFFFF;
+}
+
+.general-settings__content form{
+    background-color: rgba(0,0,0,0);
+    backdrop-filter: none;
+    text-align: left;
+}
+
+.general-settings__update-sfx-form #id_notifications{
+    display: none;
+}
+
+.general-settings__update-notifications-form #id_sfx{
+    display: none;
+}
+
+#id_sfx{
+    width: 15%;
+}
+
+#id_notifications{
+    width: 15%;
+}
+/*####################################################### Profile Settings ###########################################*/
+
+.profile-settings{
+    list-style: none;
+    display: inline-block;
+    width: 10%;
+    margin-left: 2%;
+    text-align: center;
+    padding-left: 0%;
+    background-color: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-clip: padding-box;
+    animation: show-up 0.5s linear forwards;
+}
+
+.profile-settings__tab{
+    cursor: pointer;
+    height: 25px;
+    padding: 10px;
+    transition: background-color 0.5s;
+}
+
+.profile-settings__content{
+    width: 85%;
+    height: 73%;
+    position: absolute;
+    top: 21%;
+    left: 13%;
+}
+
+.profile-settings__content #no-data{
+    top: 40%;
+    left: 43%;
+}
+
+.profile-settings__content form{
+    background-color: rgba(0,0,0,0);
+    backdrop-filter: none;
+    text-align: left;
+}
+
+#id_availability{
+    width: 15%;
+}
+
+/*####################################################### Account Settings ###########################################*/
+
+.downgrade-button{
+    transition: 0.5s;
+}
+
+.downgrade-button--active{
+    background-color: #d93725;
+    border-color: #d93725;
+    color: #FFFFFF;
+    transition: 0.5s;
+}
+
+.upgrade-button{
+    transition: 0.5s;
+}
+
+.upgrade-button--active{
+    background-color: #25d96a;
+    border-color: #25d96a;
+    color: #FFFFFF;
+    transition: 0.5s;
+}
+
+.downgrade-form{
+    background-color: #d93725;
+}
+
+.downgrade-warning{
+    text-align: justify;
+}
+
+.upgrade-form{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    height: 58%;
+    width: 50%;
+    padding: 0px;
+}
+
+.upgrade-form__subscription-details{
+    background-color: #32a852;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.upgrade-form__payment-details{
+    padding: 0px 16px;
+}
+
+.manage-subscription-form:not(.upgrade-form){
+    height: 50%;
+    width: 20%;
+}
+
+.Premium-response, .Basic-response{
+    border-radius: 10px;
+    padding: 20px;
+    background-color: rgba(255,255,255,0.1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.identity-unverified-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    padding: 0px 20px;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    width: 50%;
+}
+
+.account-settings p, .account-settings button{
+    margin-left: 1%;
+    animation: show-up 0.5s linear forwards;
+}
+
+.account-settings select{
+    width: 15%;
+    animation: show-up 0.5s linear forwards;
+}
+
+.account-settings button{
+    width: 10%;
+}
+
+#account-settings-form{
+    background-color: rgba(0,0,0,0);
+    backdrop-filter: none;
+    text-align: left;
+}
+
+/*####################################################### Linking Settings ###########################################*/
+
+.account-subscription-warning{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255,255,255,0.1);
+    width: 50%;
+    height: 20%;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.add-extra-linking{
+    position: fixed;
+    left: 79%;
+    top: 16%;
+}
+
+#linking-id{
+    margin-left: 1%;
+}
+
+.links-container{
+    max-height: 698px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.links-container__link{
+    width: 100%;
+    height: 50px;
+    margin-left: 1%;
+    background-color: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-clip: padding-box;
+    transition: background-color 0.5s;
+    animation: show-up 0.5s linear forwards;
+}
+
+.links-container__link--active{
+    cursor: pointer;
+    background-color: white;
+    color: #000000;
+}
+
+.links-container__link p{
+    width: calc(100% / 4);
+    text-align: center;
+    display: inline-block;
+}
+
+.data-table__unblock--active{
+    color: #25BB41;
+    transition: 0.5s;
+}
+
+.data-table__unlink--active{
+    cursor: pointer;
+    color: #A31621;
+    transition: 0.5s;
+}
+
+/*####################################################### Mailing #####################################################*/
+
+#mailing-info-form{
+    background-color: rgba(0,0,0,0);
+    backdrop-filter: none;
+    text-align: left;
+    animation: show-up 0.5s linear forwards;
+}
+
+#mailing-info-form input{
+    width: 25%;
+}
+
+#mailing-info-form p, input, #mailing-info-form button{
+    margin-left: 1%;
+}
+
+#mailing-info-form input[type=checkbox]{
+    width: 3%;
+}
+
+#mailing-info-form button{
+    width: 10%;
+    margin-left: 10%;
+}
+
+/*################################################## Vaccination #####################################################*/
+
+#add-vaccine-operation, #update-vaccine-operation{
+    height: 70%;
+}
+
+#comments{
+    text-align: justify;
+    max-height: 80px;
+    overflow-y: auto;
+    padding: 2px;
+}
+
+/*####################################################### Modal ######################################################*/
+
+.modal__form button{
+    width: 25%;
+}
+
+.error-response{
+    width: 30%;
+    height: 12%;
+    border-radius: 20px;
+    text-align: center;
+    padding: 20px;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255,255,255,0.1);
+}
+
+.modal__content .password-form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    border-radius: 25px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 15px;
+    width: 25%;
+    height: 50%;
+}
+
+.error{
+    color: #FFFFFF;
+}
+
+#details{
+    width: 25%;
+    height: 30%;
+    padding: 25px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    border-radius: 25px;
+    background-color: rgba(255,255,255,0.1);
+    transform: translate(-50%, -50%);
+}
+
+#details h2{
+    text-align: center;
+}

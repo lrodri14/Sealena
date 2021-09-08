@@ -1,0 +1,356 @@
+/* This profile.css stylesheet contains all the styles needed to display the Profile view properly */
+
+/*////////////////////////////////////////////////////////// Body ////////////////////////////////////////////////////*/
+
+body{
+    height: 190vh;
+    width: 200vw;
+}
+
+/*///////////////////////////////////////////// Glassmorphism Effect /////////////////////////////////////////////////*/
+
+
+.card, .user-details, .user-details-form-container__form{
+    background-color: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-clip: padding-box;
+    animation: show-up 1s linear forwards;
+}
+
+/*/////////////////////////////////////////////////////// Profile Card ///////////////////////////////////////////////*/
+
+.card{
+    width: 70%;
+    height: 70%;
+    position: absolute;
+    top: 55%;
+    left: 55%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.card__edit-button{
+    position: absolute;
+    top: 5%;
+    left: 96%;
+}
+
+.card__edit-button--active{
+    color: #CBA415;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.card__send-request, .card__cancel-request, .card__delete-contact{
+    cursor: pointer;
+    position: absolute;
+    top: 5%;
+    left: 92%;
+    transition: 0.5s;
+}
+
+.card__block-contact{
+    font-size: 17px;
+    cursor: pointer;
+    position: absolute;
+    top: 5%;
+    left: 96%;
+    transition: 0.5s;
+}
+
+.card__unblock-contact{
+    font-size: 17px;
+    cursor: pointer;
+    position: absolute;
+    top: 5%;
+    left: 96%;
+    transition: 0.5s;
+}
+
+.card__send-request--active{
+    color: #25BB41;
+    transition: 0.5s;
+}
+
+.card__cancel-request--active{
+    color: #A31621;
+    transition: 0.5s;
+}
+
+.card__delete-contact--active{
+    color: #A31621;
+    transition: 0.5s;
+}
+
+.card__block-contact--active{
+    color: #A31621;
+    transition: 0.5s;
+}
+
+.card__unblock-contact--active{
+    color: #25BB41;
+    transition: 0.5s;
+}
+/*/////////////////////////////////////////////////////// Profile Pic ///////////////////////////////////////////////*/
+
+.card__picture-container{
+    width: 40%;
+    height: 90%;
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    margin-right: -50%;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.card__picture{
+    border-radius: 25px;
+    width: 100%;
+    height: auto;
+}
+
+.card__picture-edit-button{
+    font-size: 25px;
+    color: #FFFFFF;
+    cursor: pointer;
+    position: absolute;
+    top: 4%;
+    left: 88%;
+    z-index: 2;
+    transition: 0.5s;
+}
+
+.card__picture-edit-button--active{
+    color: #25BB41;
+    transition: 0.5s;
+}
+
+.card__no-picture-message{
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    z-index: 1;
+}
+
+.card__no-picture-icon{
+    cursor: default;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    font-size: 32px;
+}
+
+/*/////////////////////////////////////////////////////// Profile Status ///////////////////////////////////////////////*/
+
+.card__status{
+    width: 11%;
+    text-align: right;
+    position: absolute;
+    top: -5%;
+    left: 88.5%;
+}
+
+.fa-circle{
+    font-size: 12px;
+    padding-right: 10px;
+    animation: glow 1.5s linear infinite;
+}
+
+#available{
+    color: #359e23;
+}
+
+#busy{
+    color: #9e2323;
+}
+
+/*/////////////////////////////////////////////////////// Profile Information ///////////////////////////////////////////*/
+
+.card__information{
+    position: absolute;
+    top: 0%;
+    left: 27%;
+    width: 50%;
+}
+
+h3{
+    margin-left: 27.5%;
+    margin-top: 30%;
+}
+
+/*/////////////////////////////////////////////////////// Profile Activity ///////////////////////////////////////////*/
+
+.card__activity{
+    position: relative;
+    top: 85%;
+    left: 4%;
+}
+
+/*/////////////////////////////////////////////////////// About Section //////////////////////////////////////////////*/
+
+.card__biography{
+    width: 65%;
+    height: 30%;
+    max-height: 30%;
+    padding: 5px 20px;
+    text-align: justify;
+    overflow-y: auto;
+    position: absolute;
+    top: 75%;
+    left: 62%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255,255,255,0.2);
+    z-index: 1;
+}
+
+/*/////////////////////////////////////////////// Display Information Button /////////////////////////////////////////*/
+
+.display-user-details-button{
+    cursor: pointer;
+    font-size: 30px;
+    position: absolute;
+    top: 94%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    transition: color 0.5s, transform 0.5s;
+}
+
+.display-user-details-button--active{
+    color: #25BB41;
+    transition: 0.5s;
+}
+
+.arrow-rotate{
+    transform: rotate(180deg);
+    transition: 0.5s;
+}
+
+/*/////////////////////////////////////////////// Profile User Details ///////////////////////////////////////////////*/
+
+.user-details{
+    position: absolute;
+    top: 105%;
+    left: 15%;
+    width: 70%;
+    height: 72%;
+    border-radius: 25px;
+    padding: 20px;
+}
+
+.user-details h4{
+    margin-left: 2%;
+}
+
+hr{
+    border: none;
+    border-bottom: 1px solid #FFFFFF;
+}
+
+/*////////////////////////////////////////////////// Profile Edit Form ///////////////////////////////////////////////*/
+
+.user-details-form-container{
+    position: absolute;
+    top: 15%;
+    left: 110%;
+    width: 80%;
+    height: 70%;
+}
+
+.user-details-form-container__form{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.user-details-form-container__form-wrapper{
+    display: grid;
+    grid-template-columns: 30% 65%;
+    grid-gap: 5%;
+    text-align: left;
+}
+
+.user-details-form-container__biography{
+    text-align: center;
+}
+
+.user-details-form-container__personal-information div:nth-child(2){
+    margin-top: 10%;
+}
+
+.user-details-form-container__personal-information-edit{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+select{
+   height: 22px;
+}
+
+textarea{
+    text-align: justify;
+    border: none;
+    border-bottom: 1px solid #FFFFFF;
+    resize: none;
+    width: 95%;
+}
+
+#id_location{
+    width: 25%;
+}
+
+#id_address{
+    overflow: hidden;
+}
+
+button{
+    width: 30%;
+    height: 30px;
+    transition: all 0.5s;
+}
+/*////////////////////////////////////////////// Profile Picture Form ////////////////////////////////////////////////*/
+
+.edit-profile-picture-form{
+    width: 50%;
+    margin-left: 25%;
+    padding: 20px;
+    text-align: center;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.edit-profile-picture-form__input{
+    display: none;
+}
+
+.edit-profile-picture-form__picture-container{
+    max-width: 300px;
+    max-height: 300px;
+    overflow: hidden;
+    margin: auto;
+}
+
+.edit-profile-picture-form__selected_picture{
+    width: 100%;
+    height: auto;
+}
+
+label[for=id_profile_pic]{
+    padding: 5px;
+    border: none;
+    border-radius: 0px;
+    border-bottom: 1px solid #FFFFFF;
+    transition: 0.5s;
+}
+
+.label-hover{
+    cursor: pointer;
+    background-color: #FFFFFF;
+    color: #000000;
+    transition: 0.5s;
+}
