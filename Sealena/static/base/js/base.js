@@ -80,7 +80,8 @@ function displayMessage(fromUser, message){
 // WebSockets
 
 // Notifications WebSocket Url
-NWSUrl = 'ws://' + window.location.host
+
+NWSUrl = `wss://${window.location.host}:8001`
 let notificationWebsocket = new WebSocket(NWSUrl)
 
 notificationWebsocket.addEventListener('message', (e) => {
@@ -94,7 +95,7 @@ notificationWebsocket.addEventListener('message', (e) => {
 })
 
 // Chat Websocket URL
-let CWSUrlBluePrint = 'ws://' + window.location.host + '/chat'
+let CWSUrlBluePrint = `wss://${window.location.host}:8001/chat`
 let chatWebsocket = null
 
 function activateChatWebSocketEvents(CWS){
