@@ -4,7 +4,7 @@
     display: grid;
     grid-template-columns: 19% 60% 19%;
     grid-gap: 1%;
-    padding: 5px;
+    padding: 2px;
 }
 
 .container div{
