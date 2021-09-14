@@ -55,7 +55,7 @@
 }
 
 .data-container{
-    max-height: 693px;
+    max-height: 617px;
 }
 
 .filter-container__filter-form--display{
@@ -314,7 +314,7 @@
 }
 
 .links-container{
-    max-height: 698px;
+    max-height: 610px;
     overflow-x: hidden;
     overflow-y: auto;
 }
