@@ -329,7 +329,8 @@ def user_lookup(request):
         filtering, independently if the searching was successful or not, the response will be returned in JSON Format.
     """
     query = request.GET.get('query')
-    users = User.objects.filter(Q(username__startswith=query) | Q(first_name__startswith=query) | Q(last_name__startswith=query), roll='DOCTOR')\
+    (name_assumption, username_assumption) = (query.capitalize(), query.lower())
+    users = User.objects.filter(Q(username__startswith=name_assumption) | Q(first_name__startswith=name_assumption) | Q(last_name__startswith=username_assumption), roll='DOCTOR')\
             .exclude(username=request.user).order_by('first_name')
     template = 'accounts/users_lookup_results.html'
     context = {'users': users}

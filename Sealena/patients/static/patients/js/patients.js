@@ -16,6 +16,7 @@ let warningPopup = document.querySelector('.popup')
 let warningPopupText = document.querySelector('.popup__text')
 let modal = document.querySelector('.modal')
 let modalContent = document.querySelector('.modal__content')
+let addPatientButton = document.querySelector('.add-data' || false)
 
 // Warning Messages
 let warningMessages = {
@@ -95,6 +96,16 @@ function updateItem(e){
 // ############################################ Event Listeners ########################################################
 
 // addData Event Listeners, this events will be fired when there is not data available to show.
+
+if (addPatientButton){
+    addPatientButton.addEventListener('mouseover', (e) => {
+        addPatientButton.classList.add('add-data--active')
+    })
+
+    addPatientButton.addEventListener('mouseout', (e) => {
+        addPatientButton.classList.remove('add-data--active')
+    })
+}
 
 // Data Container
 
