@@ -31,7 +31,7 @@
 {% else %}
 
     <p id="no-data">There are no patients listed</p>
-    <a class="add-data" href="{% url 'patients:add_patient' %}"><i class="fas fa-plus"></i></a>
+    <a href="{% url 'patients:add_patient' %}" class="add-data"><i class="fas fa-plus"></i></a>
 
 {% endif %}
 

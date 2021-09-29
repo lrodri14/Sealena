@@ -46,6 +46,7 @@ class CustomUser(AbstractUser):
             self.roll = 'ASSISTANT'
 
     def save(self, *args, **kwargs):
+        self.username = self.username.lower()
         self.first_name = self.first_name.title()
         self.last_name = self.last_name.title()
         super().save(*args, **kwargs)

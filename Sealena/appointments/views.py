@@ -56,7 +56,7 @@ def appointments(request):
          can only be linked to a single doctor, this before we build up the multiple linking functionality in future updates.*
 
     """
-    today = timezone.localtime()
+    today = timezone.localtime().date()
     if request.user.roll == 'DOCTOR':
         aimed_user = request.user
     else:
@@ -71,7 +71,7 @@ def appointments(request):
         else:
             message = 'The user you are linked to has Sealena Basic account, it has {} records left'.format(records_left)
 
-    appointments_list = BaseConsult.objects.filter(Q(created_by=aimed_user, datetime__date=today.date(), medical_status=False, status='CONFIRMED') | Q(created_by=aimed_user, lock=False)).order_by('datetime')
+    appointments_list = BaseConsult.objects.filter(Q(created_by=aimed_user, datetime__date=today, medical_status=False, status='CONFIRMED') | Q(created_by=aimed_user, lock=False)).order_by('datetime')
     template = 'appointments/appointments.html'
     context = {'appointments': appointments_list, 'message': message}
     return render(request, template, context)
@@ -468,9 +468,9 @@ def agenda(request):
     else:
         aimed_user = request.user.assistant.doctors.all()[0]
 
-    today = timezone.localtime()
+    today = timezone.localtime().date()
     tzone = timezone.get_current_timezone()
-    appointments_list = BaseConsult.objects.filter(created_by=aimed_user, datetime__date__gte=today.date(), medical_status=False).order_by('datetime')
+    appointments_list = BaseConsult.objects.filter(created_by=aimed_user, datetime__date__gte=today, medical_status=False).order_by('datetime')
     months_names = collect_months_names(appointments_list, tzone)
     form = AgendaDateFilterForm
     template = 'appointments/agenda.html'
@@ -525,7 +525,7 @@ def appointment_date_update(request, pk):
     else:
         aimed_user = request.user.assistant.doctors.all()[0]
 
-    today = timezone.localtime()
+    today = timezone.localtime().date()
     tzone = timezone.get_current_timezone()
     consult = BaseConsult.objects.get(pk=pk)
     form = AgendaDateFilterForm
@@ -540,7 +540,7 @@ def appointment_date_update(request, pk):
             try:
                 consult_form.save()
                 loop.run_until_complete(send_sms(consult))
-                consults_list = BaseConsult.objects.filter(created_by=aimed_user, datetime__date__gte=today.date(), medical_status=False).order_by('datetime')
+                consults_list = BaseConsult.objects.filter(created_by=aimed_user, datetime__date__gte=today, medical_status=False).order_by('datetime')
                 months_names = collect_months_names(consults_list, tzone)
                 data = {'updated_html': render_to_string('appointments/partial_agenda_list.html', {'appointments': consults_list, 'months': months_names, 'form': form}, request=request)}
                 data['to'] = request.user.username if request.user.roll == 'DOCTOR' else request.user.assistant.doctors.all()[0].username
@@ -573,10 +573,10 @@ def confirm_appointment(request, pk):
     consult = BaseConsult.objects.get(pk=pk)
     consult.status = 'CONFIRMED'
     consult.save()
-    today = timezone.localtime()
+    today = timezone.localtime().date()
     tzone = timezone.get_current_timezone()
     form = AgendaDateFilterForm
-    consults_list = BaseConsult.objects.filter(created_by=aimed_user, datetime__date__gte=today.date(), medical_status=False).order_by('datetime')
+    consults_list = BaseConsult.objects.filter(created_by=aimed_user, datetime__date__gte=today, medical_status=False).order_by('datetime')
     months_names = collect_months_names(consults_list, tzone)
     data = {'html': render_to_string('appointments/partial_agenda_list.html', {'appointments': consults_list, 'months': months_names, 'form': form}, request=request)}
     data['to'] = request.user.username if request.user.roll == 'DOCTOR' else request.user.assistant.doctors.all()[0].username
@@ -606,7 +606,7 @@ def cancel_appointment(request, pk):
     else:
         aimed_user = request.user.assistant.doctors.all()[0]
 
-    today = timezone.localtime(timezone.now())
+    today = timezone.localtime().date()
     consult = BaseConsult.objects.get(pk=pk)
     tzone = timezone.get_current_timezone()
     form = AgendaDateFilterForm
@@ -616,7 +616,7 @@ def cancel_appointment(request, pk):
     if request.method == 'POST':
         consult.status = 'CANCELLED'
         consult.save()
-        appointments_list = BaseConsult.objects.filter(created_by=aimed_user, datetime__date__gte=today.date(), medical_status=False).order_by('datetime')
+        appointments_list = BaseConsult.objects.filter(created_by=aimed_user, datetime__date__gte=today, medical_status=False).order_by('datetime')
         months_names = collect_months_names(appointments_list, tzone)
         data = {'html': render_to_string('appointments/partial_agenda_list.html', {'appointments': appointments_list, 'months': months_names, 'form':form}, request=request)}
         data['to'] = request.user.username if request.user.roll == 'DOCTOR' else request.user.assistant.doctors.all()[0].username
