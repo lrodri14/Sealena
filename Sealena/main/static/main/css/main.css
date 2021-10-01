@@ -125,7 +125,7 @@ form{
 
 form button{
     cursor: pointer;
-    margin-top: 5%;
+    margin-top: 1%;
     width: 100px;
     height: 30px;
     border: 1px solid #FFFFFF;
@@ -173,6 +173,11 @@ select{
   height: 30px;
 }
 
+/* The project wide #FFFFFF font color affects select's option element, which makes text invisible in Windows OS*/
+option{
+    color: #000000;
+}
+
 select:focus{
     outline: none;
 }
@@ -188,14 +193,31 @@ textarea:focus{
     outline: none;
 }
 
+.loader{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(0,0,0,0);
+    border-top: 2px solid #FFFFFF;
+    visibility: hidden;
+    transition: 0.5s;
+    animation: spin 1s linear infinite;
+}
+
+.loader--display{
+    visibility: visible;
+    transition: 0.5s;
+}
+
 /*///////////////////////////////////////////////////// Login Form ///////////////////////////////////////////////////*/
 
 .login-form{
     width: 25%;
-    height: 50%;
-    padding-top: 25px;
+    padding: 25px 0px 50px 0px;
     border-radius: 20px;
     position: absolute;
+    display: inline-block;
     top: 50%;
     left: 50%;
     margin-right: -50%;
@@ -212,6 +234,11 @@ textarea:focus{
     transition: 0.5s;
 }
 
+.login-form__loader{
+    top: 2%;
+    right: 2.5%;
+}
+
 /*///////////////////////////////////////////// Password Reset Form //////////////////////////////////////////////////*/
 
 .password-reset-form{
@@ -226,6 +253,11 @@ textarea:focus{
 
 .password-reset-form__submit-button{
     margin-top: 0%;
+}
+
+.password-reset-form__loader{
+    top: 3.5%;
+    right: 1.5%;
 }
 
 .password-reset-done{
@@ -253,6 +285,7 @@ textarea:focus{
     transition: all 0.3s;
 }
 
+
 /*////////////////////////////////////////////////// SignUp Form /////////////////////////////////////////////////////*/
 
 .signup-form{
@@ -267,22 +300,8 @@ textarea:focus{
 }
 
 .signup-form__loader{
-    position: absolute;
     top: 1.5%;
     right: 1%;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid rgba(0,0,0,0.2);
-    border-top: 2px solid #FFFFFF;
-    visibility: hidden;
-    transition: 0.5s;
-    animation: spin 1s linear infinite;
-}
-
-.signup-form__loader--display{
-    visibility: visible;
-    transition: 0.5s;
 }
 
 .signup-form__wrapper{
@@ -326,11 +345,13 @@ textarea:focus{
     background-clip: padding-box;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur( 10px );
+    height: 150px;
+    width: 600px;
     position: absolute;
-    top: 40%;
-    left: 30%;
-    height: 20%;
-    width: 40%;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s;
@@ -355,7 +376,7 @@ textarea:focus{
 }
 
 .account-type-selector__icon{
-    margin-top: 17%;
+    margin-top: 45px;
     margin-right: 10px;
     font-size: 50px;
     pointer-events: none;
