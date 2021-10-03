@@ -3,8 +3,9 @@
 {% load static %}
 <!-- Login Forms -->
 <form action="{% url 'accounts:login' %}" method="POST" autocomplete="off" class="login-form">
-    <h1>Log In</h1>
     {% csrf_token %}
+    <div class="loader login-form__loader"></div>
+    <h1>Log In</h1>
     <p>{{ form.username.label }}</p>
     <p>{{ form.username  }}</p>
     <p>{{ form.password.label}}</p>

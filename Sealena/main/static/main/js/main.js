@@ -253,14 +253,17 @@ if (modal){
             let url = form.action
             let method = form.method
             let csrfmiddlewaretoken = document.querySelector('input[type=hidden]').value
+            let loader = document.querySelector('.loader')
 
             /* If the target contains the login-form classList, the loginAW function will be called, if the data is
                authentic then the user will be logged in, if not, an error will be displayed.*/
              if (e.target.classList.contains('login-form')){
+                 loader.classList.add('loader--display')
                  loginAW(formData, url, method, csrfmiddlewaretoken)
                 .then(data => {
                     if (data['html']){
                         modalContent.innerHTML = data['html']
+                        loader.classList.add('loader--display')
                         username = document.querySelector('#id_username')
                         password = document.querySelector('#id_password')
                         submitBtn = document.querySelector('.login-form__submit-button')
@@ -274,9 +277,11 @@ if (modal){
             /* If the target contains the password-reset-form class in it's classList, the loginAW function will be called,
                and the response will be added to the modalContent.innerHTML*/
              if (e.target.classList.contains('password-reset-form')){
+                loader.classList.add('loader--display')
                 loginAW(formData, url, method, csrfmiddlewaretoken)
                 .then(data => {
                     if (data['html']){
+                        loader.classList.remove('loader--display')
                         modalContent.innerHTML = data['html']
                     }
                 })
@@ -286,12 +291,11 @@ if (modal){
                called and depending if we received errors or not, they will be displayed, else, the login form will
                be displayed.*/
             if (e.target.classList.contains('signup-form')){
-                let loader = document.querySelector('.signup-form__loader')
-                loader.classList.add('signup-form__loader--display')
+                loader.classList.add('loader--display')
                 signUpAW(formData, url, method, csrfmiddlewaretoken)
                 .then(data => {
                     if (data['error']){
-                        loader.classList.remove('signup-form__loader--display')
+                        loader.classList.remove('loader--display')
                         modalContent.innerHTML = data['html']
                         signUpInputs = document.querySelectorAll('input,select')
                         submitBtn = document.querySelector('.signup-form__submit-button')
