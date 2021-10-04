@@ -51,6 +51,7 @@ body{
     cursor: pointer;
     background-color: rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     background-clip: padding-box;
     font-size: 16px;
     height: 50px;
@@ -72,6 +73,7 @@ body{
 .container__quote{
     background-color: rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     background-clip: padding-box;
     text-align: justify;
     position: absolute;
@@ -113,6 +115,7 @@ form{
     text-align: center;
     background-color: rgba(255,255,255,0.1);
     backdrop-filter: blur( 10px );
+    -webkit-backdrop-filter: blur(10px);
     animation: show-up 0.3s linear forwards;
     z-index: 1;
 }
@@ -268,6 +271,7 @@ textarea:focus{
     transform: translate(-50%, -50%);
     background-color: rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 10px;
     animation: show-up 0.3s linear forwards;
 }
@@ -287,7 +291,7 @@ textarea:focus{
 /*////////////////////////////////////////////////// SignUp Form /////////////////////////////////////////////////////*/
 
 .signup-form{
-    width: 30%;
+    border-radius: 20px;
     background-color: rgba(0,0,0,0);
     position: absolute;
     top: 50%;
@@ -296,12 +300,10 @@ textarea:focus{
     transform: translate(-50%, -50%);
 }
 
+/*////////////////////////////////////////////// Medical SignUp Form /////////////////////////////////////////////////*/
+
 .medical-signup-form{
     width: 95%;
-}
-
-.signup-form__title{
-    position: absolute;
 }
 
 .signup-form__medical-form__loader{
@@ -309,40 +311,92 @@ textarea:focus{
     right: 1%;
 }
 
-.signup-form__assistant-form__loader{
-    top: 1.5%;
-    right: 2%;
-}
-
-.signup-form__wrapper{
+.signup-form__medical-form__wrapper{
     display: grid;
     grid-template-columns: 49.5% 49.5%;
     grid-gap: 1%;
+}
+
+.signup-form__personal-information__title{
+    grid-area: title;
+}
+
+.signup-form__personal-information__main{
+    grid-area: main;
+}
+
+.signup-form__personal-information__secondary{
+    grid-area: secondary;
 }
 
 .signup-form__personal-information{
     display: grid;
     grid-template-columns: 49.5% 49.5%;
+    grid-template-areas:
+                "title title"
+                "main secondary";
     grid-gap: 1%;
     border-radius: 20px;
     padding: 20px;
     background-color: rgba(255,255,255,0.1);
+}
+
+.signup-form__account-information__title{
+    grid-area: title;
+}
+
+.signup-form__account-information__account{
+    grid-area: account;
+}
+
+.signup-form__account-information__address{
+    grid-area: address;
 }
 
 .signup-form__account-information{
     display: grid;
-    grid-template-columns: 49.5% 49.5%;
+    grid-template-areas:
+                "title title"
+                "account address";
     grid-gap: 1%;
     border-radius: 20px;
     padding: 20px;
     background-color: rgba(255,255,255,0.1);
 }
 
-.signup-form__unitary-form{
+/*////////////////////////////////////////////// Assistant SignUp Form ///////////////////////////////////////////////*/
+
+.assistant-signup-form{
+    width: 60%;
+}
+
+.signup-form__assistant-form__loader{
+    top: 1.5%;
+    right: 1%;
+}
+
+.signup-form__assistant-form__title{
+    grid-area: title;
+}
+
+signup-form__assistant-form__personal-information{
+    grid-area: personal;
+}
+
+signup-form__assistant-form__account-information{
+    grid-area: account;
+}
+
+.signup-form__assistant-form__wrapper{
+    display: grid;
+    grip-gap: 1%;
+    grid-template-areas: "title title"
+                         "personal account";
+    background-color: rgba(255,255,255,0.1);
     border-radius: 20px;
     padding: 20px;
-    background-color: rgba(255,255,255,0.1);
 }
+
 
 /*///////////////////////////////////////////////////// Modal ////////////////////////////////////////////////////////*/
 
