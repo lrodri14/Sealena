@@ -280,7 +280,7 @@ select:focus{
 }
 
 .data-container{
-    max-height: 693px;
+    max-height: 83.5vh;
     overflow-y: auto;
     animation: show-up 0.5s linear;
 }
