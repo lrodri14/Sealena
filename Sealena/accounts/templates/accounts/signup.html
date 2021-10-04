@@ -4,10 +4,18 @@
 {% if profile_creation_form %}
     <form method="POST" action="{% url 'accounts:signup' %}" autocomplete="off" class="signup-form medical-signup-form">
         {% csrf_token %}
+        <!-- Medical Signup Form Loader -->
         <div class="loader signup-form__medical-form__loader"></div>
-        <div class="signup-form__wrapper">
+        <!-- Medical Signup Form Wrapper -->
+        <div class="signup-form__medical-form__wrapper">
+            <!-- Medical Signup Form Personal Information Wrapper -->
             <div class="signup-form__personal-information">
-                <div>
+                <!-- Medical Signup Form Personal Information Title -->
+                <div class="signup-form__personal-information__title">
+                    <h1>Personal Information</h1>
+                </div>
+                <!-- Medical Signup Form Personal Information Main -->
+                <div class="signup-form__personal-information__main">
                     <p>{{ user_creation_form.first_name.label }} <span class="obligatory">*</span></p>
                     <p>{{ user_creation_form.first_name }}</p>
                     <p>{{ user_creation_form.last_name.label }} <span class="obligatory">*</span></p>
@@ -17,7 +25,8 @@
                     <p>{{ profile_creation_form.birth_date.label }} <span class="obligatory">*</span></p>
                     <p>{{ profile_creation_form.birth_date }}</p>
                 </div>
-                <div>
+                <!-- Medical Signup Form Personal Information Secondary -->
+                <div class="signup-form__personal-information__secondary">
                     <p>{{ profile_creation_form.origin.label }} <span class="obligatory">*</span></p>
                     <p>{{ profile_creation_form.origin }}</p>
                     <p>{{ profile_creation_form.location.label }} <span class="obligatory">*</span></p>
@@ -26,8 +35,14 @@
                     <p>{{ user_creation_form.speciality }}</p>
                 </div>
             </div>
+            <!-- Medical Signup Form Account Information Wrapper -->
             <div class="signup-form__account-information">
-                <div>
+                <!-- Medical Signup Form Account Information Title -->
+                <div class="signup-form__account-information__title">
+                    <h1>Account Information</h1>
+                </div>
+                <!-- Medical Signup Form Account Information Account Information -->
+                <div class="signup-form__account-information__account">
                     <p>{{ user_creation_form.username.label }} <span class="obligatory">*</span></p>
                     <p>{{ user_creation_form.username }}</p>
                     <p>{{ user_creation_form.email.label }} <span class="obligatory">*</span></p>
@@ -37,7 +52,8 @@
                     <p>Password Confirmation <span class="obligatory">*</span></p>
                     <p>{{ user_creation_form.password2 }} </p>
                 </div>
-                <div>
+                <!-- Medical Signup Form Account Information Address Information -->
+                <div class="signup-form__account-information__address">
                     <p>{{ profile_creation_form.phone_number.label }}</p>
                     <p>{{ profile_creation_form.phone_number }}</p>
                     <p>{{ profile_creation_form.address.label }}</p>
@@ -59,34 +75,45 @@
         </div>
     </form>
 {% else %}
-    <form method="POST" autocomplete="off" class="signup-form" action="{% url 'accounts:signup' %}">
+    <form method="POST" action="{% url 'accounts:signup' %}" autocomplete="off" class="signup-form assistant-signup-form">
         {% csrf_token %}
+        <!-- Assistant Signup Form Loader -->
         <div class="loader signup-form__assistant-form__loader"></div>
-        <div class="signup-form__unitary-form">
-            <p>{{ user_creation_form.first_name.label }} <span class="obligatory">*</span></p>
-            <p>{{ user_creation_form.first_name }}</p>
-            <p>{{ user_creation_form.last_name.label }} <span class="obligatory">*</span></p>
-            <p>{{ user_creation_form.last_name }}</p>
-            <p>{{ user_creation_form.email.label }} <span class="obligatory">*</span></p>
-            <p>{{ user_creation_form.email }}</p>
-            <p>{{ user_creation_form.username.label }} <span class="obligatory">*</span></p>
-            <p>{{ user_creation_form.username }}</p>
-            <p>{{ user_creation_form.password1.label }} <span class="obligatory">*</span></p>
-            <p>{{ user_creation_form.password1 }}</p>
-            <p>Password Confirmation <span class="obligatory">*</span></p>
-            <p>{{ user_creation_form.password2 }}</p>
-            <button type="submit" class="signup-form__submit-button">Sign Up</button>
-            {% if user_creation_form.errors %}
-                {% for error in user_creation_form.email.errors %}
-                    <p class="signup-form__error"><small>{{ error }}</small></p>
-                {% endfor %}
-                {% for error in user_creation_form.username.errors %}
-                    <p class="signup-form__error"><small>{{ error }}</small></p>
-                {% endfor %}
-                {% for error in user_creation_form.password2.errors %}
-                    <p class="signup-form__error"><small>{{ error }}</small></p>
-                {% endfor %}
-            {% endif %}
+        <!-- Assistant Signup Form Loader -->
+        <div class="signup-form__assistant-form__wrapper">
+            <div class="signup-form__assistant-form__title">
+                <h1>Assistant Information</h1>
+            </div>
+            <!-- Assistant Signup Form Personal Information -->
+            <div class="signup-form__assistant-form__personal-information">
+                <p>{{ user_creation_form.first_name.label }} <span class="obligatory">*</span></p>
+                <p>{{ user_creation_form.first_name }}</p>
+                <p>{{ user_creation_form.last_name.label }} <span class="obligatory">*</span></p>
+                <p>{{ user_creation_form.last_name }}</p>
+                <p>{{ user_creation_form.email.label }} <span class="obligatory">*</span></p>
+                <p>{{ user_creation_form.email }}</p>
+            </div>
+            <!-- Assistant Signup Form Account Information -->
+            <div class="signup-form__assistant-form__account-information">
+                <p>{{ user_creation_form.username.label }} <span class="obligatory">*</span></p>
+                <p>{{ user_creation_form.username }}</p>
+                <p>{{ user_creation_form.password1.label }} <span class="obligatory">*</span></p>
+                <p>{{ user_creation_form.password1 }}</p>
+                <p>Password Confirmation <span class="obligatory">*</span></p>
+                <p>{{ user_creation_form.password2 }}</p>
+                <button type="submit" class="signup-form__submit-button">Sign Up</button>
+                {% if user_creation_form.errors %}
+                    {% for error in user_creation_form.email.errors %}
+                        <p class="signup-form__error"><small>{{ error }}</small></p>
+                    {% endfor %}
+                    {% for error in user_creation_form.username.errors %}
+                        <p class="signup-form__error"><small>{{ error }}</small></p>
+                    {% endfor %}
+                    {% for error in user_creation_form.password2.errors %}
+                        <p class="signup-form__error"><small>{{ error }}</small></p>
+                    {% endfor %}
+                {% endif %}
+            </div>
         </div>
     </form>
 {% endif %}

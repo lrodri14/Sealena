@@ -330,7 +330,7 @@ def user_lookup(request):
     """
     query = request.GET.get('query')
     (name_assumption, username_assumption) = (query.capitalize(), query.lower())
-    users = User.objects.filter(Q(username__startswith=name_assumption) | Q(first_name__startswith=name_assumption) | Q(last_name__startswith=username_assumption), roll='DOCTOR')\
+    users = User.objects.filter(Q(username__startswith=username_assumption) | Q(first_name__startswith=name_assumption) | Q(last_name__startswith=name_assumption), roll='DOCTOR')\
             .exclude(username=request.user).order_by('first_name')
     template = 'accounts/users_lookup_results.html'
     context = {'users': users}

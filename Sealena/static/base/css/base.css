@@ -243,6 +243,12 @@ select{
   transition: 0.5s;
 }
 
+/* The project wide #FFFFFF font color affects select's option element, which makes text invisible in Windows OS*/
+option{
+    color: #000000;
+}
+
+
 select:focus{
     outline: none;
 }
