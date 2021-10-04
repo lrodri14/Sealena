@@ -20,7 +20,7 @@
 }
 
 .patient-form__general-information-container{
-    height: 80vh;
+    height: 75vh;
     overflow-y: auto;
 }
 
@@ -37,16 +37,16 @@ form:not(#add-allergy-form):not(#add-insurance-form){
 
 .patient-form__allergies-form-container{
     overflow: auto;
-    max-height: 20vh;
+    max-height: 12vh;
 }
 
 .patient-form__antecedents-form-container{
     overflow: auto;
-    max-height: 20vh;
+    max-height: 12vh;
 }
 
 h1{
-    padding: 25px;
+    padding: 10px;
     overflow: auto;
 }
 
