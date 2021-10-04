@@ -55,7 +55,7 @@
 }
 
 .data-container{
-    max-height: 617px;
+    max-height: 75vh;
 }
 
 .filter-container__filter-form--display{
@@ -171,7 +171,7 @@
     width: 85%;
     height: 73%;
     position: absolute;
-    top: 21%;
+    top: 22;
     left: 13%;
 }
 
