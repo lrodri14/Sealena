@@ -465,7 +465,7 @@ signup-form__assistant-form__account-information{
 .support-message{
     position: absolute;
     left: 5px;
-    bottom: 0px;
+    bottom: 0vh;
 }
 
 /*///////////////////////////////////////////////////// Animations ///////////////////////////////////////////////////*/
