@@ -398,6 +398,8 @@ def manage_block_list(request, pk):
         block_list.add(target_user)
         user_contacts.remove(target_user)
         target_user.profile.contacts.remove(request.user)
+        chat = Chat.objects.filter(participants__in=[request.user, target_user])
+        chat.delete()
         data = {'success': True}
     return JsonResponse(data)
 
