@@ -1,35 +1,33 @@
-<!-- This partial profile template is used to display the users profile, this template is dynamically populated whenever
-     the profile is updated with new information. -->
-
 <!-- Profile Partial Template -->
 {% load static %}
+
+<!-- Profile Picture -->
+<div class="card__picture-container">
+    {% if profile.user == user %}
+        <i class="fas fa-camera card__picture-edit-button" data-url="{% url 'accounts:profile_picture_change' %}"></i>
+    {% endif %}
+    {% if profile.profile_pic %}
+        <img class="card__picture" src="{{ MEDIA_URL }}{{ profile.profile_pic }}" alt="">
+    {% else %}
+        <p class="card__no-picture-message">No profile picture available</p>
+        <i class="fas fa-camera card__no-picture-icon" ></i>
+    {% endif %}
+</div>
+
+<!-- User's Status -->
+<div class="card__status">
+    <span>
+    {% if profile.availability == 'A' %}
+        <i id="available" class="fas fa-circle"></i>
+    {% else %}
+        <i id="busy" class="fas fa-circle"></i>
+    {% endif %}
+    {{ profile.get_availability_display }}
+    </span>
+</div>
+
 <!-- Profile Card -->
 <div class="card">
-
-    <!-- Profile Picture -->
-    <div class="card__picture-container">
-        {% if profile.user == user %}
-            <i class="fas fa-camera card__picture-edit-button" data-url="{% url 'accounts:profile_picture_change' %}"></i>
-        {% endif %}
-        {% if profile.profile_pic %}
-            <img class="card__picture" src="{{ MEDIA_URL }}{{ profile.profile_pic }}" alt="">
-        {% else %}
-            <p class="card__no-picture-message">No profile picture available</p>
-            <i class="fas fa-camera card__no-picture-icon" ></i>
-        {% endif %}
-    </div>
-
-    <!-- User's Status -->
-    <div class="card__status">
-        <span>
-        {% if profile.availability == 'A' %}
-            <i id="available" class="fas fa-circle"></i>
-        {% else %}
-            <i id="busy" class="fas fa-circle"></i>
-        {% endif %}
-        {{ profile.get_availability_display }}
-        </span>
-    </div>
 
     <!-- Add Contact or Edit Profile Button -->
     {% if user.profile == profile %}
@@ -58,8 +56,8 @@
     </div>
 
     <!-- User's Bio -->
-    <h3>About</h3>
     <div class="card__biography">
+        <h3>About</h3>
         <p>{{ profile.bio }}</p>
     </div>
 
@@ -68,55 +66,7 @@
         <small class="card__activity">Last Active: {{ profile.user.last_login }}</small>
     {% endif %}
 
-</div>
 
-<!-- User's Personal Information -->
-<i class="far fa-arrow-alt-circle-down display-user-details-button" ></i>
-
-<div class="user-details">
-    <h4>Personal Information
-    </h4>
-    <hr>
-    <div class="user-details__personal">
-        <div>
-            <ul>
-                <li><h5>Name: {{ profile.user.first_name }} {{ profile.user.last_name }}</h5></li>
-                <li><h5>Contact: {% if profile.phone_number %}{{ profile.phone_number }}{% else %}Not Available{% endif %}</h5></li>
-                <li><h5>Email: {{ profile.user.email }}</h5></li>
-            </ul>
-        </div>
-        <div>
-            <ul>
-                <li><h5>Birth Date: {% if profile.birth_date %}{{ profile.birth_date }}{% else %}Not Available{% endif %}</h5></li>
-                <li><h5>Gender: {% if profile.gender %}{{ profile.get_gender_display }}{% else %}Not Available{% endif %}</h5></li>
-                <li><h5>Origin: {% if profile.origin %}{{ profile.get_origin_display }}{% else %}Not Available{% endif %}</h5></li>
-            </ul>
-        </div>
-    </div>
-    <h4>Professional Information</h4>
-    <hr>
-    <div class="user-details__medical">
-        <ul>
-            <li>
-                <h5>Roll: {{ profile.user.get_roll_display }}</h5>
-            </li>
-            <li>
-                <h5>Speciality: {{ profile.user.doctor.get_speciality_display }}</h5>
-            </li>
-        </ul>
-    </div>
-    <h4>Addressing Information</h4>
-    <hr>
-    <div class="user-details__addressing">
-        <ul>
-            <li>
-                <h5>Location: {% if profile.location %}{{ profile.get_location_display }}{% else %}Not Available{% endif %}</h5>
-            </li>
-            <li>
-                <h5>Address: {% if profile.address %}{{ profile.address }}{% else %}No Address Available{% endif %}</h5>
-            </li>
-        </ul>
-    </div>
 </div>
 
 <!-- User's Edit Profile Form -->
