@@ -2,11 +2,12 @@
 
 /*///////////////////////////////////////////// Glassmorphism Effect /////////////////////////////////////////////////*/
 
-body, .container{
-    width: 200vw;
+body{
+    width: 200%;
+    overflow-x: scroll;
 }
 
-.card, .user-details, .user-details-form-container__form{
+.card, .user-details-form-container__form{
     background-color: rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -91,14 +92,12 @@ body, .container{
 /*/////////////////////////////////////////////////////// Profile Pic ///////////////////////////////////////////////*/
 
 .card__picture-container{
-    border-radius: 25px;
     position: absolute;
-    top: 5%;
+    top: 10%;
     left: 10%;
-    margin-right: -50%;
     width: 350px;
     height: 550px;
-    position: absolute;
+    border-radius: 25px;
     background-color: rgba(255, 255, 255, 0.1);
     z-index: 1;
 }
@@ -142,14 +141,6 @@ body, .container{
 
 /*/////////////////////////////////////////////////////// Profile Status ///////////////////////////////////////////////*/
 
-.card__status{
-    width: 11%;
-    text-align: right;
-    position: absolute;
-    top: 15%;
-    left: 79%;
-}
-
 .fa-circle{
     font-size: 12px;
     padding-right: 10px;
@@ -185,8 +176,8 @@ body, .container{
 
 .card__biography{
     position: absolute;
-    top: 75%;
-    left: 58%;
+    top: 80%;
+    left: 57.5%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
     width: 65%;
@@ -203,8 +194,10 @@ body, .container{
 
 .user-details-form-container{
     position: absolute;
-    top: 10%;
+    top: 50%;
     left: 110%;
+    margin-right: -50%;
+    transform: translate(0%, -50%);
     width: 80%;
     height: 550px;
 }
