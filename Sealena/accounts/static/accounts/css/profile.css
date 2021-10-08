@@ -1,14 +1,10 @@
 /* This profile.css stylesheet contains all the styles needed to display the Profile view properly */
 
-/*////////////////////////////////////////////////////////// Body ////////////////////////////////////////////////////*/
-
-body{
-    height: 190vh;
-    width: 200vw;
-}
-
 /*///////////////////////////////////////////// Glassmorphism Effect /////////////////////////////////////////////////*/
 
+body, .container{
+    width: 200vw;
+}
 
 .card, .user-details, .user-details-form-container__form{
     background-color: rgba(255,255,255,0.1);
@@ -21,13 +17,13 @@ body{
 /*/////////////////////////////////////////////////////// Profile Card ///////////////////////////////////////////////*/
 
 .card{
-    width: 70%;
-    height: 70%;
     position: absolute;
     top: 55%;
     left: 55%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 500px;
 }
 
 .card__edit-button{
@@ -95,22 +91,22 @@ body{
 /*/////////////////////////////////////////////////////// Profile Pic ///////////////////////////////////////////////*/
 
 .card__picture-container{
-    width: 40%;
-    height: 90%;
-    position: absolute;
-    top: 30%;
-    left: 5%;
-    margin-right: -50%;
     border-radius: 25px;
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    margin-right: -50%;
+    width: 350px;
+    height: 550px;
+    position: absolute;
     background-color: rgba(255, 255, 255, 0.1);
-    transform: translate(-50%, -50%);
     z-index: 1;
 }
 
 .card__picture{
     border-radius: 25px;
     width: 100%;
-    height: auto;
+    height: 100%;
 }
 
 .card__picture-edit-button{
@@ -150,8 +146,8 @@ body{
     width: 11%;
     text-align: right;
     position: absolute;
-    top: -5%;
-    left: 88.5%;
+    top: 15%;
+    left: 79%;
 }
 
 .fa-circle{
@@ -173,93 +169,44 @@ body{
 .card__information{
     position: absolute;
     top: 0%;
-    left: 27%;
+    left: 23%;
     width: 50%;
-}
-
-h3{
-    margin-left: 27.5%;
-    margin-top: 30%;
 }
 
 /*/////////////////////////////////////////////////////// Profile Activity ///////////////////////////////////////////*/
 
 .card__activity{
-    position: relative;
-    top: 85%;
-    left: 4%;
+    position: absolute;
+    top: 95%;
+    left: 0.5%;
 }
 
 /*/////////////////////////////////////////////////////// About Section //////////////////////////////////////////////*/
 
 .card__biography{
+    position: absolute;
+    top: 75%;
+    left: 58%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
     width: 65%;
     height: 30%;
     max-height: 30%;
     padding: 5px 20px;
     text-align: justify;
     overflow-y: auto;
-    position: absolute;
-    top: 75%;
-    left: 62%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
     background-color: rgba(255,255,255,0.2);
     z-index: 1;
-}
-
-/*/////////////////////////////////////////////// Display Information Button /////////////////////////////////////////*/
-
-.display-user-details-button{
-    cursor: pointer;
-    font-size: 30px;
-    position: absolute;
-    top: 94%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    transition: color 0.5s, transform 0.5s;
-}
-
-.display-user-details-button--active{
-    color: #25BB41;
-    transition: 0.5s;
-}
-
-.arrow-rotate{
-    transform: rotate(180deg);
-    transition: 0.5s;
-}
-
-/*/////////////////////////////////////////////// Profile User Details ///////////////////////////////////////////////*/
-
-.user-details{
-    position: absolute;
-    top: 102%;
-    left: 15%;
-    width: 70%;
-    height: 77%;
-    border-radius: 25px;
-    padding: 20px;
-}
-
-.user-details h4{
-    margin-left: 2%;
-}
-
-hr{
-    border: none;
-    border-bottom: 1px solid #FFFFFF;
 }
 
 /*////////////////////////////////////////////////// Profile Edit Form ///////////////////////////////////////////////*/
 
 .user-details-form-container{
     position: absolute;
-    top: 15%;
+    top: 10%;
     left: 110%;
     width: 80%;
-    height: 70%;
+    height: 550px;
 }
 
 .user-details-form-container__form{
@@ -277,10 +224,6 @@ hr{
 
 .user-details-form-container__biography{
     text-align: center;
-}
-
-.user-details-form-container__personal-information div:nth-child(2){
-    margin-top: 10%;
 }
 
 .user-details-form-container__personal-information-edit{
@@ -353,4 +296,8 @@ label[for=id_profile_pic]{
     background-color: #FFFFFF;
     color: #000000;
     transition: 0.5s;
+}
+
+.modal{
+    z-index: 2;
 }

@@ -104,11 +104,6 @@ if (body){
             e.target.classList.add('card__picture-edit-button--active')
         }
 
-        /* This event will be fired whenever the 'display-user-details-button' class resides in the target's classList, the display-user-details-button--active class will be added */
-        if (e.target.classList.contains('display-user-details-button')){
-            e.target.classList.add('display-user-details-button--active')
-        }
-
         /* This event will be fired whenever the target's nodeName is 'BUTTON', the button--active class will be added */
         if (e.target.nodeName === 'BUTTON'){
             e.target.classList.add('button--active')
@@ -164,10 +159,6 @@ if (body){
             e.target.classList.remove('card__picture-edit-button--active')
         }
 
-        /* This event will be fired whenever the 'display-user-details-button' class resides in the target's classList, the display-user-details-button--active class will be removed */
-        if (e.target.classList.contains('display-user-details-button')){
-            e.target.classList.remove('display-user-details-button--active')
-        }
 
         /* This event will be fired whenever the target's nodeName is 'BUTTON', the button--active class will be added */
         if (e.target.nodeName === 'BUTTON'){
@@ -189,13 +180,6 @@ if (body){
 
     /* Click Events */
     body.addEventListener('click', (e) => {
-
-        /* This event will be fired every time the display-user-details-button is clicked, it will scroll the window object up or down based on
-           it's current location. It will also add or remove the arrow-rotate class.*/
-        if (e.target.classList.contains('display-user-details-button')){
-            window.scrollY === 0 ? window.scrollTo({'top': body.scrollHeight, 'behavior': 'smooth'}) : window.scrollTo({'top': 0, 'behavior': 'smooth'})
-            e.target.classList.contains('arrow-rotate') ? e.target.classList.remove('arrow-rotate') : e.target.classList.add('arrow-rotate')
-        }
 
         /* This event will be fired every time the target is edit profile picture button, it will display the edit profile picture form. */
         if (e.target.classList.contains('card__picture-edit-button')){
