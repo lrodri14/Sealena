@@ -142,14 +142,6 @@ body, .container{
 
 /*/////////////////////////////////////////////////////// Profile Status ///////////////////////////////////////////////*/
 
-.card__status{
-    width: 11%;
-    text-align: right;
-    position: absolute;
-    top: 15%;
-    left: 79%;
-}
-
 .fa-circle{
     font-size: 12px;
     padding-right: 10px;
@@ -185,7 +177,7 @@ body, .container{
 
 .card__biography{
     position: absolute;
-    top: 75%;
+    top: 80%;
     left: 58%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
