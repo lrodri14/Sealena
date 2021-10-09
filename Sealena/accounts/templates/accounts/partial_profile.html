@@ -14,6 +14,18 @@
     {% endif %}
 </div>
 
+<!-- User's Status -->
+<div class="card__status">
+    <span>
+    {% if profile.availability == 'A' %}
+        <i id="available" class="fas fa-circle"></i>
+    {% else %}
+        <i id="busy" class="fas fa-circle"></i>
+    {% endif %}
+    {{ profile.get_availability_display }}
+    </span>
+</div>
+
 <!-- Profile Card -->
 <div class="card">
 
@@ -36,17 +48,6 @@
     <!-- User's Information -->
     <div class="card__information">
         <h1>{{ profile.user.first_name }} {{ profile.user.last_name }}</h1>
-        <!-- User's Status -->
-        <div class="card__status">
-            <span>
-            {% if profile.availability == 'A' %}
-                <i id="available" class="fas fa-circle"></i>
-            {% else %}
-                <i id="busy" class="fas fa-circle"></i>
-            {% endif %}
-            {{ profile.get_availability_display }}
-            </span>
-        </div>
         <p id="username"><i class="fas fa-user-tie"></i> @{{ profile.user }}</p>
         <p><i class="fas fa-map-pin"></i> {{ profile.get_origin_display }}</p>
         <p><i class="fas fa-stethoscope"></i> {{ profile.user.doctor.get_speciality_display }}</p>
