@@ -21,6 +21,10 @@ def collect_quote():
         tuple containing the quote itself and it's author.
     """
     response = requests.get(endpoint, headers=headers, params=querystring).json()
-    quote = response[0]['text']
-    author = response[0]['author']
+    try:
+        quote = response[0]['text']
+        author = response[0]['author']
+    except:
+        quote = 'Try not to become a man of success, but rather try to become a man of value'
+        author = 'Albert Einstein'
     return tuple([quote, author])
