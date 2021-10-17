@@ -15,6 +15,17 @@ def main(request):
         request, which expects a request object.
     """
     template = 'main/main.html'
+    # quote, author = collect_quote()
+    # context = {'quote': quote, 'author': author}
+    return render(request, template, {})
+
+
+def lobby(request):
+    """
+        DOCSTRING: This lobby view is responsible to display the main page or (Login Page). It expects one single argument:
+        request, which expects a request object.
+    """
+    template = 'main/lobby.html'
     quote, author = collect_quote()
     context = {'quote': quote, 'author': author}
     return render(request, template, context)

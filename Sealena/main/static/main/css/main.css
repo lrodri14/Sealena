@@ -1,490 +1,128 @@
-/* This main.css file contains all the styles needed to present the main page. */
-
-/*////////////////////////////////////////////////// Body ////////////////////////////////////////////////////////////*/
-
-*{
+html, body{
     color: #FFFFFF;
     font-family: 'Nunito', sans-serif;
-}
-
-body{
     margin: 0px;
     padding: 0px;
-}
-
-/*//////////////////////////////////////////////////// BG ////////////////////////////////////////////////////////////*/
-
-#video{
-  object-fit: cover;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-}
-
-/*///////////////////////////////////////////////// Container ////////////////////////////////////////////////////////*/
-
-.container{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.container__logo{
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    left: 7%;
-    top: 6%;
-}
-
-.container__auth{
-    position: absolute;
-    top: 8%;
-    right: 10%;
-}
-
-.container__auth-button{
-    border: none;
-    cursor: pointer;
-    background-color: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    background-clip: padding-box;
-    font-size: 16px;
-    height: 50px;
-    width: 120px;
-    transition: background-color 0.5s ease, color 0.5s ease, opacity 0.5s;
-}
-
-.container__auth-button--active{
-    background-color: #FFFFFF;
-    border-color: #FFFFFF;
-    color: #000000;
-    transition: all 0.5s ease;
-}
-
-.container__auth-button:focus{
-    outline: none;
-}
-
-.container__quote{
-    background-color: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    background-clip: padding-box;
-    text-align: justify;
-    position: absolute;
-    top: 40%;
-    left: 5%;
-    max-width: 500px;
-    padding: 20px;
-    transition: opacity 0.5s;
-    animation: show-up 1.5s linear forwards;
-}
-
-.container__elements--fade-out{
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.container__footer{
-    position: absolute;
-    top: 95%;
-    height: 5%;
-    width: 100%;
-}
-
-.container__social-media-contact{
-    position: absolute;
-    right: 1%;
-}
-
-.container__social-media-logo{
-    width: 30px;
-    height: 30px;
-    margin: 0px 5px;
-}
-
-/*///////////////////////////////////////////////////// Forms ////////////////////////////////////////////////////////*/
-
-form{
-    text-align: center;
-    background-color: rgba(255,255,255,0.1);
-    backdrop-filter: blur( 10px );
-    -webkit-backdrop-filter: blur(10px);
-    animation: show-up 0.3s linear forwards;
-    z-index: 1;
-}
-
-.obligatory{
-    color: #f54242;
-}
-
-form button{
-    cursor: pointer;
-    margin-top: 1%;
-    width: 100px;
-    height: 30px;
-    border: 1px solid #FFFFFF;
-    border-radius: 10px;
-    background-color: transparent;
-    transition: background-color 0.5s, color 0.5s, opacity 0.5s;
-}
-
-button:focus{
-    outline: none;
-}
-
-.button--active{
-    background-color: #FFFFFF;
-    color: #000000;
-    cursor: pointer;
-    transition: 0.5s;
-}
-
-input{
-    width: 50%;
-    padding: 5px;
-    text-align: center;
-    border: none;
-    border-bottom: 1px solid #FFFFFF;
-    background-color: transparent;
-    transition: width 0.3s;
-}
-
-.input-active{
-    width: 60%;
-    transition: all 0.3s;
-}
-
-input:focus{
-    outline: none;
-}
-
-select{
-  text-align-last:center;
-  background-color: rgba(0,0,0,0);
-  border: none;
-  border-bottom: 1px solid #FFFFFF;
-  width: 250px;
-  height: 30px;
-}
-
-/* The project wide #FFFFFF font color affects select's option element, which makes text invisible in Windows OS*/
-option{
-    color: #000000;
-}
-
-select:focus{
-    outline: none;
-}
-
-textarea{
-    border: 1px solid white;
-    background-color: transparent;
-    resize: none;
-    height: 100px;
-}
-
-textarea:focus{
-    outline: none;
-}
-
-.loader{
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid rgba(0,0,0,0);
-    border-top: 2px solid #FFFFFF;
-    visibility: hidden;
-    transition: 0.5s;
-    animation: spin 1s linear infinite;
-}
-
-.loader--display{
-    visibility: visible;
-    transition: 0.5s;
-}
-
-/*///////////////////////////////////////////////////// Login Form ///////////////////////////////////////////////////*/
-
-.login-form{
-    width: 25%;
-    padding: 25px 0px 50px 0px;
-    border-radius: 20px;
-    position: absolute;
-    display: inline-block;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-}
-
-.login-form__password-reset{
-    cursor: pointer;
-    transition: font-size 0.5s;
-}
-
-.login-form__password-reset--hover{
-    font-size: 16px;
-    transition: 0.5s;
-}
-
-.login-form__loader{
-    top: 2%;
-    right: 2.5%;
-}
-
-/*///////////////////////////////////////////// Password Reset Form //////////////////////////////////////////////////*/
-
-.password-reset-form{
-    width: 50%;
-    border-radius: 25px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-}
-
-.password-reset-form__submit-button{
-    margin-top: 0%;
-}
-
-.password-reset-form__loader{
-    top: 3.5%;
-    right: 1.5%;
-}
-
-.password-reset-done{
-    width: 60%;
-    padding: 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 10px;
-    animation: show-up 0.3s linear forwards;
-}
-
-.password-reset-done__continue-button{
-    cursor: pointer;
-    margin-left: 45%;
-    transition: font-size 0.3s;
-}
-
-.password-reset-done__continue-button--hover{
-    font-size: 20px;
-    transition: all 0.3s;
-}
-
-
-/*////////////////////////////////////////////////// SignUp Form /////////////////////////////////////////////////////*/
-
-.signup-form{
-    border-radius: 20px;
-    background-color: rgba(0,0,0,0);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-}
-
-/*////////////////////////////////////////////// Medical SignUp Form /////////////////////////////////////////////////*/
-
-.medical-signup-form{
-    width: 95%;
-}
-
-.signup-form__medical-form__loader{
-    top: 2%;
-    right: 1%;
-}
-
-.signup-form__medical-form__wrapper{
-    display: grid;
-    grid-template-columns: 49.5% 49.5%;
-    grid-gap: 1%;
-}
-
-.signup-form__personal-information__title{
-    grid-area: title;
-}
-
-.signup-form__personal-information__main{
-    grid-area: main;
-}
-
-.signup-form__personal-information__secondary{
-    grid-area: secondary;
-}
-
-.signup-form__personal-information{
-    display: grid;
-    grid-template-columns: 49.5% 49.5%;
-    grid-template-areas:
-                "title title"
-                "main secondary";
-    grid-gap: 1%;
-    border-radius: 20px;
-    padding: 20px;
-    background-color: rgba(255,255,255,0.1);
-}
-
-.signup-form__account-information__title{
-    grid-area: title;
-}
-
-.signup-form__account-information__account{
-    grid-area: account;
-}
-
-.signup-form__account-information__address{
-    grid-area: address;
-}
-
-.signup-form__account-information{
-    display: grid;
-    grid-template-areas:
-                "title title"
-                "account address";
-    grid-gap: 1%;
-    border-radius: 20px;
-    padding: 20px;
-    background-color: rgba(255,255,255,0.1);
-}
-
-/*////////////////////////////////////////////// Assistant SignUp Form ///////////////////////////////////////////////*/
-
-.assistant-signup-form{
-    width: 60%;
-}
-
-.signup-form__assistant-form__loader{
-    top: 1.5%;
-    right: 1%;
-}
-
-.signup-form__assistant-form__title{
-    grid-area: title;
-}
-
-signup-form__assistant-form__personal-information{
-    grid-area: personal;
-}
-
-signup-form__assistant-form__account-information{
-    grid-area: account;
-}
-
-.signup-form__assistant-form__wrapper{
-    display: grid;
-    grip-gap: 1%;
-    grid-template-areas: "title title"
-                         "personal account";
-    background-color: rgba(255,255,255,0.1);
-    border-radius: 20px;
-    padding: 20px;
-}
-
-
-/*///////////////////////////////////////////////////// Modal ////////////////////////////////////////////////////////*/
-
-.modal{
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    visibility: hidden;
-}
-
-.modal--display{
-    opacity: 1;
-    visibility: visible;
-}
-
-/*///////////////////////////////////////////////////// Account Type /////////////////////////////////////////////////*/
-
-.account-type-selector{
-    text-align: center;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    background-color: rgba(255,255,255,0.1);
-    background-clip: padding-box;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur( 10px );
-    height: 150px;
-    width: 600px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s;
-}
-
-.account-type-selector--display{
-    cursor: pointer;
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.3s;
-}
-
-.account-type-selector__tile--active{
-    color: #000000;
-    background-color: #FFFFFF;
-    transition: color 0.3s, background-color 0.3s;
-}
-
-.account-type-selector__tile--active .account-type-selector__icon{
-    color: #000000;
-    transition: color 0.3s;
-}
-
-.account-type-selector__icon{
-    margin-top: 45px;
-    margin-right: 10px;
-    font-size: 50px;
-    pointer-events: none;
-}
-/*///////////////////////////////////////////////////// Support Message ///////////////////////////////////////////////////*/
-.support-message{
-    position: absolute;
-    left: 5px;
-    bottom: 0vh;
-}
-
-/*///////////////////////////////////////////////////// Animations ///////////////////////////////////////////////////*/
-
-@keyframes spin{
-    0% {transform: rotate(0deg);}
-    100% {transform: rotate(360deg);}
-}
-
-@keyframes show-up{
-    0% {opacity: 0;}
-    10% {opacity: 0.1;}
-    20% {opacity: 0.2;}
-    30% {opacity: 0.3;}
-    40% {opacity: 0.4;}
-    50% {opacity: 0.5;}
-    60% {opacity: 0.6;}
-    70% {opacity: 0.7;}
-    80% {opacity: 0.8;}
-    90% {opacity: 0.9;}
-    100% {opacity: 1;}
+    scroll-behavior: smooth;
+}
+
+
+@media screen and (max-width: 767px){
+
+    .mobile-bg{
+        position: fixed;
+        top: 0%;
+        left: 0%;
+        height: 100vh;
+        width: 100vw;
+        object-fit: cover;
+        z-index: -1;
+    }
+
+    .logo{
+        height: 50px;
+        width: 50px;
+        position: absolute;
+        top: 0px;
+        left: 5px;
+    }
+
+    a:visited{
+        text-decoration: none;
+        color: #FFFFFF;
+    }
+
+    a:focus{
+        text-decoration: none;
+        color: #FFFFFF;
+    }
+
+    a:hover, a:active{
+        text-decoration: none;
+        color: #FFFFFF;
+    }
+
+    .go-to-app{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        text-decoration: none;
+    }
+
+    .go-to-app__icon{
+        font-size: 25px;
+    }
+
+    .card{
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.1);
+        background-color: rgba(0,0,0,0.3);
+        opacity: 0;
+        backdrop-filter: blur(10px) saturate(180%);
+        -webkit-backdrop-filter: blur(10px) saturate(180%);
+        transition: opacity 0.5s
+    }
+
+    .introduction{
+        position: absolute;
+        text-align: center;
+        bottom: 0%;
+    }
+
+    .card:not(.introduction){
+        position: relative;
+        top: 100vh;
+    }
+
+    .card--display{
+        opacity: 1;
+        transition: opacity 0.5s
+    }
+
+    .card__flag{
+        text-align: left;
+        font-weight: 800;
+        color: #ffa33b;
+    }
+
+    .card__title{
+        text-align: left;
+    }
+
+    .card__body{
+        text-align: justify;
+    }
+
+    .card__content{
+        transform: scale(0);
+        transition: 0.5s;
+    }
+
+    .card__content--display{
+        transform: scale(1);
+        transition: 0.5s;
+    }
+
+    .card__sc{
+        height: 25%;
+        width: 100%;
+        filter: blur(3px);
+        -webkit-filter: blur(3px);
+        border-radius: 5px;
+        border: 1px solid rgba(255,255,255,0.1);
+        transition: 0.5s;
+    }
+
+    .card__sc--unfilter{
+        filter: none;
+        -webkit-filter: none;
+        transition: 1s;
+    }
+
+    hr{
+        border: none;
+        border-bottom: 1px solid rgba(255,255,255,0.5);
+    }
 }

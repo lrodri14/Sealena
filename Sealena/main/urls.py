@@ -3,9 +3,10 @@
 """
 
 from django.urls import path
-from .views import main
+from .views import *
 
 app_name = 'main'
 urlpatterns = [
     path('', main, name='main'),
+    path('lobby/', lobby, name='lobby')
 ]
