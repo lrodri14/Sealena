@@ -20,28 +20,42 @@
 </head>
     <body>
         <img src="{% static 'main/logo/seal.svg' %}" alt="Sealena's Logo" class="logo">
-        <a href="{% url 'main:lobby' %}" class="go-to-app">Go to App    <i class="fas fa-door-open go-to-app__icon"></i></a>
-        <img src="{% static 'main/backgrounds/mobile-bg1.jpg' %}" alt="Doctor and Patient video call" class="mobile-bg">
+        <a href="{% url 'main:lobby' %}" class="go-to-app">Go to App <i class="fas fa-door-open go-to-app__icon"></i></a>
+        <img src="{% static 'main/backgrounds/mobile-bg.jpg' %}" alt="Doctor using a tablet" class="mobile-bg">
+        <img src="{% static 'main/backgrounds/tablet-bg.jpg' %}" alt="Doctor using a tablet" class="tablet-bg">
+        <img src="{% static 'main/backgrounds/main-bg.jpg' %}" alt="Doctor using a tablet" class="main-bg">
 
         <div class="card introduction">
+            <div class="card__img"></div>
             <div class="card__content">
                 <p class="card__flag">Welcome</p>
                 <h2 class="card__title">Sealena</h2>
                 <p class="card__body">Sealena, it's Medical Information Management and Collaboration Software created with the purpose of easing the collaboration between health workers, the organization and accessing of information from anywhere</p>
+                <div class="introduction__features">
+                    <p>Some of the features included in the Premium Version:</p>
+                    <ul>
+                        <li>Patients and Agenda Management</li>
+                        <li>More than 1 assistant linking</li>
+                        <li>Unlimited amount of created patients</li>
+                        <li>Unlimited amount of appointments</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
         <div class="card management">
+            <div class="card__img"></div>
             <div class="card__content">
                 <p class="card__flag">Manage all your information</p>
                 <h2 class="card__title">Management</h2>
                 <p class="card__body">Patiends, Consults, Appointments and even Providers, everything can be managed with Sealena. Our main goal is to provide you a centralized software where you can manage all your information and be able to access it wherever you are.</p>
-                <img src="{% static 'main/screenshots/patients.png' %}" alt="Patients Screenshot" class="card__sc">
-                <img src="{% static 'main/screenshots/agenda.png' %}" alt="Agenda Screenshot" class="card__sc">
+                <img src="{% static 'main/screenshots/patients.png' %}" alt="Patients Screenshot" class="card__sc double">
+                <img src="{% static 'main/screenshots/agenda.png' %}" alt="Agenda Screenshot" class="card__sc double">
             </div>
         </div>
 
         <div class="card collaboration">
+            <div class="card__img"></div>
             <div class="card__content">
                 <p class="card__flag">Connect with your colleagues</p>
                 <h2 class="card__title">Collaboration</h2>
@@ -52,26 +66,29 @@
         </div>
 
         <div class="card linking">
+            <div class="card__img"></div>
             <div class="card__content">
                 <p class="card__flag">Link to your assistants</p>
                 <h2 class="card__title">Linking</h2>
                 <p class="card__body">You may not want to fill up the appointments by yourself. No problem, with Sealena you can link different assistants to your account through the unique Linking ID and let them create, confirm, update or cancel appointments for you.</p>
-                <img src="{% static 'main/screenshots/linking.png' %}" alt="Sealena's linking list" class="card__sc">
-                <img src="{% static 'main/screenshots/linking2.png' %}" alt="Sealena's linking form" class="card__sc">
+                <img src="{% static 'main/screenshots/linking.png' %}" alt="Sealena's linking list" class="card__sc double">
+                <img src="{% static 'main/screenshots/linking2.png' %}" alt="Sealena's linking form" class="card__sc double">
             </div>
         </div>
 
         <div class="card statistics">
+            <div class="card__img"></div>
             <div class="card__content">
                 <p class="card__flag">Alive Data</p>
                 <h2 class="card__title">Statistics</h2>
                 <p class="card__body">You want to see how your data is behaving? No problem, we got you covered. Sealena provides you with realtime Statistics based on the data you are managing and the data you desire to take a look at.</p>
-               <img src="{% static 'main/screenshots/statistics.png' %}" alt="Sealena's Statistics" class="card__sc">
-               <img src="{% static 'main/screenshots/statistics2.png' %}" alt="Sealena's Statistics" class="card__sc">
+               <img src="{% static 'main/screenshots/statistics.png' %}" alt="Sealena's Statistics" class="card__sc double">
+               <img src="{% static 'main/screenshots/statistics2.png' %}" alt="Sealena's Statistics" class="card__sc double">
             </div>
         </div>
 
         <div class="card reaching">
+            <div class="card__img"></div>
             <div class="card__content">
                 <p class="card__flag">Remind your patients</p>
                 <h2 class="card__title">Reaching</h2>
@@ -81,6 +98,7 @@
         </div>
 
         <div class="card mailing">
+            <div class="card__img"></div>
             <div class="card__content">
                 <p class="card__flag">Mail your patients and providers directly</p>
                 <h2 class="card__title">Mailing</h2>

@@ -9,6 +9,7 @@ const statistics = document.querySelector('.statistics')
 const reaching = document.querySelector('.reaching')
 const mailing = document.querySelector('.mailing')
 const linking = document.querySelector('.linking')
+const navSections = document.querySelectorAll('.navbar__content div')
 
 /*/////////////////////////////////////////////// Intersection Observers /////////////////////////////////////////////*/
 const cardObserverOptions = {
@@ -44,3 +45,20 @@ cardObserver.observe(statistics)
 cardObserver.observe(linking)
 cardObserver.observe(reaching)
 cardObserver.observe(mailing)
+
+/*//////////////////////////////////////////////////// Event Listeners ///////////////////////////////////////////////*/
+if (navSections){
+    navSections.forEach((section) => {
+        section.addEventListener('mouseover', (e) => {
+            e.target.classList.add('navbar-section--active')
+        })
+
+        section.addEventListener('mouseout', (e) => {
+            e.target.classList.remove('navbar-section--active')
+        })
+
+        section.addEventListener('click', (e) => {
+
+        })
+    })
+}

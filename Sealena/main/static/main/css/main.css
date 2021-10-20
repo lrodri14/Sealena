@@ -6,58 +6,80 @@ html, body{
     scroll-behavior: smooth;
 }
 
+.mobile-bg, .tablet-bg, .main-bg{
+    display: none;
+    visibility: hidden;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    height: 100vh;
+    width: 100vw;
+    object-fit: cover;
+    z-index: -1;
+}
 
-@media screen and (max-width: 767px){
+.logo{
+    filter: brightness(150%);
+    position: absolute;
+    top: 0px;
+    left: 5px;
+}
 
+a:visited{
+    text-decoration: none;
+}
+
+a:focus{
+    text-decoration: none;
+}
+
+a:hover, a:active{
+    text-decoration: none;
+}
+
+.go-to-app{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 1023px){
     .mobile-bg{
-        position: fixed;
-        top: 0%;
-        left: 0%;
-        height: 100vh;
-        width: 100vw;
-        object-fit: cover;
-        z-index: -1;
+        display: inline;
+        visibility: visible;
     }
 
     .logo{
         height: 50px;
         width: 50px;
-        position: absolute;
-        top: 0px;
-        left: 5px;
     }
 
     a:visited{
-        text-decoration: none;
-        color: #FFFFFF;
+        color: #333333;
     }
 
     a:focus{
-        text-decoration: none;
-        color: #FFFFFF;
+        color: #333333;
     }
 
     a:hover, a:active{
-        text-decoration: none;
-        color: #FFFFFF;
+        color: #333333;
     }
 
     .go-to-app{
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        text-decoration: none;
+        color: #333333;
     }
 
-    .go-to-app__icon{
-        font-size: 25px;
+    .navbar{
+        display: none;
     }
 
     .card{
         padding: 10px;
         margin: 10px;
         border-radius: 10px;
-        border: 1px solid rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.5);
         background-color: rgba(0,0,0,0.3);
         opacity: 0;
         backdrop-filter: blur(10px) saturate(180%);
@@ -65,10 +87,18 @@ html, body{
         transition: opacity 0.5s
     }
 
+    .card__sc{
+        width: 50vh
+    }
+
     .introduction{
         position: absolute;
         text-align: center;
         bottom: 0%;
+    }
+
+    .introduction__features{
+        display: none;
     }
 
     .card:not(.introduction){
@@ -126,3 +156,54 @@ html, body{
         border-bottom: 1px solid rgba(255,255,255,0.5);
     }
 }
+
+@media screen and (min-width: 768px) and (max-width: 1023px){
+    body{
+        font-size: 24px;
+    }
+
+    .mobile-bg{
+        display: none;
+        visibility: hidden;
+    }
+
+    .tablet-bg{
+        display: inline;
+        visibility: visible;
+    }
+
+    .logo{
+        height: 80px;
+        width: 80px;
+    }
+
+    a:visited{
+        color: #FFFFFF;
+    }
+
+    a:focus{
+        color: #FFFFFF;
+    }
+
+    a:hover, a:active{
+        color: #FFFFFF;
+    }
+
+    .go-to-app, .go-to-app__icon{
+        color: #FFFFFF;
+        font-size: 32px;
+    }
+
+    .navbar{
+        display: none;
+    }
+
+    .card{
+        padding: 20px;
+    }
+
+    .card__sc.double{
+        width: 49%;
+    }
+}
+
