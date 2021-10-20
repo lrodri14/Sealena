@@ -18,6 +18,58 @@ html, body{
     z-index: -1;
 }
 
+.navbar{
+    position: fixed;
+    width: 100vw;
+    height: 50px;
+    background-color: rgba(0,0,0,0.3);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.navbar__logo{
+    filter: brightness(150%);
+    height: 50px;
+    width: 50px;
+    float: left;
+    transition: 0.5s;
+}
+
+.navbar__go-to-app{
+    float: right;
+    color: #FFFFFF;
+    transition: 0.5s;
+}
+
+.navbar__go-to-app--active{
+    font-size: 18px;
+    transition: 0.5s;
+}
+
+.navbar__content{
+    text-align: center;
+    height: 50px;
+}
+
+.navbar__content div{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 10vw;
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.navbar-section--active{
+    background-color: #FFFFFF;
+    color: #000000;
+    transition: 0.5;s
+}
+
 .logo{
     filter: brightness(150%);
     position: absolute;
@@ -48,6 +100,10 @@ a:hover, a:active{
     .mobile-bg{
         display: inline;
         visibility: visible;
+    }
+
+    .navbar{
+        display: none;
     }
 
     .logo{
@@ -207,3 +263,67 @@ a:hover, a:active{
     }
 }
 
+@media screen and (min-width: 1024px){
+
+    body{
+        height: 200vh;
+    }
+
+    .main-bg{
+        display: inline;
+        visibility: visible;
+        filter: brightness(90%);
+    }
+
+    .navbar--display{
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 0.5s;
+    }
+
+    .logo{
+        position: absolute;
+        top: 10px;
+        left: 25px;
+        height: 100px;
+        width: 100px;
+    }
+
+    a{
+        text-decoration: none;
+    }
+
+    a:visited{
+        color: #333333
+    }
+
+    a:focus{
+        color: #333333
+    }
+
+    a:hover, a:active{
+        color: #333333
+    }
+
+    .go-to-app, .go-to-app__icon{
+        color: #333333;
+        font-size: 24px;
+        transition: 0.5s;
+    }
+
+    .go-to-app{
+        position: absolute;
+        top: 30px;
+        right: 25px;
+    }
+
+    .go-to-app--active, .go-to-app--active .go-to-app__icon{
+        font-size: 25px;
+        color: #525252;
+        transition: 0.5s;
+    }
+
+    .card{
+        display: none;
+    }
+}
