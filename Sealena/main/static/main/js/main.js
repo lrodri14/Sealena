@@ -109,3 +109,5 @@ if (goToAppBtn){
         e.target.classList.remove('go-to-app--active')
     })
 }
+
+window.scrollTo(0, 0);

@@ -281,6 +281,22 @@ a:hover, a:active{
         transition: opacity 0.5s;
     }
 
+    .navbar__go-to-app, .navbar__go-to-app__icon{
+        color: #FFFFFF;
+    }
+
+    .navbar__go-to-app a:visited{
+        color: #FFFFFF;
+    }
+
+     .navbar__go-to-app a:focus{
+        color: #FFFFFF;
+    }
+
+     .navbar__go-to-app a:hover, a:active{
+        color: #FFFFFF;
+    }
+
     .logo{
         position: absolute;
         top: 10px;
@@ -294,15 +310,15 @@ a:hover, a:active{
     }
 
     a:visited{
-        color: #333333
+        color: #333333;
     }
 
     a:focus{
-        color: #333333
+        color: #333333;
     }
 
     a:hover, a:active{
-        color: #333333
+        color: #333333;
     }
 
     .go-to-app, .go-to-app__icon{
