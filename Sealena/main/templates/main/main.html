@@ -33,12 +33,12 @@
         </div>
 
         <div class="card introduction">
-            <div class="card__img"></div>
+            <div class="card__img-container"><img src="{% static 'main/images/card_img1.jpg' %}" alt="" class="card__img"></div>
             <div class="card__content">
                 <p class="card__flag">Welcome</p>
                 <h2 class="card__title">Sealena</h2>
                 <p class="card__body">Sealena, it's Medical Information Management and Collaboration Software created with the purpose of easing the collaboration between health workers, the organization and accessing of information from anywhere</p>
-                <div class="introduction__features">
+                <div class="card__extra-features">
                     <p>Some of the features included in the Premium Version:</p>
                     <ul>
                         <li>Patients and Agenda Management</li>
@@ -51,65 +51,84 @@
         </div>
 
         <div class="card management">
-            <div class="card__img"></div>
+            <div class="card__img-container"><img src="{% static 'main/images/card_img2.jpg' %}" alt="" class="card__img"></div>
             <div class="card__content">
                 <p class="card__flag">Manage all your information</p>
                 <h2 class="card__title">Management</h2>
                 <p class="card__body">Patiends, Consults, Appointments and even Providers, everything can be managed with Sealena. Our main goal is to provide you a centralized software where you can manage all your information and be able to access it wherever you are.</p>
+                <div class="card__extra-features">
+                    <p>There is much more to expect from Sealena than what we mentioned before, we are constantly bringing new features into it, to give you the best possible experience when it comes to the easing of your daily activities.</p>
+                </div>
                 <img src="{% static 'main/screenshots/patients.png' %}" alt="Patients Screenshot" class="card__sc double">
                 <img src="{% static 'main/screenshots/agenda.png' %}" alt="Agenda Screenshot" class="card__sc double">
             </div>
         </div>
 
         <div class="card collaboration">
-            <div class="card__img"></div>
+            <div class="card__img-container"><img src="{% static 'main/images/card_img3.jpg' %}" alt="" class="card__img"></div>
             <div class="card__content">
                 <p class="card__flag">Connect with your colleagues</p>
                 <h2 class="card__title">Collaboration</h2>
                 <p class="card__body">You can connect and contact all your colleagues who have a Sealena account. Be able to collaborate with them and share ideas with the Sealena's Chat System.</p>
+                <div class="card__extra-features">
+                    <p>By sending an contact request to your desired collegue, after been been accepted, you will be able to expand your network within Sealena, and not only that, now you can have direct contact with them, Sealena's Chat System makes it super
+                       easy to manage and message your contacts at any moment.</p>
+                </div>
                 <img src="{% static 'main/screenshots/user-lookup.png' %}" alt="User's Lookup Screenshot" class="card__sc">
                 <img src="{% static 'main/screenshots/chat-system.png' %}" alt="Sealena's Chat System" class="card__sc">
             </div>
         </div>
 
         <div class="card linking">
-            <div class="card__img"></div>
+            <div class="card__img-container"><img src="{% static 'main/images/card_img4.jpg' %}" alt="" class="card__img"></div>
             <div class="card__content">
                 <p class="card__flag">Link to your assistants</p>
                 <h2 class="card__title">Linking</h2>
                 <p class="card__body">You may not want to fill up the appointments by yourself. No problem, with Sealena you can link different assistants to your account through the unique Linking ID and let them create, confirm, update or cancel appointments for you.</p>
+                <div class="card__extra-features">
+                    <p>You will receive notifications whenever an assistant makes an action, for example when a patient has created a new patient because it does not exist in your patients lists, or when a new appointment has been changed it's status, this way you will be updated with what's happening.</p>
+                </div>
                 <img src="{% static 'main/screenshots/linking.png' %}" alt="Sealena's linking list" class="card__sc double">
                 <img src="{% static 'main/screenshots/linking2.png' %}" alt="Sealena's linking form" class="card__sc double">
             </div>
         </div>
 
         <div class="card statistics">
-            <div class="card__img"></div>
+            <div class="card__img-container"><img src="{% static 'main/images/card_img5.jpg' %}" alt="" class="card__img"></div>
             <div class="card__content">
                 <p class="card__flag">Alive Data</p>
                 <h2 class="card__title">Statistics</h2>
                 <p class="card__body">You want to see how your data is behaving? No problem, we got you covered. Sealena provides you with realtime Statistics based on the data you are managing and the data you desire to take a look at.</p>
-               <img src="{% static 'main/screenshots/statistics.png' %}" alt="Sealena's Statistics" class="card__sc double">
+               <div class="card__extra-features">
+                    <p>Sealena will present you with different charts displaying different information about your Patients and about your Appointments/Consults, we will be adding different visualizations about different information for you in the future.</p>
+                </div>
+                <img src="{% static 'main/screenshots/statistics.png' %}" alt="Sealena's Statistics" class="card__sc double">
                <img src="{% static 'main/screenshots/statistics2.png' %}" alt="Sealena's Statistics" class="card__sc double">
             </div>
         </div>
 
         <div class="card reaching">
-            <div class="card__img"></div>
+            <div class="card__img-container"><img src="{% static 'main/images/card_img6.jpg' %}" alt="" class="card__img"></div>
             <div class="card__content">
                 <p class="card__flag">Remind your patients</p>
                 <h2 class="card__title">Reaching</h2>
                 <p class="card__body">Your patients will never miss an appointment with Sealena's Messaging System. Whenever a consult has been created for the specified patient, a direct message will be sent with the exact date and time of his/her appointment.</p>
+                <div class="card__extra-features">
+                    <p>You don't need to configure anything, Sealena's got you covered, all the messages will be sent to your patients from our own phone numbers, so you don't need to worry about setting your personal phone number for instant messaging.</p>
+                </div>
                 <img src="{% static 'main/screenshots/messaging.png' %}" alt="Sealena's Messaging System" class="card__sc">
             </div>
         </div>
 
         <div class="card mailing">
-            <div class="card__img"></div>
+            <div class="card__img-container"><img src="{% static 'main/images/card_img7.jpg' %}" alt="" class="card__img"></div>
             <div class="card__content">
                 <p class="card__flag">Mail your patients and providers directly</p>
                 <h2 class="card__title">Mailing</h2>
                 <p class="card__body">Have a direct contact with your patients or ask your providers for a specific product, all directly from Sealena. Sealena's mailing system will be responsible to make your emails arrive instantly and securely to your target.</p>
+                <div class="card__extra-features">
+                    <p>As with Sealena's Messaging System, Sealena comes built with a Mailing System, in difference from other types of software, you don't need to configure any protocol settings, your mails will be sent using Sealena's Mailing System and the mail will contain a redirection to your email for more personal communication.</p>
+                </div>
                 <img src="{% static 'main/screenshots/mailing.png' %}" alt="Sealena's mailing form" class="card__sc">
             </div>
         </div>

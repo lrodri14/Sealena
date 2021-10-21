@@ -23,8 +23,11 @@ html, body{
     width: 100vw;
     height: 50px;
     background-color: rgba(0,0,0,0.3);
+    backdrop-filter: blur(5px) saturate(180%);
+    -webkit-backdrop-filter: blur(5px) saturate(180%);
     visibility: hidden;
     opacity: 0;
+    z-index: 1;
     transition: opacity 0.5s;
 }
 
@@ -96,6 +99,23 @@ a:hover, a:active{
     text-decoration: none;
 }
 
+.card{
+    text-align: justify;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.5);
+    background-color: rgba(0,0,0,0.3);
+    opacity: 0;
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    transition: opacity 0.5s
+}
+
+.card__flag{
+    text-align: left;
+    font-weight: 800;
+    color: #ffa33b;
+}
+
 @media screen and (max-width: 1023px){
     .mobile-bg{
         display: inline;
@@ -134,13 +154,10 @@ a:hover, a:active{
     .card{
         padding: 10px;
         margin: 10px;
-        border-radius: 10px;
-        border: 1px solid rgba(255,255,255,0.5);
-        background-color: rgba(0,0,0,0.3);
-        opacity: 0;
-        backdrop-filter: blur(10px) saturate(180%);
-        -webkit-backdrop-filter: blur(10px) saturate(180%);
-        transition: opacity 0.5s
+    }
+
+    .card__img-container{
+        display: none;
     }
 
     .card__sc{
@@ -153,7 +170,7 @@ a:hover, a:active{
         bottom: 0%;
     }
 
-    .introduction__features{
+    .card__extra-features{
         display: none;
     }
 
@@ -165,12 +182,6 @@ a:hover, a:active{
     .card--display{
         opacity: 1;
         transition: opacity 0.5s
-    }
-
-    .card__flag{
-        text-align: left;
-        font-weight: 800;
-        color: #ffa33b;
     }
 
     .card__title{
@@ -264,11 +275,6 @@ a:hover, a:active{
 }
 
 @media screen and (min-width: 1024px){
-
-    body{
-        height: 200vh;
-    }
-
     .main-bg{
         display: inline;
         visibility: visible;
@@ -340,6 +346,40 @@ a:hover, a:active{
     }
 
     .card{
+        position: relative;
+        top: 15vh;
+        left: 10vw;
+        height: 70vh;
+        width: 75vw;
+        display: grid;
+        grid-template-columns: 39.5% 59.5%;
+        grid-gap: 1%;
+        padding: 30px;
+        margin-bottom: 10px;
+        opacity: 1;
+    }
+
+    .card__img-container{
+        height: 70vh;
+        width: 100%;
+    }
+
+    .card__img{
+        height: 100%;
+        border-radius: 10px;
+    }
+
+    .card__sc{
+        border-radius: 10px;
+        width: 300px;
+    }
+
+    .collaboration .card__content .card__sc{
+        width: 550px;
+    }
+
+    .collaboration .card__content .card__sc:last-child{
         display: none;
+        height: 200px;
     }
 }
