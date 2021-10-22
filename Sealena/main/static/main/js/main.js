@@ -1,5 +1,8 @@
 /* This main.js file contains all the logic used and needed for the main page to work properyly */
 
+// Scrolling into top of the page
+window.scrollTo(0,0)
+
 /*//////////////////////////////////////////// Variable declarations /////////////////////////////////////////////////*/
 const continueButton = document.querySelector('.introduction__continue')
 const introduction = document.querySelector('.introduction')
@@ -38,9 +41,13 @@ function cardObserverCallback(entries, observer){
         if (images){
             setTimeout(() => {
                 images.forEach((image) => {
-                    image.classList.add('card__sc--unfilter')
+                    const source = image.src.split("-blur.jpg")
+                    if (source.length === 2){
+                        image.src = image.classList.contains('card__img') ? source[0] + '.jpg' : source[0] + '.png'
+                        image.classList.contains('card__img') ? image.classList.add('card__img--unfilter') : image.classList.add('card__sc--unfilter')
+                    }
                 })
-            }, 1000)
+            }, 500)
         }
     }
 }
@@ -80,34 +87,46 @@ mainObserver.observe(logo)
 
 
 /*//////////////////////////////////////////////////// Event Listeners ///////////////////////////////////////////////*/
+
+// Navigation Sections
 if (navSections){
     navSections.forEach((section) => {
+        // Section Mouseover events
         section.addEventListener('mouseover', (e) => {
             const target = e.target
             !target.classList.contains('navbar__go-to-app') && target.nodeName === 'DIV'
-            ? e.target.classList.add('navbar-section--active')
+            ? e.target.classList.add('navbar__tile--active')
             : null
             target.closest('.navbar__go-to-app') ? target.classList.add('navbar__go-to-app--active') : null
         })
 
+        // Section Mouseover events
         section.addEventListener('mouseout', (e) => {
             const target = e.target
             !target.classList.contains('navbar__go-to-app') && target.nodeName === 'DIV'
-            ? e.target.classList.remove('navbar-section--active')
+            ? e.target.classList.remove('navbar__tile--active')
             : null
             target.closest('.navbar__go-to-app') ? target.classList.remove('navbar__go-to-app--active') : null
+        })
+
+        // Section Click events
+        section.addEventListener('click', (e) => {
+            let target = e.target.textContent.toLowerCase()
+            target = target === 'main' ? 'introduction' : target
+            const section = document.querySelector('.' + target)
+            section.scrollIntoView(false)
         })
     })
 }
 
+// Go to App Btn Events
 if (goToAppBtn){
+    // Go to app, mouseover events
     goToAppBtn.addEventListener('mouseover', (e) => {
         e.target.classList.add('go-to-app--active')
     })
-
+    // Go to app, mouseout events
     goToAppBtn.addEventListener('mouseout', (e) => {
         e.target.classList.remove('go-to-app--active')
     })
 }
-
-window.scrollTo(0, 0);

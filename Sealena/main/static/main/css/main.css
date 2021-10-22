@@ -32,7 +32,6 @@ html, body{
 }
 
 .navbar__logo{
-    filter: brightness(150%);
     height: 50px;
     width: 50px;
     float: left;
@@ -55,7 +54,7 @@ html, body{
     height: 50px;
 }
 
-.navbar__content div{
+.navbar__content .navbar__tile{
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -67,14 +66,35 @@ html, body{
     transition: 0.5s;
 }
 
-.navbar-section--active{
+.navbar__tile--active{
     background-color: #FFFFFF;
     color: #000000;
     transition: 0.5;s
 }
 
+.navbar--display{
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+.navbar__go-to-app, .navbar__go-to-app__icon{
+    color: #FFFFFF;
+}
+
+.navbar__go-to-app a:visited{
+    color: #FFFFFF;
+}
+
+ .navbar__go-to-app a:focus{
+    color: #FFFFFF;
+}
+
+ .navbar__go-to-app a:hover, a:active{
+    color: #FFFFFF;
+}
+
 .logo{
-    filter: brightness(150%);
     position: absolute;
     top: 0px;
     left: 5px;
@@ -110,10 +130,26 @@ a:hover, a:active{
     transition: opacity 0.5s
 }
 
+.card--display{
+    opacity: 1;
+    transition: opacity 0.5s
+}
+
 .card__flag{
     text-align: left;
     font-weight: 800;
     color: #ffa33b;
+}
+
+.card__content{
+    text-align: justify;
+    transform: scale(0);
+    transition: 0.5s;
+}
+
+.card__content--display{
+    transform: scale(1);
+    transition: 0.5s;
 }
 
 @media screen and (max-width: 1023px){
@@ -160,14 +196,14 @@ a:hover, a:active{
         display: none;
     }
 
-    .card__sc{
-        width: 50vh
-    }
-
     .introduction{
         position: absolute;
         text-align: center;
         bottom: 0%;
+    }
+
+    .introduction .card__sc{
+        display: none;
     }
 
     .card__extra-features{
@@ -177,29 +213,6 @@ a:hover, a:active{
     .card:not(.introduction){
         position: relative;
         top: 100vh;
-    }
-
-    .card--display{
-        opacity: 1;
-        transition: opacity 0.5s
-    }
-
-    .card__title{
-        text-align: left;
-    }
-
-    .card__body{
-        text-align: justify;
-    }
-
-    .card__content{
-        transform: scale(0);
-        transition: 0.5s;
-    }
-
-    .card__content--display{
-        transform: scale(1);
-        transition: 0.5s;
     }
 
     .card__sc{
@@ -272,6 +285,12 @@ a:hover, a:active{
     .card__sc.double{
         width: 49%;
     }
+
+    .card__sc--unfilter{
+        filter: none;
+        -webkit-filter: none;
+        transition: 1s;
+    }
 }
 
 @media screen and (min-width: 1024px){
@@ -279,28 +298,6 @@ a:hover, a:active{
         display: inline;
         visibility: visible;
         filter: brightness(90%);
-    }
-
-    .navbar--display{
-        visibility: visible;
-        opacity: 1;
-        transition: opacity 0.5s;
-    }
-
-    .navbar__go-to-app, .navbar__go-to-app__icon{
-        color: #FFFFFF;
-    }
-
-    .navbar__go-to-app a:visited{
-        color: #FFFFFF;
-    }
-
-     .navbar__go-to-app a:focus{
-        color: #FFFFFF;
-    }
-
-     .navbar__go-to-app a:hover, a:active{
-        color: #FFFFFF;
     }
 
     .logo{
@@ -356,6 +353,9 @@ a:hover, a:active{
         grid-gap: 1%;
         padding: 30px;
         margin-bottom: 10px;
+    }
+
+    .card:not(.card:first-child){
         opacity: 1;
     }
 
@@ -365,13 +365,30 @@ a:hover, a:active{
     }
 
     .card__img{
+        filter: blur(10px);
+        -webkit-filter: blur(10px);
         height: 100%;
         border-radius: 10px;
+        transition: 0.5s;
+    }
+
+    .card__img--unfilter{
+        filter: none;
+        -webkit-filter: none;
+        transition: 0.5s;
     }
 
     .card__sc{
         border-radius: 10px;
         width: 300px;
+        filter: blur(3px);
+        -webkit-filter: blur(3px);
+    }
+
+    .card__sc--unfilter{
+        filter: none;
+        -webkit-filter: none;
+        transition: 1s;
     }
 
     .collaboration .card__content .card__sc{
