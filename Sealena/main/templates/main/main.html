@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Sealena</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
@@ -18,60 +19,121 @@
     <meta name="theme-color" content="#abc4ed">
 </head>
     <body>
+        <img src="{% static 'main/logo/seal.svg' %}" alt="Sealena's Logo" class="logo">
+        <a href="{% url 'main:lobby' %}" class="go-to-app">Go to App <i class="fas fa-door-open go-to-app__icon"></i></a>
+        <img src="{% static 'main/backgrounds/mobile-bg.jpg' %}" alt="Doctor using a tablet" class="mobile-bg">
+        <img src="{% static 'main/backgrounds/tablet-bg.jpg' %}" alt="Doctor using a tablet" class="tablet-bg">
+        <img src="{% static 'main/backgrounds/main-bg.jpg' %}" alt="Doctor using a tablet" class="main-bg">
 
-    <video id="video" src="{% static 'main/backgrounds/background-video.mp4' %}" autoplay loop muted></video>
+        <div class="navbar">
+           <img src="{% static 'main/logo/seal.svg' %}" alt="Sealena's Logo" class="navbar__logo">
+            <div class="navbar__content">
+                <div class="navbar__tile">Main</div><div class="navbar__tile">Management</div><div class="navbar__tile">Collaboration</div><div class="navbar__tile">Linking</div><div class="navbar__tile">Statistics</div><div class="navbar__tile">Reaching</div><div class="navbar__tile">Mailing</div><div class="navbar__go-to-app navbar__tile"><a href="{% url 'main:lobby' %}">Go to App <i class="fas fa-door-open navbar__go-to-app__icon"></i></a></div>
+            </div>
+        </div>
 
-        <!-- Container -->
-        <div class="container">
-            <!-- Logo -->
-            <img class="container__logo" src="{% static 'main/logo/seal.svg' %}" alt="">
-            <!-- Authentication -->
-            <div class="container__auth">
-                <div class="container__auth-controls">
-                    <button type="button" id="login-btn" class="container__auth-button" data-url="{% url 'accounts:login' %}">Log In</button>
-                    <button type="button" id="signup-btn" class="container__auth-button">Sign Up</button>
+        <div class="card introduction">
+            <div class="card__img-container"><img src="{% static 'main/images/card_img1-blur.jpg' %}" alt="" class="card__img"></div>
+            <div class="card__content">
+                <p class="card__flag">Welcome</p>
+                <h2 class="card__title">Sealena</h2>
+                <p class="card__body">Sealena, it's Medical Information Management and Collaboration Software created with the purpose of easing the collaboration between health workers, the organization and accessing of information from anywhere</p>
+                <div class="card__extra-features">
+                    <p>Some of the features included in the Premium Version:</p>
+                    <ul>
+                        <li>Patients and Agenda Management</li>
+                        <li>More than 1 assistant linking</li>
+                        <li>Unlimited amount of created patients</li>
+                        <li>Unlimited amount of appointments</li>
+                    </ul>
                 </div>
+                <img src="{% static 'main/screenshots/main-menu-blur.jpg' %}" alt="Sealena's Main Menu" class="card__sc">
             </div>
-            <!-- Slogan Container -->
-            <div class="container__quote">
-                <q>{{ quote }}</q><br>
-                {% if author is not None %}
-                    <i>- {{ author }}</i>
-                {% endif %}
-            </div>
-            <!-- Footer -->
-            <div class="container__footer">
-                <div class="container__social-media-contact">
-                    <a href="" target="_blank"><img class="container__social-media-logo" src="{% static 'main/social_media_icons/facebook.svg' %}" alt=""></a>
-                    <a href="" target="_blank"><img class="container__social-media-logo" src="{% static 'main/social_media_icons/instagram.svg' %}" alt=""></a>
-                    <a href="" target="_blank"><img class="container__social-media-logo" src="{% static 'main/social_media_icons/twitter.svg' %}" alt=""></a>
-                    <a href="" target="_blank"><img class="container__social-media-logo" src="{% static 'main/social_media_icons/seal.svg' %}" alt=""></a>
+        </div>
+
+        <div class="card management">
+            <div class="card__img-container"><img src="{% static 'main/images/card_img2-blur.jpg' %}" alt="" class="card__img"></div>
+            <div class="card__content">
+                <p class="card__flag">Manage all your information</p>
+                <h2 class="card__title">Management</h2>
+                <p class="card__body">Patiends, Consults, Appointments and even Providers, everything can be managed with Sealena. Our main goal is to provide you a centralized software where you can manage all your information and be able to access it wherever you are.</p>
+                <div class="card__extra-features">
+                    <p>There is much more to expect from Sealena than what we mentioned before, we are constantly bringing new features into it, to give you the best possible experience when it comes to the easing of your daily activities.</p>
                 </div>
+                <img src="{% static 'main/screenshots/patients-blur.jpg' %}" alt="Patients Screenshot" class="card__sc double">
+                <img src="{% static 'main/screenshots/agenda-blur.jpg' %}" alt="Agenda Screenshot" class="card__sc double">
             </div>
         </div>
 
-        <!-- Account Type Selector -->
-        <div class="account-type-selector">
-            <div class="account-type-selector__tile" data-url="{% url 'accounts:signup' %}" data-type="doctor">
-                <i class="fas fa-user-md account-type-selector__icon"></i>
-                Doctor
-            </div>
-            <div class="account-type-selector__tile" data-url="{% url 'accounts:signup' %}" data-type="assistant">
-                <i class="fas fa-user-nurse account-type-selector__icon"></i>
-                Assistant
-            </div>
-        </div>
-
-        <!-- Modal -->
-        <div class="modal">
-            <div class="modal__content">
-
+        <div class="card collaboration">
+            <div class="card__img-container"><img src="{% static 'main/images/card_img3-blur.jpg' %}" alt="" class="card__img"></div>
+            <div class="card__content">
+                <p class="card__flag">Connect with your colleagues</p>
+                <h2 class="card__title">Collaboration</h2>
+                <p class="card__body">You can connect and contact all your colleagues who have a Sealena account. Be able to collaborate with them and share ideas with the Sealena's Chat System.</p>
+                <div class="card__extra-features">
+                    <p>By sending an contact request to your desired collegue, after been been accepted, you will be able to expand your network within Sealena, and not only that, now you can have direct contact with them, Sealena's Chat System makes it super
+                       easy to manage and message your contacts at any moment.</p>
+                </div>
+                <img src="{% static 'main/screenshots/user-lookup-blur.jpg' %}" alt="User's Lookup Screenshot" class="card__sc">
+                <img src="{% static 'main/screenshots/chat-system-blur.jpg' %}" alt="Sealena's Chat System" class="card__sc">
             </div>
         </div>
 
-        <p class="support-message"><span class="obligatory">* </span>We're currently giving Sealena the final touches. Sealena will be up running by the start of 2022
-            <br><span class="obligatory">* </span>For more information please contact: <a href="mailto:sealena@sealena.com">sealena-support@sealena.com</a></p>
-    <script src="{% static 'main/js/main.js' %}"></script>
+        <div class="card linking">
+            <div class="card__img-container"><img src="{% static 'main/images/card_img4-blur.jpg' %}" alt="" class="card__img"></div>
+            <div class="card__content">
+                <p class="card__flag">Link to your assistants</p>
+                <h2 class="card__title">Linking</h2>
+                <p class="card__body">You may not want to fill up the appointments by yourself. No problem, with Sealena you can link different assistants to your account through the unique Linking ID and let them create, confirm, update or cancel appointments for you.</p>
+                <div class="card__extra-features">
+                    <p>You will receive notifications whenever an assistant makes an action, for example when a patient has created a new patient because it does not exist in your patients lists, or when a new appointment has been changed it's status, this way you will be updated with what's happening.</p>
+                </div>
+                <img src="{% static 'main/screenshots/linking-blur.jpg' %}" alt="Sealena's linking list" class="card__sc double">
+                <img src="{% static 'main/screenshots/linking2-blur.jpg' %}" alt="Sealena's linking form" class="card__sc double">
+            </div>
+        </div>
+
+        <div class="card statistics">
+            <div class="card__img-container"><img src="{% static 'main/images/card_img5-blur.jpg' %}" alt="" class="card__img"></div>
+            <div class="card__content">
+                <p class="card__flag">Alive Data</p>
+                <h2 class="card__title">Statistics</h2>
+                <p class="card__body">You want to see how your data is behaving? No problem, we got you covered. Sealena provides you with realtime Statistics based on the data you are managing and the data you desire to take a look at.</p>
+               <div class="card__extra-features">
+                    <p>Sealena will present you with different charts displaying different information about your Patients and about your Appointments/Consults, we will be adding different visualizations about different information for you in the future.</p>
+                </div>
+                <img src="{% static 'main/screenshots/statistics-blur.jpg' %}" alt="Sealena's Statistics" class="card__sc double">
+               <img src="{% static 'main/screenshots/statistics2-blur.jpg' %}" alt="Sealena's Statistics" class="card__sc double">
+            </div>
+        </div>
+
+        <div class="card reaching">
+            <div class="card__img-container"><img src="{% static 'main/images/card_img6-blur.jpg' %}" alt="" class="card__img"></div>
+            <div class="card__content">
+                <p class="card__flag">Remind your patients</p>
+                <h2 class="card__title">Reaching</h2>
+                <p class="card__body">Your patients will never miss an appointment with Sealena's Messaging System. Whenever a consult has been created for the specified patient, a direct message will be sent with the exact date and time of his/her appointment.</p>
+                <div class="card__extra-features">
+                    <p>You don't need to configure anything, Sealena's got you covered, all the messages will be sent to your patients from our own phone numbers, so you don't need to worry about setting your personal phone number for instant messaging.</p>
+                </div>
+                <img src="{% static 'main/screenshots/messaging-blur.jpg' %}" alt="Sealena's Messaging System" class="card__sc">
+            </div>
+        </div>
+
+        <div class="card mailing">
+            <div class="card__img-container"><img src="{% static 'main/images/card_img7-blur.jpg' %}" alt="" class="card__img"></div>
+            <div class="card__content">
+                <p class="card__flag">Mail your patients and providers directly</p>
+                <h2 class="card__title">Mailing</h2>
+                <p class="card__body">Have a direct contact with your patients or ask your providers for a specific product, all directly from Sealena. Sealena's mailing system will be responsible to make your emails arrive instantly and securely to your target.</p>
+                <div class="card__extra-features">
+                    <p>As with Sealena's Messaging System, Sealena comes built with a Mailing System, in difference from other types of software, you don't need to configure any protocol settings, your mails will be sent using Sealena's Mailing System and the mail will contain a redirection to your email for more personal communication.</p>
+                </div>
+                <img src="{% static 'main/screenshots/mailing-blur.jpg' %}" alt="Sealena's mailing form" class="card__sc">
+            </div>
+        </div>
+
+        <script src="{% static 'main/js/main.js' %}"></script>
     </body>
 </html>
-

@@ -29,7 +29,7 @@ class LoginRequiredMiddleware:
         return response
 
     def process_view(self, request, view_func, view_args, view_kwargs):
-        view_names = ['Login', 'signup', 'main', 'PasswordReset',
+        view_names = ['Login', 'signup', 'main', 'lobby', 'PasswordReset',
                       'PasswordResetDone', 'PasswordResetConfirm',
                       'PasswordResetComplete', 'confirm_identity']
 
@@ -65,8 +65,3 @@ class TimezoneMiddleware:
         else:
             pass
         return self.get_response(request)
-
-
-
-
-
