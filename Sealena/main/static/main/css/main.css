@@ -25,6 +25,9 @@ html, body{
     background-color: rgba(0,0,0,0.3);
     backdrop-filter: blur(5px) saturate(180%);
     -webkit-backdrop-filter: blur(5px) saturate(180%);
+    -moz-backdrop-filter: blur(5px) saturate(180%);
+    -ms-backdrop-filter: blur(5px) saturate(180%);
+    -o-backdrop-filter: blur(5px) saturate(180%);
     visibility: hidden;
     opacity: 0;
     z-index: 1;
@@ -42,6 +45,10 @@ html, body{
     float: right;
     color: #FFFFFF;
     transition: 0.5s;
+}
+
+.navbar__go-to-app a{
+    color: #FFFFFF;
 }
 
 .navbar__go-to-app--active{
@@ -127,6 +134,9 @@ a:hover, a:active{
     opacity: 0;
     backdrop-filter: blur(10px) saturate(180%);
     -webkit-backdrop-filter: blur(10px) saturate(180%);
+    -moz-backdrop-filter: blur(10px) saturate(180%);
+    -ms-backdrop-filter: blur(10px) saturate(180%);
+    -o-backdrop-filter: blur(10px) saturate(180%);
     transition: opacity 0.5s
 }
 
@@ -151,6 +161,27 @@ a:hover, a:active{
     transform: scale(1);
     transition: 0.5s;
 }
+
+.card__sc{
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -ms-filter: blur(3px);
+    -o-filter: blur(3px);
+    border-radius: 5px;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: 0.5s;
+}
+
+.card__sc--unfilter{
+    filter: none;
+    -webkit-filter: none;
+    -moz-filter: none;
+    -ms-filter: none;
+    -o-filter: none;
+    transition: 1s;
+    }
+
 
 @media screen and (max-width: 1023px){
     .mobile-bg{
@@ -218,17 +249,6 @@ a:hover, a:active{
     .card__sc{
         height: 25%;
         width: 100%;
-        filter: blur(3px);
-        -webkit-filter: blur(3px);
-        border-radius: 5px;
-        border: 1px solid rgba(255,255,255,0.1);
-        transition: 0.5s;
-    }
-
-    .card__sc--unfilter{
-        filter: none;
-        -webkit-filter: none;
-        transition: 1s;
     }
 
     hr{
@@ -284,12 +304,6 @@ a:hover, a:active{
 
     .card__sc.double{
         width: 49%;
-    }
-
-    .card__sc--unfilter{
-        filter: none;
-        -webkit-filter: none;
-        transition: 1s;
     }
 }
 
@@ -369,13 +383,13 @@ a:hover, a:active{
         -webkit-filter: blur(10px);
         height: 100%;
         border-radius: 10px;
-        transition: 0.5s;
+        transition: 1s;
     }
 
     .card__img--unfilter{
         filter: none;
         -webkit-filter: none;
-        transition: 0.5s;
+        transition: 1s;
     }
 
     .card__sc{
